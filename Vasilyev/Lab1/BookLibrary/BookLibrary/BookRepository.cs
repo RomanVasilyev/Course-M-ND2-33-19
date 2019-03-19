@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace BookLibrary
@@ -7,15 +8,26 @@ namespace BookLibrary
     public class BookRepository : IRepository<Book>
     {
         private readonly IList<Book> data;
+        private string path = Directory.GetCurrentDirectory() + @"\books.json";
+        private JsonWorker jw = new JsonWorker();
 
         public BookRepository()
         {
-            data = new List<Book>
+            var fileinfo = new FileInfo(path);
+            if (fileinfo.Exists)
             {
-                new Book { Id = 1, Title = "Title1" },
-                new Book { Id = 2, Title = "Title2" },
-                new Book { Id = 3, Title = "Title3" },
-            };
+                data = jw.Load(path).ToList();
+            }
+            else
+            {
+                data = new List<Book>
+                {
+                    new Book { Id = 1, Title = "Title1" },
+                    new Book { Id = 2, Title = "Title2" },
+                    new Book { Id = 3, Title = "Title3" },
+                };
+                jw.Save(path, data.ToList());
+            }
         }
 
         public Book Get(int id)
@@ -39,30 +51,21 @@ namespace BookLibrary
                 throw new Exception("Element alredy exists");
         }
 
-        public void Change(int id, string newtitle)
+        public void Change(Book book)
         {
-            try
-            {
-                var book = data.FirstOrDefault(x => x.Id == id);
-                book.Title = newtitle;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            Delete(book.Id);
+            Add(book);
         }
 
         public void Delete(int id)
         {
-            try
-            {
-                var book = data.FirstOrDefault(x => x.Id == id);
-                data.Remove(book);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            var book = Get(id);
+            data.Remove(book);
+        }
+
+        public void SaveChanges()
+        {
+            jw.Save(path, data.ToList());
         }
     }
 }

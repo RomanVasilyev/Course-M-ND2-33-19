@@ -4,7 +4,7 @@
     {
         T Get(int id);
         void Add(T book);
-        void Change(int id, string title);
+        void Change(T book);
         void Delete(int id);
     }
 }

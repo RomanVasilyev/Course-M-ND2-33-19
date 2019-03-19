@@ -14,19 +14,5 @@
             return repository.Get(id);
         }
 
-        public void Add(Book book)
-        {
-            repository.Add(book);
-        }
-
-        public void Change(int id, string title)
-        {
-            repository.Change(id, title);
-        }
-
-        public void Delete(int id)
-        {
-            repository.Delete(id);
-        }        
     }
 }
