@@ -13,6 +13,26 @@ namespace UnitTestProject1
         {
             return new Book {Id = id};
         }
+
+        public void Add(Book entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Book entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [TestClass]
