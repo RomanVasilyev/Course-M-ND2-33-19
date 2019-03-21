@@ -9,10 +9,11 @@ namespace BookLibrary
     {
         private readonly IList<Book> data;
         private string path = Directory.GetCurrentDirectory() + @"\books.json";
-        private JsonWorker jw = new JsonWorker();
+        private IJsonWorker jw;
 
         public BookRepository()
         {
+            jw = new JsonWorker();
             var fileinfo = new FileInfo(path);
             if (fileinfo.Exists)
             {
@@ -28,6 +29,12 @@ namespace BookLibrary
                 };
                 jw.Save(path, data.ToList());
             }
+        }
+
+        public BookRepository(IJsonWorker jsonWorker) : base()
+        {
+            jw = jsonWorker;
+            data = jw.Load(path).ToList();
         }
 
         public Book Get(int id)
