@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BooksWebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,7 +24,8 @@ namespace Models
             {
                 data = new List<Book>
                 {
-                    new Book { Id = 1, Title = "Title1" },
+                    new Book { Id = 1, Title = "Title1", Description = "Description 1", Author = "Author 1", Created = new DateTime(2019,1,1),
+                        Genre = Genre.Classic, IsPaper = true,  Languages = new[] { 0, 1}, DeliveryRequired = true },
                     new Book { Id = 2, Title = "Title2" },
                     new Book { Id = 3, Title = "Title3" },
                 };
