@@ -45,6 +45,7 @@ namespace BooksWebApplication.Controllers
         }
 
         // GET: Post/Edit/5
+        //[HttpPost]
         public ActionResult Edit(int id)
         {
             var genres = new List<SelectListItem>();
