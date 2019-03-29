@@ -3,14 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web;
 
 namespace Models
 {
     public class BookRepository : IRepository<Book>
     {
         private readonly IList<Book> data;
-        private string path = Directory.GetCurrentDirectory() + @"\books.json";
+        //private string path = Directory.GetCurrentDirectory() + @"\books.json";
+        private string path = HttpContext.Current.Server.MapPath("~/App_Data/books.json");
         private IJsonWorker jw;
+
+        public IList<Book> Books { get { return data; } }
 
         public BookRepository()
         {
@@ -26,8 +30,10 @@ namespace Models
                 {
                     new Book { Id = 1, Title = "Title1", Description = "Description 1", Author = "Author 1", Created = new DateTime(2019,1,1),
                         Genre = Genre.Classic, IsPaper = true,  Languages = new[] { 0, 1}, DeliveryRequired = true },
-                    new Book { Id = 2, Title = "Title2" },
-                    new Book { Id = 3, Title = "Title3" },
+                    new Book { Id = 2, Title = "Title2", Author = "Author 2", Created = new DateTime(2019,1,1),
+                        Genre = Genre.Essay, IsPaper = true,  Languages = new[] { 0, 1}, DeliveryRequired = true },
+                    new Book { Id = 3, Title = "Title3", Author = "Author 3", Created = new DateTime(2019,1,1),
+                        Genre = Genre.Legend, IsPaper = true,  Languages = new[] { 0, 1}, DeliveryRequired = true },
                 };
                 jw.Save(path, data.ToList());
             }

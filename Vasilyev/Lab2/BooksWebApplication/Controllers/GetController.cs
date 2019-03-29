@@ -9,12 +9,13 @@ namespace BooksWebApplication.Controllers
 {
     public class GetController : Controller
     {
-        public BookRepository Books { get; set; }
+        //public BookRepository Books { get; set; }
         // GET: Get
         public ActionResult Index()
         {
-            Books = new BookRepository();
-            return View(Books);
+            var books = new BookRepository();
+            ViewBag.Books = books.Books;
+            return View(books.Books);
         }
 
         // GET: Get/Details/5
