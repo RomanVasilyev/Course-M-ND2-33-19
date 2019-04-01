@@ -11,7 +11,7 @@ namespace Models
         public IEnumerable<Book> Load(string path)
         {
             List<Book> books = new List<Book>();
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(path, FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(books.GetType());
             books = ser.ReadObject(fs) as List<Book>;
             fs.Close();

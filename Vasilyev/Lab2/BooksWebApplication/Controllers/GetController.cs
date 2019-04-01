@@ -9,13 +9,13 @@ namespace BooksWebApplication.Controllers
 {
     public class GetController : Controller
     {
-        //public BookRepository Books { get; set; }
+        public BookRepository BooksRepo { get; set; }
         // GET: Get
         public ActionResult Index()
         {
-            var books = new BookRepository();
-            ViewBag.Books = books.Books;
-            return View(books.Books);
+            BooksRepo = new BookRepository();
+            ViewBag.Books = BooksRepo.Books;
+            return View(BooksRepo.Books);
         }
 
         // GET: Get/Details/5
@@ -49,7 +49,9 @@ namespace BooksWebApplication.Controllers
         // GET: Get/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            BooksRepo = new BookRepository();
+            //var book = BooksRepo.Books.FirstOrDefault(x => x.Id == id);            
+            return RedirectToAction("Edit", "Post",  new { controller = "Post", id });            
         }
 
         // POST: Get/Edit/5

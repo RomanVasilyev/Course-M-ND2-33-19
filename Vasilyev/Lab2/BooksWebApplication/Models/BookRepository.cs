@@ -28,12 +28,17 @@ namespace Models
             {
                 data = new List<Book>
                 {
-                    new Book { Id = 1, Title = "Title1", Description = "Description 1", Author = "Author 1", Created = new DateTime(2019,1,1),
-                        Genre = Genre.Classic, IsPaper = true,  Languages = new[] { 0, 1}, DeliveryRequired = true },
-                    new Book { Id = 2, Title = "Title2", Author = "Author 2", Created = new DateTime(2019,1,1),
-                        Genre = Genre.Essay, IsPaper = true,  Languages = new[] { 0, 1}, DeliveryRequired = true },
-                    new Book { Id = 3, Title = "Title3", Author = "Author 3", Created = new DateTime(2019,1,1),
-                        Genre = Genre.Legend, IsPaper = true,  Languages = new[] { 0, 1}, DeliveryRequired = true },
+                    new Book { Id = 1, Title = "How to Win Friends and Influence People",
+                        Description = "Дейл Бре́кенридж Карнеги — американский педагог, лектор," +
+                    " писатель, оратор-мотиватор. Стоял у истоков создания теории общения, переведя научные разработки психологов того времени" +
+                    " в практическую область, разработав собственную концепцию бесконфликтного общения. Основал курсы по самосовершенствованию," +
+                    " навыкам эффективного общения, выступления и другие.",
+                        Author = "Dale Harbison Carnegie", Created = new DateTime(1936,1,1),
+                        Genre = Genre.Essay, IsPaper = true,  Languages = new[] { 3 }, DeliveryRequired = true },
+                    new Book { Id = 2, Title = "CLR VIA C#", Description = "Book for C# programmers", Author = "Jeffrey Richter", Created = new DateTime(2006,1,1),
+                        Genre = Genre.ReferenceBooks, IsPaper = true,  Languages = new[] { 1, 3 }, DeliveryRequired = true },
+                    new Book { Id = 3, Title = "Cashflow Quadrant", Description = "Rich Dad's Guide to Financial Freedom", Author = "Robert Toru Kiyosaki", Created = new DateTime(2000,1,1),
+                        Genre = Genre.Legend, IsPaper = true,  Languages = new[] { 1, 2, 3 }, DeliveryRequired = false },
                 };
                 jw.Save(path, data.ToList());
             }
