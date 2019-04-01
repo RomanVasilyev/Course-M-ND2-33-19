@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using BooksWebApplication.Models;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,23 +22,59 @@ namespace BooksWebApplication.Controllers
         // GET: Get/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            BooksRepo = new BookRepository();
+            var book = BooksRepo.Books.FirstOrDefault(x => x.Id == id);
+            if (book == null) return new HttpNotFoundResult();
+            var genres = new List<SelectListItem>();
+            var names = Enum.GetNames(typeof(Genre));
+            for (int i = 0; i < names.Length; i++)
+            {
+                genres.Add(new SelectListItem { Value = i.ToString(), Text = names[i] });
+            }
+            var langs = new List<SelectListItem>();
+            var nlangs = Enum.GetNames(typeof(Langs));
+            for (int i = 0; i < nlangs.Length; i++)
+            {
+                langs.Add(new SelectListItem { Value = i.ToString(), Text = nlangs[i] });
+            }
+            book.AvailableLanguages = langs;
+            book.AvailableGenres = genres;
+            return View(book);
         }
 
         // GET: Get/Create
         public ActionResult Create()
         {
-            return View();
+            BooksRepo = new BookRepository();
+            Book book = new Book();
+            //book = BooksRepo.Books.FirstOrDefault(x => x.Id == id);
+            if (book == null) return new HttpNotFoundResult();
+            var genres = new List<SelectListItem>();
+            var names = Enum.GetNames(typeof(Genre));
+            for (int i = 0; i < names.Length; i++)
+            {
+                genres.Add(new SelectListItem { Value = i.ToString(), Text = names[i] });
+            }
+            var langs = new List<SelectListItem>();
+            var nlangs = Enum.GetNames(typeof(Langs));
+            for (int i = 0; i < nlangs.Length; i++)
+            {
+                langs.Add(new SelectListItem { Value = i.ToString(), Text = nlangs[i] });
+            }
+            book.AvailableLanguages = langs;
+            book.AvailableGenres = genres;
+            return View(book);
         }
 
         // POST: Get/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Book book)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                BooksRepo = new BookRepository();
+                BooksRepo.Add(book);
+                BooksRepo.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -73,7 +110,10 @@ namespace BooksWebApplication.Controllers
         // GET: Get/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            BooksRepo = new BookRepository();
+            BooksRepo.Delete(id);
+            BooksRepo.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: Get/Delete/5

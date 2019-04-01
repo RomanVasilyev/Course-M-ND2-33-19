@@ -29,10 +29,7 @@ namespace Models
                 data = new List<Book>
                 {
                     new Book { Id = 1, Title = "How to Win Friends and Influence People",
-                        Description = "Дейл Бре́кенридж Карнеги — американский педагог, лектор," +
-                    " писатель, оратор-мотиватор. Стоял у истоков создания теории общения, переведя научные разработки психологов того времени" +
-                    " в практическую область, разработав собственную концепцию бесконфликтного общения. Основал курсы по самосовершенствованию," +
-                    " навыкам эффективного общения, выступления и другие.",
+                        Description = "Книга представляет собой собрание практических советов и жизненных историй.",
                         Author = "Dale Harbison Carnegie", Created = new DateTime(1936,1,1),
                         Genre = Genre.Essay, IsPaper = true,  Languages = new[] { 3 }, DeliveryRequired = true },
                     new Book { Id = 2, Title = "CLR VIA C#", Description = "Book for C# programmers", Author = "Jeffrey Richter", Created = new DateTime(2006,1,1),
