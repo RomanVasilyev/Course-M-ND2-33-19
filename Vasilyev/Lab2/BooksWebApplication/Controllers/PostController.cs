@@ -41,10 +41,8 @@ namespace BooksWebApplication.Controllers
 
         // GET: Get/Create
         public ActionResult Create()
-        {
-            //BooksRepo = new BookRepository();
+        {            
             Book book = new Book();
-            //book = BooksRepo.Books.FirstOrDefault(x => x.Id == id);
             if (book == null) return new HttpNotFoundResult();
             var genres = new List<SelectListItem>();
             var names = Enum.GetNames(typeof(Genre));
