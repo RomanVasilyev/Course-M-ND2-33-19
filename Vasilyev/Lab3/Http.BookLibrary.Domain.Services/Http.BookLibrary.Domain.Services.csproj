@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{71CBB218-6C92-4808-83F8-6F50DE65A9AA}</ProjectGuid>
+    <ProjectGuid>{E9954CB2-D7F3-4C8F-8C9C-9C760CABEF3A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Http.BooksLibrary.Data.Contracts</RootNamespace>
-    <AssemblyName>Http.BooksLibrary.Data.Contracts</AssemblyName>
+    <RootNamespace>Http.BookLibrary.Domain.Services</RootNamespace>
+    <AssemblyName>Http.BookLibrary.Domain.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,11 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,16 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookRepository.cs" />
-    <Compile Include="Entities\Book.cs" />
-    <Compile Include="Entities\Genre.cs" />
-    <Compile Include="Entities\Langs.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="ITransaction.cs" />
-    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="PostService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Http.BookLibrary.Domain.Contracts\Http.BookLibrary.Domain.Contracts.csproj">
+      <Project>{29ED35B2-894C-4CAE-8921-1BDEC6223691}</Project>
+      <Name>Http.BookLibrary.Domain.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Http.BooksLibrary.Data.Contracts\Http.BooksLibrary.Data.Contracts.csproj">
+      <Project>{71CBB218-6C92-4808-83F8-6F50DE65A9AA}</Project>
+      <Name>Http.BooksLibrary.Data.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

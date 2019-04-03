@@ -6,5 +6,6 @@
         void Add(T book);
         void Change(T book);
         void Delete(int id);
+        void SaveChanges();
     }
 }

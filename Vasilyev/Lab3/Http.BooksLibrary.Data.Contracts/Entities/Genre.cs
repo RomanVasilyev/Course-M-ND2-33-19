@@ -1,4 +1,4 @@
-﻿namespace Http.BooksLibrary.Data.Contracts
+﻿namespace Http.BooksLibrary.Data.Contracts.Entities
 {
     public enum Genre
     {

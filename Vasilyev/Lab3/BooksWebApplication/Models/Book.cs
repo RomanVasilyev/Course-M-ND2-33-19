@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Web.Mvc;
 
-namespace Http.BooksLibrary.Data.Contracts
+namespace Models
 {
     [DataContract]
     public class Book
