@@ -1,11 +1,11 @@
 ﻿using System;
 using AutoMapper;
-using Http.BookLibrary.Domain.Contracts;
-using Http.BookLibrary.Domain.Contracts.ViewModels;
+using Http.BooksLibrary.Domain.Contracts;
+using Http.BooksLibrary.Domain.Contracts.ViewModels;
 using Http.BooksLibrary.Data.Contracts;
 using Http.BooksLibrary.Data.Contracts.Entities;
 
-namespace Http.BookLibrary.Domain.Services
+namespace Http.BooksLibrary.Domain.Services
 {
     public class PostService : IPostService
     {

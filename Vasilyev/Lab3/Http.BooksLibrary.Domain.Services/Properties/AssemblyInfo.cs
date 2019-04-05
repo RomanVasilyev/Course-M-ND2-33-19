@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Http.BookLibrary.Domain.Contracts")]
+[assembly: AssemblyTitle("Http.BooksLibrary.Domain.Services")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Http.BookLibrary.Domain.Contracts")]
+[assembly: AssemblyProduct("Http.BooksLibrary.Domain.Services")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("29ed35b2-894c-4cae-8921-1bdec6223691")]
+[assembly: Guid("e9954cb2-d7f3-4c8f-8c9c-9c760cabef3a")]
 
 // Version information for an assembly consists of the following four values:
 //

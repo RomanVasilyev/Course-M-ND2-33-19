@@ -41,5 +41,14 @@ namespace Http.BooksLibrary.Data.Contracts.Entities
        
         [Display(Name = "Delivery required")]
         public bool DeliveryRequired { get; set; }
+
+        [Timestamp]
+        public byte[] Version { get; set; }
+
+        public long LongVersion
+        {
+            get => BitConverter.ToInt64(Version, 0);
+            set => Version = BitConverter.GetBytes(value);
+        }
     }
 }

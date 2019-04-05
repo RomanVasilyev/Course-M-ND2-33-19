@@ -1,7 +1,7 @@
 ﻿using System;
 using BooksWebApplication.Models;
 
-namespace Http.BookLibrary.Domain.Contracts.ViewModels
+namespace Http.BooksLibrary.Domain.Contracts.ViewModels
 {
     public class PostViewModel
     {

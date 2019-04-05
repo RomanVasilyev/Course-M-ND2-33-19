@@ -1,6 +1,6 @@
-﻿using Http.BookLibrary.Domain.Contracts.ViewModels;
+﻿using Http.BooksLibrary.Domain.Contracts.ViewModels;
 
-namespace Http.BookLibrary.Domain.Contracts
+namespace Http.BooksLibrary.Domain.Contracts
 {
     public interface IPostService
     {
