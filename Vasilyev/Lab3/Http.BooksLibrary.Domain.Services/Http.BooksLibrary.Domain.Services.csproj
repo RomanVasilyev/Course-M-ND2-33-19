@@ -7,8 +7,8 @@
     <ProjectGuid>{E9954CB2-D7F3-4C8F-8C9C-9C760CABEF3A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Http.BookLibrary.Domain.Services</RootNamespace>
-    <AssemblyName>Http.BookLibrary.Domain.Services</AssemblyName>
+    <RootNamespace>Http.BooksLibrary.Domain.Services</RootNamespace>
+    <AssemblyName>Http.BooksLibrary.Domain.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

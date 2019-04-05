@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using Http.BooksLibrary.Data.Contracts.Entities;
+using Newtonsoft.Json;
 
 namespace Http.BooksLibrary.Data.EntityFramework
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
 
     public class ApplicationDbContext : DbContext
@@ -25,23 +28,46 @@ namespace Http.BooksLibrary.Data.EntityFramework
 
         public DbSet<Book> Books { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    var bookConfiguration = modelBuilder.Entity<Book>();
-        //    bookConfiguration.Ignore(x => x.LongVersion);
-        //    bookConfiguration.HasKey(x => x.Id);
-        //    bookConfiguration.Property(x => x.Title).IsRequired();
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            var bookConfiguration = modelBuilder.Entity<Book>();
+            bookConfiguration.Ignore(x => x.LongVersion);
+            bookConfiguration.HasKey(x => x.Id);
+            bookConfiguration.Property(x => x.Title).IsRequired();
 
-        //}
+        }
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
-    }
+        public override int SaveChanges()
+        {
+            var listOfChanges = new List<HistoryLog>();
 
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
+            var entries = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified);
+
+
+            foreach (var entry in entries)
+            {
+                var entityType = ObjectContext.GetObjectType(entry.Entity.GetType());
+                if (entityType == typeof(Book))
+                {
+                    var postId = ((Book)entry.Entity).Id;
+                    var originalEntity = Set(entityType).AsNoTracking().Cast<Book>().First(x => x.Id == postId);
+
+                    var settings = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                    var log = new HistoryLog
+                    {
+                        EntityId = postId,
+                        EntityType = entityType.Name,
+                        OriginalValue = JsonConvert.SerializeObject(originalEntity, settings),
+                        ActualValue = JsonConvert.SerializeObject(entry.Entity, settings)
+                    };
+                    listOfChanges.Add(log);
+                }
+            }
+
+            return base.SaveChanges();
+        }
+    }
 }

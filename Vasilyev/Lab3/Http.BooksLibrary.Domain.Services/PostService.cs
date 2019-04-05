@@ -30,15 +30,14 @@ namespace Http.BooksLibrary.Domain.Services
                 try
                 {
                     Book book = unitOfWork.Get<Book>(viewModel.Id);
-                    if (true) // TODO: check version of post
+                    if (book.LongVersion != viewModel.LongVersion)
                     {
-                        
+                        throw new Exception("Version redact error");
                     }
 
                     Mapper.Map(viewModel, book);
                     unitOfWork.SaveChanges();
                     transaction.Commit();
-
                 }
                 catch (Exception)
                 {

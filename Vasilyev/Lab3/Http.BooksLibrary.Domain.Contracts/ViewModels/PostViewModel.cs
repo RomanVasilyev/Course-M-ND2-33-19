@@ -22,5 +22,7 @@ namespace Http.BooksLibrary.Domain.Contracts.ViewModels
         public int[] Languages { get; set; }
 
         public bool DeliveryRequired { get; set; }
+
+        public long LongVersion { get; set; }
     }
 }

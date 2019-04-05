@@ -7,8 +7,8 @@
     <ProjectGuid>{29ED35B2-894C-4CAE-8921-1BDEC6223691}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Http.BookLibrary.Domain.Contracts</RootNamespace>
-    <AssemblyName>Http.BookLibrary.Domain.Contracts</AssemblyName>
+    <RootNamespace>Http.BooksLibrary.Domain.Contracts</RootNamespace>
+    <AssemblyName>Http.BooksLibrary.Domain.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
