@@ -1,4 +1,6 @@
-﻿using Http.BooksLibrary.Data.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Http.BooksLibrary.Data.Contracts;
 
 namespace Http.BooksLibrary.Data.EntityFramework
 {
@@ -16,6 +18,13 @@ namespace Http.BooksLibrary.Data.EntityFramework
             var dbSet = dbContext.Set<T>();
             var result = dbSet.Find(id);
             return result;
+        }
+
+        public IList<T> GetList()
+        {
+            var dbSet = dbContext.Set<T>();
+            var result = dbContext.Books.ToList(); //???
+            return (IList<T>) result;
         }
 
         public void Add(T book)

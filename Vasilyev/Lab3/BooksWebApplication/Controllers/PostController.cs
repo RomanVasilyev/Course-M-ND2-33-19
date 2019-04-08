@@ -3,72 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BooksWebApplication.Models;
-using Models;
+using Http.BooksLibrary.Data.Contracts.Entities;
+using Http.BooksLibrary.Domain.Contracts;
+using Http.BooksLibrary.Domain.Contracts.ViewModels;
 
 namespace BooksWebApplication.Controllers
 {
     public class PostController : Controller
     {
-        public readonly BookRepository BooksRepo = new BookRepository();
+        private readonly IPostService postService;
         // GET: Get
         public ActionResult Index()
         {
-            return View(BooksRepo.GetList());
+            var books = postService.GetAll();
+            return View(books);
         }
 
         // GET: Get/Details/5
         public ActionResult Details(int id)
         {
-            var book = BooksRepo.GetList().FirstOrDefault(x => x.Id == id);
-            if (book == null) return new HttpNotFoundResult();
-            var genres = new List<SelectListItem>();
-            var names = Enum.GetNames(typeof(Genre));
-            for (int i = 0; i < names.Length; i++)
-            {
-                genres.Add(new SelectListItem { Value = i.ToString(), Text = names[i] });
-            }
-            var langs = new List<SelectListItem>();
-            var nlangs = Enum.GetNames(typeof(Langs));
-            for (int i = 0; i < nlangs.Length; i++)
-            {
-                langs.Add(new SelectListItem { Value = i.ToString(), Text = nlangs[i] });
-            }
-            book.AvailableLanguages = langs;
-            book.AvailableGenres = genres;
-            return View(book);
+            var viewModel = postService.Get(id);
+            if (viewModel == null) return new HttpNotFoundResult();
+            PrepareView(viewModel);
+            return View(viewModel);
         }
 
         // GET: Get/Create
         public ActionResult Create()
-        {            
-            Book book = new Book();
-            if (book == null) return new HttpNotFoundResult();
-            var genres = new List<SelectListItem>();
-            var names = Enum.GetNames(typeof(Genre));
-            for (int i = 0; i < names.Length; i++)
-            {
-                genres.Add(new SelectListItem { Value = i.ToString(), Text = names[i] });
-            }
-            var langs = new List<SelectListItem>();
-            var nlangs = Enum.GetNames(typeof(Langs));
-            for (int i = 0; i < nlangs.Length; i++)
-            {
-                langs.Add(new SelectListItem { Value = i.ToString(), Text = nlangs[i] });
-            }
-            book.AvailableLanguages = langs;
-            book.AvailableGenres = genres;
-            return View(book);
+        {
+            BookViewModel viewModel = new BookViewModel();
+            if (viewModel == null) return new HttpNotFoundResult();
+            PrepareView(viewModel);
+            return View(viewModel);
         }
 
         // POST: Get/Create
         [HttpPost]
-        public ActionResult Create(Book book)
+        public ActionResult Create(BookViewModel viewModel)
         {
             try
             {
-                BooksRepo.Add(book);
-                BooksRepo.SaveChanges();
+                postService.Save(viewModel);
                 return RedirectToAction("Index");
             }
             catch
@@ -80,10 +55,35 @@ namespace BooksWebApplication.Controllers
         // GET: Post/Edit/5
         //[HttpPost]
         public ActionResult Edit(int id)
-        {            
-            Book book = new Book();
-            book = BooksRepo.GetList().FirstOrDefault(x => x.Id == id);
-            if (book == null) return new HttpNotFoundResult();
+        {
+            var viewModel = postService.Get(id);
+            if (viewModel == null) return new HttpNotFoundResult();
+            PrepareView(viewModel);
+            ViewData["PageTitle"] = viewModel.Title;
+            ViewBag.PageTitleLower = viewModel.Title.ToLower();
+            Session["Created"] = DateTime.Now;
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(BookViewModel viewModel)
+        {
+            postService.Save(viewModel);
+            var title = ViewData["BookTitle"];
+            var author = TempData["Author"];
+            var created = Session["Created"];
+            return RedirectToAction("Edit", new { id = viewModel.Id });
+        }
+
+        // GET: Get/Delete/5
+        public ActionResult Delete(int id)
+        {
+            postService.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        private void PrepareView(BookViewModel viewModel)
+        {
             var genres = new List<SelectListItem>();
             var names = Enum.GetNames(typeof(Genre));
             for (int i = 0; i < names.Length; i++)
@@ -96,32 +96,8 @@ namespace BooksWebApplication.Controllers
             {
                 langs.Add(new SelectListItem { Value = i.ToString(), Text = nlangs[i] });
             }
-            book.AvailableLanguages = langs;
-            book.AvailableGenres = genres;
-            ViewData["PageTitle"] = book.Title;
-            ViewBag.PageTitleLower = book.Title.ToLower();
-            //TempData["Author"] = "Jeffrey Richter";
-            Session["Created"] = DateTime.Now;
-            return View(book);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(Book book)
-        {
-            BooksRepo.Change(book);
-            BooksRepo.SaveChanges();
-            var title = ViewData["BookTitle"];
-            var author = TempData["Author"];
-            var created = Session["Created"];
-            return RedirectToAction("Edit", new { id = book.Id });
-        }
-
-        // GET: Get/Delete/5
-        public ActionResult Delete(int id)
-        {
-            BooksRepo.Delete(id);
-            BooksRepo.SaveChanges();
-            return RedirectToAction("Index");
+            viewModel.AvailableLanguages = langs;
+            viewModel.AvailableGenres = genres;
         }
 
     }

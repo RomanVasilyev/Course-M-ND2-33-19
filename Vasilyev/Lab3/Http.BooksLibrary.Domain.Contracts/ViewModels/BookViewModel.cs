@@ -1,9 +1,11 @@
 ﻿using System;
-using BooksWebApplication.Models;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using Http.BooksLibrary.Data.Contracts.Entities;
 
 namespace Http.BooksLibrary.Domain.Contracts.ViewModels
 {
-    public class PostViewModel
+    public class BookViewModel
     {
         public int Id { get; set; }
 
@@ -24,5 +26,9 @@ namespace Http.BooksLibrary.Domain.Contracts.ViewModels
         public bool DeliveryRequired { get; set; }
 
         public long LongVersion { get; set; }
+
+        public List<SelectListItem> AvailableLanguages { get; set; }
+
+        public List<SelectListItem> AvailableGenres { get; set; }
     }
 }

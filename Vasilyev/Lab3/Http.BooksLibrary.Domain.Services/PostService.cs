@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Http.BooksLibrary.Domain.Contracts;
 using Http.BooksLibrary.Domain.Contracts.ViewModels;
@@ -16,14 +17,21 @@ namespace Http.BooksLibrary.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public PostViewModel Get(int id)
+        public BookViewModel Get(int id)
         {
             Book book = unitOfWork.Get<Book>(id);
-            var result = Mapper.Map<PostViewModel>(book);
+            var result = Mapper.Map<BookViewModel>(book);
             return result;
         }
 
-        public void Save(PostViewModel viewModel)
+        public IList<BookViewModel> GetAll()
+        {
+            IList<Book> books = unitOfWork.GetAll<Book>();
+            var result = Mapper.Map<List<BookViewModel>>(books);
+            return result;
+        }
+
+        public void Save(BookViewModel viewModel)
         {
             using (var transaction = unitOfWork.BeginTransaction())
             {
@@ -36,6 +44,23 @@ namespace Http.BooksLibrary.Domain.Services
                     }
 
                     Mapper.Map(viewModel, book);
+                    unitOfWork.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var transaction = unitOfWork.BeginTransaction())
+            {
+                try
+                {
+                    unitOfWork.Delete<Book>(id);
                     unitOfWork.SaveChanges();
                     transaction.Commit();
                 }

@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -55,7 +61,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -138,15 +146,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\BookRepository.cs" />
-    <Compile Include="Models\BookService.cs" />
-    <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\IBookService.cs" />
-    <Compile Include="Models\IJsonWorker.cs" />
-    <Compile Include="Models\IRepository.cs" />
-    <Compile Include="Models\JsonWorker.cs" />
-    <Compile Include="Models\Langs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\BooksList\" />
     <Folder Include="Views\Details\" />
   </ItemGroup>
@@ -205,6 +205,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Http.BooksLibrary.Data.Contracts\Http.BooksLibrary.Data.Contracts.csproj">
+      <Project>{71CBB218-6C92-4808-83F8-6F50DE65A9AA}</Project>
+      <Name>Http.BooksLibrary.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Http.BooksLibrary.Domain.Contracts\Http.BooksLibrary.Domain.Contracts.csproj">
+      <Project>{29ed35b2-894c-4cae-8921-1bdec6223691}</Project>
+      <Name>Http.BooksLibrary.Domain.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Http.BooksLibrary.Infrastructure\Http.BooksLibrary.Infrastructure.csproj">
+      <Project>{233883d6-0d57-4cc3-afc4-08d03f71b500}</Project>
+      <Name>Http.BooksLibrary.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

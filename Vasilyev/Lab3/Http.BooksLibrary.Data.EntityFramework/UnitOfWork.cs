@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Collections.Generic;
+using Autofac;
 using Http.BooksLibrary.Data.Contracts;
 
 namespace Http.BooksLibrary.Data.EntityFramework
@@ -18,6 +19,13 @@ namespace Http.BooksLibrary.Data.EntityFramework
         {
             var repository = GetRepository<T>();
             var result = repository.Get(id);
+            return result;
+        }
+
+        public IList<T> GetAll<T>() where T : class
+        {
+            var repository = GetRepository<T>();
+            var result = repository.GetList();
             return result;
         }
 

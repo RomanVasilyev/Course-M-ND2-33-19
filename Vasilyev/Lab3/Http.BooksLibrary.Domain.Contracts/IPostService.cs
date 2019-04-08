@@ -1,10 +1,14 @@
-﻿using Http.BooksLibrary.Domain.Contracts.ViewModels;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Http.BooksLibrary.Domain.Contracts.ViewModels;
 
 namespace Http.BooksLibrary.Domain.Contracts
 {
     public interface IPostService
     {
-        PostViewModel Get(int id);
-        void Save(PostViewModel viewModel);
+        BookViewModel Get(int id);
+        IList<BookViewModel> GetAll();
+        void Save(BookViewModel viewModel);
+        void Delete(int id);
     }
 }
