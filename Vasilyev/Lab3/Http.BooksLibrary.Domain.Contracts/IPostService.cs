@@ -8,6 +8,7 @@ namespace Http.BooksLibrary.Domain.Contracts
     {
         BookViewModel Get(int id);
         IList<BookViewModel> GetAll();
+
         void Save(BookViewModel viewModel);
         void Delete(int id);
     }

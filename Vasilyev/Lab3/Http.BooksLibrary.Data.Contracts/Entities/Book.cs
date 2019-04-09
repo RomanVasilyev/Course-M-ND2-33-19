@@ -19,10 +19,8 @@ namespace Http.BooksLibrary.Data.Contracts.Entities
 
         public int Id { get; set; }
 
-        [Display(Name = "Title")]
         public string Title { get; set; }
         
-        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         public string Author { get; set; }
@@ -31,15 +29,14 @@ namespace Http.BooksLibrary.Data.Contracts.Entities
 
         public Genre Genre { get; set; }
 
-        public IList<SelectListItem> AvailableGenres { get; set; }
+        //public IList<SelectListItem> AvailableGenres { get; set; }
 
         public bool IsPaper { get; set; }
 
         public int[] Languages { get; set; }
 
-        public IList<SelectListItem> AvailableLanguages { get; set; }
+        //public IList<SelectListItem> AvailableLanguages { get; set; }
        
-        [Display(Name = "Delivery required")]
         public bool DeliveryRequired { get; set; }
 
         [Timestamp]

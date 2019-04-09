@@ -4,14 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Http.BooksLibrary.Data.Contracts.Entities;
+using Http.BooksLibrary.Data.EntityFramework;
 using Http.BooksLibrary.Domain.Contracts;
 using Http.BooksLibrary.Domain.Contracts.ViewModels;
+using Http.BooksLibrary.Domain.Services;
 
 namespace BooksWebApplication.Controllers
 {
     public class PostController : Controller
     {
         private readonly IPostService postService;
+
+        public PostController(IPostService postService)
+        {
+            this.postService = postService;
+        }
+
         // GET: Get
         public ActionResult Index()
         {
@@ -98,6 +106,7 @@ namespace BooksWebApplication.Controllers
             }
             viewModel.AvailableLanguages = langs;
             viewModel.AvailableGenres = genres;
+            viewModel.Created = DateTime.Now;
         }
 
     }

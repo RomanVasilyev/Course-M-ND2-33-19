@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using Http.BooksLibrary.Data.Contracts.Entities;
 using Newtonsoft.Json;
+using System;
+using System.Data.Entity;
+using System.Linq;
+using System.Data.Entity.Core.Objects;
 
 namespace Http.BooksLibrary.Data.EntityFramework
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
-
     public class ApplicationDbContext : DbContext
     {
         // Your context has been configured to use a 'ApplicationDbContext' connection string from your application's 
@@ -17,14 +16,10 @@ namespace Http.BooksLibrary.Data.EntityFramework
         // 
         // If you wish to target a different database and/or database provider, modify the 'ApplicationDbContext' 
         // connection string in the application configuration file.
-        public ApplicationDbContext()
-            : base("name=ApplicationDbContext")
+
+        public ApplicationDbContext() : base("Server=(localdb)\\mssqllocaldb;Database=Http.BooksLibrary;Trusted_Connection=True;MultipleActiveResultSets=true")
         {
         }
-
-        //public ApplicationDbContext() : base("Server=(localdb)\\mssqllocaldb;Database=Htp.News;Trusted_Connection=True;MultipleActiveResultSets=true")
-        //{
-        //}
 
         public DbSet<Book> Books { get; set; }
 

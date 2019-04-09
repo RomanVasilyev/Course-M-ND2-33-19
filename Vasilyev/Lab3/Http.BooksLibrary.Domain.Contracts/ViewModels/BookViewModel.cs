@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Http.BooksLibrary.Data.Contracts.Entities;
 
@@ -9,8 +10,10 @@ namespace Http.BooksLibrary.Domain.Contracts.ViewModels
     {
         public int Id { get; set; }
 
+        [Display(Name = "Title")]
         public string Title { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         public string Author { get; set; }
@@ -23,6 +26,7 @@ namespace Http.BooksLibrary.Domain.Contracts.ViewModels
 
         public int[] Languages { get; set; }
 
+        [Display(Name = "Delivery required")]
         public bool DeliveryRequired { get; set; }
 
         public long LongVersion { get; set; }
