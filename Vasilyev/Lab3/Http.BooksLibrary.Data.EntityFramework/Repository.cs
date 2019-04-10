@@ -22,9 +22,7 @@ namespace Http.BooksLibrary.Data.EntityFramework
 
         public IList<T> GetList()
         {
-            var dbSet = dbContext.Set<T>();
-            var result = dbContext.Books.ToList(); //???
-            return (IList<T>) result;
+            return (IList<T>) dbContext.Books.ToList();
         }
 
         public void Add(T book)
@@ -35,6 +33,7 @@ namespace Http.BooksLibrary.Data.EntityFramework
 
         public void Change(T book)
         {
+            throw new System.NotImplementedException();
         }
 
         public void Delete(int id)

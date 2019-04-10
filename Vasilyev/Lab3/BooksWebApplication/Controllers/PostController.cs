@@ -40,8 +40,8 @@ namespace BooksWebApplication.Controllers
         public ActionResult Create()
         {
             BookViewModel viewModel = new BookViewModel();
-            if (viewModel == null) return new HttpNotFoundResult();
             PrepareView(viewModel);
+            viewModel.Created = DateTime.Now;
             return View(viewModel);
         }
 
@@ -77,9 +77,6 @@ namespace BooksWebApplication.Controllers
         public ActionResult Edit(BookViewModel viewModel)
         {
             postService.Save(viewModel);
-            var title = ViewData["BookTitle"];
-            var author = TempData["Author"];
-            var created = Session["Created"];
             return RedirectToAction("Edit", new { id = viewModel.Id });
         }
 
@@ -106,7 +103,6 @@ namespace BooksWebApplication.Controllers
             }
             viewModel.AvailableLanguages = langs;
             viewModel.AvailableGenres = genres;
-            viewModel.Created = DateTime.Now;
         }
 
     }

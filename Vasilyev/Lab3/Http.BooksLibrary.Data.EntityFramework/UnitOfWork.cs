@@ -35,22 +35,10 @@ namespace Http.BooksLibrary.Data.EntityFramework
             return repository;
         }
 
-        public void Add<T>(T entity) where T : class
-        {
-            var repository = GetRepository<T>();
-            repository.Add(entity);
-        }
-
         public void Delete<T>(int id) where T : class
         {
             var repository = GetRepository<T>();
             repository.Delete(id);
-        }
-
-        public void Change<T>(T entity) where T : class
-        {
-            var repository = GetRepository<T>();
-            repository.Change(entity);
         }
 
         public void SaveChanges()

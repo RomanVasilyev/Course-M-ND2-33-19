@@ -10,6 +10,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.LongVersion)
     
 <div class="form-horizontal">
     <h4>Book</h4>

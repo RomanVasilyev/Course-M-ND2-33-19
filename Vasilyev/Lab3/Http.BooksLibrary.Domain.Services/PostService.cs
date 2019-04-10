@@ -42,7 +42,6 @@ namespace Http.BooksLibrary.Domain.Services
                     {
                         throw new Exception("Version redact error");
                     }
-
                     Mapper.Map(viewModel, book);
                     unitOfWork.SaveChanges();
                     transaction.Commit();

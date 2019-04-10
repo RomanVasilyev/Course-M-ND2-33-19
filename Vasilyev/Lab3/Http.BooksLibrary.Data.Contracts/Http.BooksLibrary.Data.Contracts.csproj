@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookRepository.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Langs.cs" />
