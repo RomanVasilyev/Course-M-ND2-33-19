@@ -37,6 +37,7 @@ namespace BooksWebApp.Controllers
         }
 
         // GET: Get/Create
+        [Authorize]
         public ActionResult Create()
         {
             BookViewModel viewModel = new BookViewModel();
@@ -47,6 +48,7 @@ namespace BooksWebApp.Controllers
 
         // POST: Get/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(BookViewModel viewModel)
         {
             try
@@ -62,6 +64,7 @@ namespace BooksWebApp.Controllers
 
         // GET: Post/Edit/5
         //[HttpPost]
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var viewModel = postService.Get(id);
@@ -74,6 +77,7 @@ namespace BooksWebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(BookViewModel viewModel)
         {
             postService.Save(viewModel);
@@ -81,6 +85,7 @@ namespace BooksWebApp.Controllers
         }
 
         // GET: Get/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             postService.Delete(id);

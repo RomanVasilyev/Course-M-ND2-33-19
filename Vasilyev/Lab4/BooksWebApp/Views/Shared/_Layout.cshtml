@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,13 +18,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Books Library", "Index", new {controller = "Post"}, new {@class = "navbar-brand"})
+            }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Books Table", "Index", new { controller = "Post" })</li>
-                    <li>@Html.ActionLink("Edit", "Edit", new { controller = "Post", id = 1 })</li>
+                    @if(ViewContext.HttpContext.User.Identity.IsAuthenticated)
+                    { 
+                    <li>@Html.ActionLink("Books Table", "Index", new {controller = "Post"})</li>
+                        <li>@Html.ActionLink("Edit", "Edit", new {controller = "Post", id = 1})</li>
+                                                                                               }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
