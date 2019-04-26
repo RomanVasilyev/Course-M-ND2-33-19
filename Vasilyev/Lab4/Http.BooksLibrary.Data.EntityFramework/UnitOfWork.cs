@@ -29,6 +29,11 @@ namespace Http.BooksLibrary.Data.EntityFramework
             return result;
         }
 
+        public void Add<T>(T entity) where T : class
+        {
+            GetRepository<T>().Add(entity);
+        }
+
         private IRepository<T> GetRepository<T>() where T : class
         {
             var repository = componentContext.Resolve<IRepository<T>>();

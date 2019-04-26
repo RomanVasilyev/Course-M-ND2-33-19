@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Http.BooksLibrary.Domain.Contracts;
 using Http.BooksLibrary.Domain.Contracts.ViewModels;
@@ -31,6 +32,14 @@ namespace Http.BooksLibrary.Domain.Services
             return result;
         }
 
+        public void Add(BookViewModel viewModel)
+        {
+            viewModel.Id = unitOfWork.GetAll<Book>().OrderBy(x => x.Id).Last().Id + 1;
+            Book book = new Book();
+            Mapper.Map(viewModel, book);
+            unitOfWork.Add(book);
+        }
+
         public void Save(BookViewModel viewModel)
         {
             using (var transaction = unitOfWork.BeginTransaction())
@@ -46,7 +55,7 @@ namespace Http.BooksLibrary.Domain.Services
                     unitOfWork.SaveChanges();
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     transaction.Rollback();
                 }

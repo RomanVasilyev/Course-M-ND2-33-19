@@ -18,7 +18,17 @@ namespace Http.BooksLibrary.Domain.Contracts.ViewModels
 
         public string Author { get; set; }
 
-        public DateTime Created { get; set; }
+        //[Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+        //[Display(Name = "Creation Time")]
+        public DateTime? Created { get; set; }
+
+        //[Display(Name = "Updated By")]
+        public string UpdatedBy { get; set; }
+
+        //[Display(Name = "Update Time")]
+        public DateTime? Updated { get; set; }
 
         public Genre Genre { get; set; }
 

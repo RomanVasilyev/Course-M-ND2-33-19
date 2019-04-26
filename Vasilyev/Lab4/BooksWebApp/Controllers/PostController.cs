@@ -42,6 +42,7 @@ namespace BooksWebApp.Controllers
         {
             BookViewModel viewModel = new BookViewModel();
             PrepareView(viewModel);
+            viewModel.CreatedBy = User.Identity.Name;
             viewModel.Created = DateTime.Now;
             return View(viewModel);
         }
@@ -53,6 +54,7 @@ namespace BooksWebApp.Controllers
         {
             try
             {
+                postService.Add(viewModel);
                 postService.Save(viewModel);
                 return RedirectToAction("Index");
             }
@@ -73,6 +75,8 @@ namespace BooksWebApp.Controllers
             ViewData["PageTitle"] = viewModel.Title;
             ViewBag.PageTitleLower = viewModel.Title.ToLower();
             Session["Created"] = DateTime.Now;
+            viewModel.UpdatedBy = User.Identity.Name;
+            viewModel.Updated = DateTime.Now;
             return View(viewModel);
         }
 

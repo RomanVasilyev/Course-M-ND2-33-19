@@ -21,7 +21,16 @@
             @Html.DisplayNameFor(model => model.Author)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Updated)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsPaper)
@@ -44,7 +53,16 @@
             @Html.DisplayFor(modelItem => item.Author)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Updated)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsPaper)
