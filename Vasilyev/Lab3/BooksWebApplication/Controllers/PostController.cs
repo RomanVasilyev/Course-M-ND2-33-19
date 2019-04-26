@@ -51,6 +51,7 @@ namespace BooksWebApplication.Controllers
         {
             try
             {
+                postService.Add(viewModel);
                 postService.Save(viewModel);
                 return RedirectToAction("Index");
             }
