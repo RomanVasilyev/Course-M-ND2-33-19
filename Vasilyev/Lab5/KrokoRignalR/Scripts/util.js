@@ -1,49 +1,58 @@
 ﻿$(function () {
     $('#chatBody').hide();
     $('#loginBlock').show();
+    $('#cbMaster').show();
     // Ссылка на автоматически-сгенерированный прокси хаба
     var chat = $.connection.chatHub;
     // Объявление функции, которая хаб вызывает при получении сообщений
-    chat.client.addMessage = function (name, message) {
+    chat.client.addMessage = function (name, message, isMaster) {
+        var master = '';
+        if (isMaster) {
+            master = ' Ведущий';
+        }
         // Добавление сообщений на веб-страницу 
-        $('#chatroom').append('<p><b>' + htmlEncode(name)
+        $('#chatroom').append('<p><b>' + htmlEncode(name + master)
             + '</b>: ' + htmlEncode(message) + '</p>');
     };
 
-    chat.client.updateDot = function (x, y) {
-        drawDot(x, y, 8);
+    chat.client.updateDot = function (ex, ey, x, y, color) {
+        //drawDot(x, y, 3);
+        drawLine(ex, ey, x, y, color);
     };
 
     chat.client.clearCanvas = function () {
         clearCanvas();
     };
 
+    chat.client.endGame = function() {
+        endGame();
+    }
+
     var canv = $('#hidenCanvas');
     canv.hide();
-    //chat.client.moveCan = function ('#idCanvas') {};
 
     // Функция, вызываемая при подключении нового пользователя
-    chat.client.onConnected = function (id, userName, allUsers) {
+    chat.client.onConnected = function (id, userName, allUsers, isMaster) {
 
         $('#loginBlock').hide();
         $('#chatBody').show();
         // установка в скрытых полях имени и id текущего пользователя
         $('#hdId').val(id);
         $('#username').val(userName);
+        //$('#cbMaster')[0].checked = isMaster;
         $('#header').html('<h3>Добро пожаловать, ' + userName + '</h3>');
-
         // Добавление всех пользователей
         for (i = 0; i < allUsers.length; i++) {
 
-            AddUser(allUsers[i].ConnectionId, allUsers[i].Name);
-            canv.show();
+            AddUser(allUsers[i].ConnectionId, allUsers[i].Name, allUsers[i].IsMaster);
         }
+        canv.show();
     }
 
     // Добавляем нового пользователя
-    chat.client.onNewUserConnected = function (id, name) {
+    chat.client.onNewUserConnected = function (id, name, isMaster) {
 
-        AddUser(id, name);
+        AddUser(id, name, isMaster);
     }
 
     // Удаляем пользователя
@@ -57,19 +66,42 @@
 
         $('#sendmessage').click(function () {
             // Вызываем у хаба метод Send
-            chat.server.send($('#username').val(), $('#message').val());
+            chat.server.send($('#username').val(), $('#message').val(), $('#cbMaster')[0].checked);
             $('#message').val('');
         });
 
+        //isAnyMaster();
         // обработка логина
         $("#btnLogin").click(function () {
-
+            
             var name = $("#txtUserName").val();
+            var isMaster;
+            isMaster = $("#cbMaster")[0].checked;
             if (name.length > 0) {
-                chat.server.connect(name);
+                chat.server.connect(name, isMaster);
             }
             else {
                 alert("Введите имя");
+            }
+            if (isMaster) {
+                //On mouse events on the canvas
+                $canvas.mousedown(function (e) {
+                    lastEvent = e;
+                    mouseDown = true;
+                }).mousemove(function (e) {
+                    //Draw lines
+                    if (mouseDown) {
+                        drawLine(lastEvent.offsetX, lastEvent.offsetY, e.offsetX, e.offsetY, color);
+                        chat.server.updateCanvas(lastEvent.offsetX, lastEvent.offsetY, e.offsetX, e.offsetY, color);
+                        lastEvent = e;
+                    }
+                }).mouseup(function () {
+                    mouseDown = false;
+                }).mouseleave(function () {
+                    $canvas.mouseup();
+                });
+            } else {
+                $('#canvasControls').hide();
             }
         });
     });
@@ -82,6 +114,16 @@
         context.closePath();
         context.fill();
     }
+
+    function drawLine(ex, ey, x, y, color) {
+        // Draw a line
+        context.beginPath();
+        context.moveTo(ex, ey);
+        context.lineTo(x, y);
+        context.strokeStyle = color;
+        //context.lineWidth = 5;
+        context.stroke();
+    }
     // Clear the canvas context using the canvas width and height     
     function cleanCanvas() {
         clearCanvas();
@@ -91,6 +133,52 @@
     function clearCanvas() {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     }
+
+    //End of game
+    function endGame() {
+        var centerX = context.canvas.width / 2;
+        var centerY = context.canvas.height / 2;
+        var radius = 70;
+        var eyeRadius = 10;
+        var eyeXOffset = 25;
+        var eyeYOffset = 20;
+
+        // draw the yellow circle
+        context.beginPath();
+        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = 'yellow';
+        context.fill();
+        //context.lineWidth = 5;
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // draw the eyes
+        context.beginPath();
+        var eyeX = centerX - eyeXOffset;
+        var eyeY = centerY - eyeXOffset;
+        context.arc(eyeX, eyeY, eyeRadius, 0, 2 * Math.PI, false);
+        var eyeX = centerX + eyeXOffset;
+        context.arc(eyeX, eyeY, eyeRadius, 0, 2 * Math.PI, false);
+        context.fillStyle = 'black';
+        context.fill();
+
+        // draw the mouth
+        context.beginPath();
+        context.arc(centerX, centerY, 50, 0, Math.PI, false);
+        context.stroke();
+    }
+
+    function isAnyMaster(allUsers) {
+        chat.server.isAnyMaster(allUsers);
+        for (i = 0; i < allUsers.length; i++) {
+            if (allUsers[i].IsMaster) {
+                $('#cbMaster')[0].checked = false;
+                $('#cbMaster').hide();
+                return;
+            }
+        }
+    }
+
     // Keep track of the mouse button being pressed and draw a dot at current location     
     function sketchpad_mouseDown() {
         mouseDown = 1;
@@ -181,29 +269,7 @@
         cleanCanvas();
     });
 
-    //On mouse events on the canvas
-    $canvas.mousedown(function (e) {
-        lastEvent = e;
-        mouseDown = true;
-        drawDot(e.offsetX, e.offsetY, 3);
-        chat.server.updateCanvas(e.offsetX, e.offsetY);
-    }).mousemove(function (e) {
-        //Draw lines
-        if (mouseDown) {
-            context.beginPath();
-            context.moveTo(lastEvent.offsetX, lastEvent.offsetY);
-            context.lineTo(e.offsetX, e.offsetY);
-            drawDot(e.offsetX, e.offsetY, 3);
-            chat.server.updateCanvas(e.offsetX, e.offsetY);
-            context.strokeStyle = color;
-            context.stroke();
-            lastEvent = e;
-        }
-    }).mouseup(function () {
-        mouseDown = false;
-    }).mouseleave(function () {
-        $canvas.mouseup();
-    });
+
 });
 // Кодирование тегов
 function htmlEncode(value) {
@@ -211,12 +277,15 @@ function htmlEncode(value) {
     return encodedValue;
 }
 //Добавление нового пользователя
-function AddUser(id, name) {
+function AddUser(id, name, isMaster) {
 
     var userId = $('#hdId').val();
-
+    var master = '';
+    if (isMaster) {
+        master = '-Ведущий';
+    }
     if (userId != id) {
 
-        $("#chatusers").append('<p id="' + id + '"><b>' + name + '</b></p>');
+        $("#chatusers").append('<p id="' + id + '"><b>' + name + master + '</b></p>');
     }
 }
