@@ -4,10 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using Autofac;
 using AutoMapper;
+using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using Http.News.Infrastructure.MappingProfiles;
 
 namespace ITNewsWeb.App_Start
 {
@@ -44,25 +45,11 @@ namespace ITNewsWeb.App_Start
 
             //// Configure Web API with the dependency resolver.
             //GlobalConfiguration.Configuration.DependencyResolver = resolver;
+        }
 
-            //// получаем экземпляр контейнера
-            //var builder = new ContainerBuilder();
-
-            //// регистрируем контроллер в текущей сборке
-            //builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
-            //// регистрируем споставление типов
-            //builder.AddDataDependencies();
-            //builder.AddDomainDependencies();
-
-            //// создаем новый контейнер с теми зависимостями, которые определены выше
-            //var container = builder.Build();
-
-            //// установка сопоставителя зависимостей
-            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            //var csl = new AutofacServiceLocator(container);
-            //ServiceLocator.SetLocatorProvider(() => csl);
+        public static void Configure()
+        {
+            Mapper.Initialize(c => c.AddProfile(typeof(CategoryProfile)));
         }
     }
 }
