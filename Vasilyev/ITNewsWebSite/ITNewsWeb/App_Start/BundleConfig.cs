@@ -23,8 +23,31 @@ namespace ITNewsWeb
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/bootstrap.css",
+                "~/Content/site.css",
+                "~/Content/docs.css",
+                "~/Content/pygments-manni.css"));
+
+            // Those bundles for the front-end page 
+            bundles.Add(
+                new ScriptBundle("~/andia-agency/scripts")
+                    .Include("~/Scripts/jquery-3.3.1.min.js")
+                    .Include("~/Content/bootstrap.min.js")
+                    .Include("~/Content/andia-agency/assets/js/jquery.flexslider.js")
+                    .Include("~/Content/andia-agency/assets/js/jquery.tweet.js")
+                    .Include("~/Content/andia-agency/assets/js/jflickrfeed.js")
+                    .Include("~/Content/andia-agency/assets/js/jquery.ui.map.min.js")
+                    .Include("~/Content/andia-agency/assets/js/jquery.quicksand.js")
+                    .Include("~/Content/andia-agency/assets/prettyPhoto/js/jquery.prettyPhoto.js")
+                    .Include("~/Content/andia-agency/assets/js/scripts.js"));
+
+            bundles.Add(
+                new StyleBundle("~/andia-agency/css")
+                    .Include("~/Content/andia-agency/assets/bootstrap/css/bootstrap.min.css")
+                    .Include("~/Content/andia-agency/assets/prettyPhoto/css/prettyPhoto.css")
+                    .Include("~/Content/andia-agency/assets/css/flexslider.css")
+                    .Include("~/Content/andia-agency/assets/css/font-awesome.css")
+                    .Include("~/Content/andia-agency/assets/css/style.css"));
         }
     }
 }

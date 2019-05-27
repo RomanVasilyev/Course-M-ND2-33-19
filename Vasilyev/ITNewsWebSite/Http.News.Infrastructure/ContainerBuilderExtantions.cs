@@ -26,6 +26,9 @@ namespace Http.News.Infrastructure
 
         public static ContainerBuilder AddDomainDependencies(this ContainerBuilder builder)
         {
+            // registering all application instances
+            builder.RegisterType<NewsUnitOfWork>()
+                .AsImplementedInterfaces();
             // registering all services
             builder.RegisterType<ItemService>().As<IItemService>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();

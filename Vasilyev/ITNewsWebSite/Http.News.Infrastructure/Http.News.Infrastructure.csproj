@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContainerBuilderExtantions.cs" />
+    <Compile Include="INewsUnitOfWork.cs" />
     <Compile Include="MappingProfiles\CategoryProfile.cs" />
+    <Compile Include="NewsUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
