@@ -46,6 +46,8 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemContent.cs" />
     <Compile Include="INewsRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="ISpecification.cs" />
     <Compile Include="ITransaction.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

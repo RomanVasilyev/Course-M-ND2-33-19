@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Http.News.Data.Contracts;
+using Http.News.Data.Contracts.Entities;
 using Http.News.Domain.Contracts.Dtos;
 using Http.News.Domain.Contracts.ViewModels;
 using Http.News.Domain.Services;
@@ -20,11 +23,11 @@ namespace Http.News.Infrastructure
         private readonly ICategoryService _categoryService;
 
         public NewsUnitOfWork(
-            //IRepository<Category> categoryRepository, 
-            //IRepository<Item> itemRepository, 
+            //IRepository<Category> categoryRepository,
+            //IRepository<Item> itemRepository,
             IItemService itemSummaryService,
             ICategoryService categoryService)
-        //IRepository<ItemContent> itemContentRepository)
+            //,IRepository<ItemContent> itemContentRepository)
         {
             //Guard.ArgumentNotNull(categoryRepository, "CategoryRepository");
             //Guard.ArgumentNotNull(itemRepository, "ItemRepository");
@@ -67,7 +70,8 @@ namespace Http.News.Infrastructure
             var itemDetailsViewModel = new ItemDetailsViewModel();
             itemDetailsViewModel.TopMenu = GetCategoryMenu(categoryId);
             itemDetailsViewModel.ItemDetails = _itemSummaryService.GetItemDetails(itemId);
-
+            var category = this.GetCategoryById(categoryId);
+            itemDetailsViewModel.CategoryName = category.Name;
             return itemDetailsViewModel;
         }
 
@@ -98,6 +102,11 @@ namespace Http.News.Infrastructure
         private IEnumerable<CategorySummaryDto> GetAllCategorySummaries()
         {
             return _categoryService.GetCategoryForMenu();
+        }
+
+        public CategorySummaryDto GetCategoryById(int id)
+        {
+            return _categoryService.GetCategoryById(id).MapTo<CategorySummaryDto>();
         }
 
         #endregion
@@ -131,7 +140,7 @@ namespace Http.News.Infrastructure
         //    if (categories != null && categories.Any())
         //    {
         //        viewModel.TotalPage = categories.Count();
-        //        viewModel.Categories = categories.Skip((page - 1)*pageSize).Take(pageSize);
+        //        viewModel.Categories = categories.Skip((page - 1) * pageSize).Take(pageSize);
         //    }
 
         //    return viewModel;
@@ -192,7 +201,7 @@ namespace Http.News.Infrastructure
 
         //    if (itemSummaries == null || !itemSummaries.Any())
         //    {
-        //        return new ItemSummaryViewModel();    
+        //        return new ItemSummaryViewModel();
         //    }
 
         //    viewModel.TotalPage = itemSummaries.Count();
@@ -214,20 +223,20 @@ namespace Http.News.Infrastructure
         //{
         //    var data = this._itemRepository.Include("ItemContent").Get(id);
         //    return new ItemDetailsDto
-        //        {
-        //            Id = data.Id,
-        //            CategoryId = data.Category.Id,
-        //            Title = data.ItemContent.Title,
-        //            SmallImageUrl = data.ItemContent.SmallImage,
-        //            MediumImageUrl = data.ItemContent.MediumImage,
-        //            BigImageUrl = data.ItemContent.BigImage,
-        //            Content = data.ItemContent.Content,
-        //            ShortDescription = data.ItemContent.ShortDescription,
-        //            CreatedDate = data.CreatedDate,
-        //            CreatedBy = data.CreatedBy,
-        //            ModifiedBy = data.ModifiedBy,
-        //            ModifiedDate = data.ModifiedDate,
-        //        };
+        //    {
+        //        Id = data.Id,
+        //        CategoryId = data.Category.Id,
+        //        Title = data.ItemContent.Title,
+        //        SmallImageUrl = data.ItemContent.SmallImage,
+        //        MediumImageUrl = data.ItemContent.MediumImage,
+        //        BigImageUrl = data.ItemContent.BigImage,
+        //        Content = data.ItemContent.Content,
+        //        ShortDescription = data.ItemContent.ShortDescription,
+        //        CreatedDate = data.CreatedDate,
+        //        CreatedBy = data.CreatedBy,
+        //        ModifiedBy = data.ModifiedBy,
+        //        ModifiedDate = data.ModifiedDate,
+        //    };
         //}
 
         ///// <summary>
@@ -251,7 +260,7 @@ namespace Http.News.Infrastructure
         //            itemEntity.Category = this._categoryRepository.Get(dto.CategoryId);
 
         //            // Update Item Content
-        //            itemContentEntity = 
+        //            itemContentEntity =
         //                this._itemContentRepository.Get(itemEntity.ItemContentId); // this is actually not a valid way
 
         //            if (itemContentEntity == null)
@@ -286,11 +295,11 @@ namespace Http.News.Infrastructure
         //            };
 
         //            itemEntity = new Item
-        //                {
-        //                    Category = this._categoryRepository.Get(dto.CategoryId),
-        //                    CreatedBy = "Actor Login",
-        //                    CreatedDate = DatetimeRegion.GetCurrentTime()
-        //                };
+        //            {
+        //                Category = this._categoryRepository.Get(dto.CategoryId),
+        //                CreatedBy = "Actor Login",
+        //                CreatedDate = DatetimeRegion.GetCurrentTime()
+        //            };
         //        }
 
         //        this._itemContentRepository.SaveOrUpdate(itemContentEntity);

@@ -6,5 +6,6 @@ namespace Http.News.Domain.Services
     public interface ICategoryService
     {
         List<CategorySummaryDto> GetCategoryForMenu();
+        CategorySummaryDto GetCategoryById(int id);
     }
 }

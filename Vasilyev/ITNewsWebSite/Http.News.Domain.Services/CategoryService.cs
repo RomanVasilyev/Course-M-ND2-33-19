@@ -23,5 +23,10 @@ namespace Http.News.Domain.Services
         {
             return _repository.GetAllCategories().ToList().MapTo<CategorySummaryDto>();
         }
+
+        public CategorySummaryDto GetCategoryById(int id)
+        {
+            return _repository.GetAllCategories().FirstOrDefault(x => x.Id == id).MapTo<CategorySummaryDto>();
+        }
     }
 }

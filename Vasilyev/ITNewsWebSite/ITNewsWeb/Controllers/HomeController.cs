@@ -38,7 +38,22 @@ namespace ITNewsWeb.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "admin")]
+        [Route("Home/Details/{title?}/{categoryId:int}/{itemId:int}")]
+        public ActionResult Details(int categoryId, int itemId, string title = null)
+        {
+            var viewModel = _unitOfWork.BuildItemDetailsViewModel(categoryId, itemId);
+
+            return View(viewModel);
+        }
+
+        [Route("Home/Category/{name}/{id:int}")]
+        public ActionResult Category(string name, int id)
+        {
+            var viewModel = _unitOfWork.BuildCategoryPageViewModel(id);
+            return View(viewModel);
+        }
+
+        //[Authorize(Roles = "admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

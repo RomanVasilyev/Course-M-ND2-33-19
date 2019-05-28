@@ -22,97 +22,121 @@ namespace Http.News.Data.EntityFramework.Migrations
             {
                 var item1 = new Item
                 {
-                    CreatedBy = "thangchung",
+                    CreatedBy = "Roman Vasilyev",
                     CreatedDate = DateTime.UtcNow,
                     ItemContent =
                                     new ItemContent
                                     {
-                                        CreatedBy = "thangchung",
+                                        CreatedBy = "Roman Vasilyev",
                                         CreatedDate = DateTime.UtcNow,
-                                        BigImage = "/Upload/img/sample.png",
-                                        SmallImage = "/Upload/img/sample.png",
-                                        MediumImage = "/Upload/img/sample.png",
+                                        BigImage = "/Upload/img/Cshpacman.png",
+                                        SmallImage = "/Upload/img/Csh.png",
+                                        MediumImage = "/Upload/img/Csh.png",
                                         NumOfView = 100,
-                                        Title = "Augue rhoncus cum lectus dapibus et duis in",
+                                        Title = "C# language",
                                         ShortDescription =
-                                            "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet.",
+                                            "C# — объектно-ориентированный язык программирования.",
                                         Content =
-                                            "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet. Et integer? Ridiculus, sed phasellus amet dignissim porttitor proin, egestas porttitor, velit augue platea? Porttitor pid a pellentesque magnis, nascetur. Scelerisque duis mid! Sit? Ultricies ultricies ut porta scelerisque. Porta integer! Nisi dolor. Nec integer, nunc, urna turpis! Hac adipiscing proin mid duis phasellus dapibus tincidunt sed, elementum urna amet, dolor dignissim odio cursus risus. Hac nunc in eu, nec a in pulvinar integer sit est aenean lorem dis ut lacus, in et risus pid, ac placerat dis urna nec. Porttitor, urna eros enim urna enim! Sed, enim purus? Porttitor penatibus penatibus est habitasse aenean, et elit enim cras platea? Ut! Egestas elit, cum ac non cras amet adipiscing. Placerat lorem auctor et a placerat ultricies, in dictumst nunc."
+                                            "C# (произносится си шарп) — объектно-ориентированный язык программирования. Разработан в 1998—2001 годах группой инженеров компании Microsoft под руководством Андерса Хейлсберга и Скотта Вильтаумота как язык разработки приложений для платформы Microsoft .NET Framework."
                                     }
                 };
 
                 var item2 = new Item
                 {
-                    CreatedBy = "thangchung",
+                    CreatedBy = "Roman Vasilyev",
                     CreatedDate = DateTime.UtcNow,
                     ItemContent =
                                     new ItemContent
                                     {
-                                        CreatedBy = "thangchung",
+                                        CreatedBy = "Roman Vasilyev",
                                         CreatedDate = DateTime.UtcNow,
-                                        BigImage = "/Upload/img/sample.png",
-                                        SmallImage = "/Upload/img/sample.png",
-                                        MediumImage = "/Upload/img/sample.png",
+                                        BigImage = "/Upload/img/CppBig.png",
+                                        SmallImage = "/Upload/img/CppSmall.png",
+                                        MediumImage = "/Upload/img/CppSmall.png",
                                         NumOfView = 200,
-                                        Title = "Augue rhoncus cum lectus dapibus et duis in",
+                                        Title = "C++ programming",
                                         ShortDescription =
-                                            "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet.",
+                                            "C++ — компилируемый, статически типизированный язык программирования общего назначения.",
                                         Content =
-                                            "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet. Et integer? Ridiculus, sed phasellus amet dignissim porttitor proin, egestas porttitor, velit augue platea? Porttitor pid a pellentesque magnis, nascetur. Scelerisque duis mid! Sit? Ultricies ultricies ut porta scelerisque. Porta integer! Nisi dolor. Nec integer, nunc, urna turpis! Hac adipiscing proin mid duis phasellus dapibus tincidunt sed, elementum urna amet, dolor dignissim odio cursus risus. Hac nunc in eu, nec a in pulvinar integer sit est aenean lorem dis ut lacus, in et risus pid, ac placerat dis urna nec. Porttitor, urna eros enim urna enim! Sed, enim purus? Porttitor penatibus penatibus est habitasse aenean, et elit enim cras platea? Ut! Egestas elit, cum ac non cras amet adipiscing. Placerat lorem auctor et a placerat ultricies, in dictumst nunc."
+                                            "C++ (читается си-плюс-плюс) — компилируемый, статически типизированный язык программирования общего назначения. Поддерживает такие парадигмы программирования, как процедурное программирование, объектно - ориентированное программирование, обобщённое программирование.Язык имеет богатую стандартную библиотеку, которая включает в себя распространённые контейнеры и алгоритмы, ввод - вывод, регулярные выражения, поддержку многопоточности и другие возможности.C++ сочетает свойства как высокоуровневых, так и низкоуровневых языков.[3][4] В сравнении с его предшественником — языком C, — наибольшее внимание уделено поддержке объектно - ориентированного и обобщённого программирования. C++ широко используется для разработки программного обеспечения, являясь одним из самых популярных языков программирования[мнения 1][мнения 2].Область его применения включает создание операционных систем, разнообразных прикладных программ, драйверов устройств, приложений для встраиваемых систем, высокопроизводительных серверов, а также игр.Существует множество реализаций языка C++, как бесплатных, так и коммерческих и для различных платформ.Например, на платформе x86 это GCC, Visual C++, Intel C++ Compiler, Embarcadero(Borland) C++ Builder и другие.C++ оказал огромное влияние на другие языки программирования, в первую очередь на Java и C#. Синтаксис C++ унаследован от языка C.Одним из принципов разработки было сохранение совместимости с C.Тем не менее, C++ не является в строгом смысле надмножеством C; множество программ, которые могут одинаково успешно транслироваться как компиляторами C, так и компиляторами C++, довольно велико, но не включает все возможные программы на C."
                                     }
+
                 };
 
                 var item3 = new Item
                 {
-                    CreatedBy = "thangchung",
+                    CreatedBy = "Roman Vasilyev",
                     CreatedDate = DateTime.UtcNow,
                     ItemContent =
                         new ItemContent
                         {
-                            CreatedBy = "thangchung",
+                            CreatedBy = "Roman Vasilyev",
                             CreatedDate = DateTime.UtcNow,
-                            BigImage = "/Upload/img/sample.png",
-                            SmallImage = "/Upload/img/sample.png",
-                            MediumImage = "/Upload/img/sample.png",
+                            BigImage = "/Upload/img/Java.png",
+                            SmallImage = "/Upload/img/Java.png",
+                            MediumImage = "/Upload/img/Java.png",
                             NumOfView = 150,
-                            Title = "Augue rhoncus cum lectus dapibus et duis in",
+                            Title = "Java programming language",
                             ShortDescription =
-                                "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet.",
+                                "Java — сильно типизированный объектно-ориентированный язык программирования, разработанный компанией Sun Microsystems. В настоящее время проект принадлежит OpenSource и распространяется по лицензии GPL. В OpenJDK вносят вклад крупные компании, такие как — Oracle, RedHat, IBM, Google, JetBrains.",
                             Content =
-                                "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet. Et integer? Ridiculus, sed phasellus amet dignissim porttitor proin, egestas porttitor, velit augue platea? Porttitor pid a pellentesque magnis, nascetur. Scelerisque duis mid! Sit? Ultricies ultricies ut porta scelerisque. Porta integer! Nisi dolor. Nec integer, nunc, urna turpis! Hac adipiscing proin mid duis phasellus dapibus tincidunt sed, elementum urna amet, dolor dignissim odio cursus risus. Hac nunc in eu, nec a in pulvinar integer sit est aenean lorem dis ut lacus, in et risus pid, ac placerat dis urna nec. Porttitor, urna eros enim urna enim! Sed, enim purus? Porttitor penatibus penatibus est habitasse aenean, et elit enim cras platea? Ut! Egestas elit, cum ac non cras amet adipiscing. Placerat lorem auctor et a placerat ultricies, in dictumst nunc."
+                                "Java — сильно типизированный объектно-ориентированный язык программирования, разработанный компанией Sun Microsystems. В настоящее время проект принадлежит OpenSource и распространяется по лицензии GPL. В OpenJDK вносят вклад крупные компании, такие как — Oracle, RedHat, IBM, Google, JetBrains."
                         }
                 };
 
                 var item4 = new Item
                 {
-                    CreatedBy = "thangchung",
+                    CreatedBy = "Roman Vasilyev",
                     CreatedDate = DateTime.UtcNow,
                     ItemContent =
                         new ItemContent
                         {
-                            CreatedBy = "thangchung",
+                            CreatedBy = "Roman Vasilyev",
                             CreatedDate = DateTime.UtcNow,
-                            BigImage = "/Upload/img/sample.png",
-                            SmallImage = "/Upload/img/sample.png",
-                            MediumImage = "/Upload/img/sample.png",
+                            BigImage = "/Upload/img/Algorithm.png",
+                            SmallImage = "/Upload/img/Algorithm.png",
+                            MediumImage = "/Upload/img/Algorithm.png",
                             NumOfView = 500,
-                            Title = "Augue rhoncus cum lectus dapibus et duis in",
+                            Title = "Algorithms and etc.",
                             ShortDescription =
-                                "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet.",
+                                "Процесс или набор правил, необходимых для проведения расчета или выполнения какой-либо задачи.",
                             Content =
-                                "Porta nec lectus nascetur nisi quis, in augue dolor, elementum amet egestas pid diam magna, turpis, elementum elementum? Dictumst risus montes? Rhoncus, arcu, turpis elit parturient magnis cursus, ac scelerisque, risus ac, placerat odio nunc placerat, ultricies placerat porta rhoncus dolor rhoncus porttitor amet egestas, et porta dapibus, lacus, nunc placerat ac odio in? Dis? Elit, in. Montes quis diam, tristique integer sed, vut odio ultrices nunc adipiscing, placerat integer, aliquet aliquam, magna et et turpis tincidunt ut, eu velit. Mauris etiam mus pulvinar, proin cras, dolor auctor? A et diam sed ultricies arcu nisi. Hac, lacus, et, lacus phasellus aliquet tincidunt in vut in? Urna a parturient mid cras odio hac massa tortor enim egestas non ultrices pulvinar. Aliquet. Et integer? Ridiculus, sed phasellus amet dignissim porttitor proin, egestas porttitor, velit augue platea? Porttitor pid a pellentesque magnis, nascetur. Scelerisque duis mid! Sit? Ultricies ultricies ut porta scelerisque. Porta integer! Nisi dolor. Nec integer, nunc, urna turpis! Hac adipiscing proin mid duis phasellus dapibus tincidunt sed, elementum urna amet, dolor dignissim odio cursus risus. Hac nunc in eu, nec a in pulvinar integer sit est aenean lorem dis ut lacus, in et risus pid, ac placerat dis urna nec. Porttitor, urna eros enim urna enim! Sed, enim purus? Porttitor penatibus penatibus est habitasse aenean, et elit enim cras platea? Ut! Egestas elit, cum ac non cras amet adipiscing. Placerat lorem auctor et a placerat ultricies, in dictumst nunc."
+                                "Алгори́тм (лат. algorithmi — от арабского имени математика Аль-Хорезми) — конечная совокупность точно заданных правил решения произвольного класса задач или набор инструкций, описывающих порядок действий исполнителя для решения некоторой задачи."
                         }
                 };
 
-                var cat1 = new Category { Name = "Sport", CreatedDate = DateTime.UtcNow, CreatedBy = "thangchung", Items = new Collection<Item> { item1 } };
-                var cat2 = new Category { Name = "Fashion", CreatedDate = DateTime.UtcNow, CreatedBy = "thangchung", Items = new Collection<Item> { item2 } };
-                var cat3 = new Category { Name = "Movie", CreatedDate = DateTime.UtcNow, CreatedBy = "thangchung", Items = new Collection<Item> { item3 } };
-                var cat4 = new Category { Name = "News", CreatedDate = DateTime.UtcNow, CreatedBy = "thangchung", Items = new Collection<Item> { item4 } };
+                var item5 = new Item
+                {
+                    CreatedBy = "Admin",
+                    CreatedDate = DateTime.UtcNow,
+                    ItemContent =
+                                new ItemContent
+                                {
+                                    CreatedBy = "Admin",
+                                    CreatedDate = DateTime.UtcNow,
+                                    BigImage = "/Upload/img/machineLearning3.png",
+                                    SmallImage = "/Upload/img/machineLearning3.png",
+                                    MediumImage = "/Upload/img/machineLearning3.png",
+                                    NumOfView = 500,
+                                    Title = "Machine Learning Test",
+                                    ShortDescription =
+                                        "Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to effectively perform a specific task without using explicit instructions, relying on patterns and inference instead. It is seen as a subset of artificial intelligence.",
+                                    Content =
+                                        "Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to effectively perform a specific task without using explicit instructions, relying on patterns and inference instead. It is seen as a subset of artificial intelligence."
+                                }
+                };
+
+                var cat1 = new Category { Name = "C#", CreatedDate = DateTime.UtcNow, CreatedBy = "Roman Vasilyev", Items = new Collection<Item> { item1 } };
+                var cat2 = new Category { Name = "C++", CreatedDate = DateTime.UtcNow, CreatedBy = "Roman Vasilyev", Items = new Collection<Item> { item2 } };
+                var cat3 = new Category { Name = "Java", CreatedDate = DateTime.UtcNow, CreatedBy = "Roman Vasilyev", Items = new Collection<Item> { item3 } };
+                var cat4 = new Category { Name = "Algorithms", CreatedDate = DateTime.UtcNow, CreatedBy = "Roman Vasilyev", Items = new Collection<Item> { item4 } };
+                var cat5 = new Category { Name = "Machine Learning", CreatedDate = DateTime.UtcNow, CreatedBy = "Admin", Items = new Collection<Item> { item5 } };
 
                 context.Categories.Add(cat1);
                 context.Categories.Add(cat2);
                 context.Categories.Add(cat3);
                 context.Categories.Add(cat4);
+                context.Categories.Add(cat5);
                 try
                 {
                     context.SaveChanges();

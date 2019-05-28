@@ -10,5 +10,7 @@
         }
         
         public ItemDetailsDto ItemDetails { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }

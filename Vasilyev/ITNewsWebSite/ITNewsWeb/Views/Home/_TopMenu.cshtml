@@ -5,11 +5,11 @@
     <li class="@Html.Raw(isCurrentPageString)">
         @if (menu.Id == 0)
         {
-            <a href="/"><i class="icon-camera"></i><br />@menu.Name</a>
+            <a href="/"><i class="icon-home"></i><br />@menu.Name</a>
         }
         else
         {
-            <a href="@Url.Content("/Home/Category/" + @menu.Name + "/" + @menu.Id)"><i class="icon-camera"></i><br />@menu.Name</a>
+            <a href="@Url.Content("/Home/Category/" + @menu.Name + "/" + @menu.Id)"><br />@menu.Name</a>
         }
     </li>
 }

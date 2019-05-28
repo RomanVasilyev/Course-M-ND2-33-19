@@ -227,6 +227,10 @@
     <Content Include="Content\andia-agency\assets\ico\apple-touch-icon-57-precomposed.png" />
     <Content Include="Content\andia-agency\assets\ico\apple-touch-icon-72-precomposed.png" />
     <Content Include="Content\andia-agency\assets\ico\favicon.ico" />
+    <Content Include="Content\andia-agency\assets\img\creative-idea-512.png" />
+    <Content Include="Content\andia-agency\assets\img\creative-idea.png" />
+    <Content Include="Content\andia-agency\assets\img\cyber.png" />
+    <Content Include="Content\andia-agency\assets\img\cyber200px.png" />
     <Content Include="Content\andia-agency\assets\img\line.png" />
     <Content Include="Content\andia-agency\assets\img\line1.jpg" />
     <Content Include="Content\andia-agency\assets\img\logo.png" />
@@ -368,7 +372,19 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Upload\img\Algorithm.png" />
+    <Content Include="Upload\img\Csh.png" />
+    <Content Include="Upload\img\Cshpacman.png" />
+    <Content Include="Upload\img\CppBig.png" />
+    <Content Include="Upload\img\CppSmall.png" />
+    <Content Include="Upload\img\creative-idea-512.png" />
+    <Content Include="Upload\img\cyber.jpg" />
+    <Content Include="Upload\img\itnewslogo.gif" />
+    <Content Include="Upload\img\IT_400x400.jpg" />
+    <Content Include="Upload\img\Java.png" />
+    <Content Include="Upload\img\machineLearning3.png" />
     <Content Include="Upload\img\sample.png" />
+    <Content Include="Upload\img\smart_idea-24.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
