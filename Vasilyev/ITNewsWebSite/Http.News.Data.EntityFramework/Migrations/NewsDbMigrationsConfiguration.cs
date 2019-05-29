@@ -39,7 +39,9 @@ namespace Http.News.Data.EntityFramework.Migrations
                                         Content =
                                             "C# (произносится си шарп) — объектно-ориентированный язык программирования. Разработан в 1998—2001 годах группой инженеров компании Microsoft под руководством Андерса Хейлсберга и Скотта Вильтаумота как язык разработки приложений для платформы Microsoft .NET Framework."
                                     },
-                    Raiting = 5
+                    Rating = 0,
+                    TotalRaters = 0,
+                    AverageRating = 0,
                 };
 
                 var item2 = new Item
@@ -61,7 +63,9 @@ namespace Http.News.Data.EntityFramework.Migrations
                                         Content =
                                             "C++ (читается си-плюс-плюс) — компилируемый, статически типизированный язык программирования общего назначения. Поддерживает такие парадигмы программирования, как процедурное программирование, объектно - ориентированное программирование, обобщённое программирование.Язык имеет богатую стандартную библиотеку, которая включает в себя распространённые контейнеры и алгоритмы, ввод - вывод, регулярные выражения, поддержку многопоточности и другие возможности.C++ сочетает свойства как высокоуровневых, так и низкоуровневых языков.[3][4] В сравнении с его предшественником — языком C, — наибольшее внимание уделено поддержке объектно - ориентированного и обобщённого программирования. C++ широко используется для разработки программного обеспечения, являясь одним из самых популярных языков программирования[мнения 1][мнения 2].Область его применения включает создание операционных систем, разнообразных прикладных программ, драйверов устройств, приложений для встраиваемых систем, высокопроизводительных серверов, а также игр.Существует множество реализаций языка C++, как бесплатных, так и коммерческих и для различных платформ.Например, на платформе x86 это GCC, Visual C++, Intel C++ Compiler, Embarcadero(Borland) C++ Builder и другие.C++ оказал огромное влияние на другие языки программирования, в первую очередь на Java и C#. Синтаксис C++ унаследован от языка C.Одним из принципов разработки было сохранение совместимости с C.Тем не менее, C++ не является в строгом смысле надмножеством C; множество программ, которые могут одинаково успешно транслироваться как компиляторами C, так и компиляторами C++, довольно велико, но не включает все возможные программы на C."
                                     },
-                    Raiting = 4
+                    Rating = 0,
+                    TotalRaters = 0,
+                    AverageRating = 0,
 
                 };
 
@@ -84,7 +88,9 @@ namespace Http.News.Data.EntityFramework.Migrations
                             Content =
                                 "Java — сильно типизированный объектно-ориентированный язык программирования, разработанный компанией Sun Microsystems. В настоящее время проект принадлежит OpenSource и распространяется по лицензии GPL. В OpenJDK вносят вклад крупные компании, такие как — Oracle, RedHat, IBM, Google, JetBrains."
                         },
-                        Raiting = 3
+                    Rating = 0,
+                    TotalRaters = 0,
+                    AverageRating = 0,
                 };
 
                 var item4 = new Item
@@ -106,7 +112,9 @@ namespace Http.News.Data.EntityFramework.Migrations
                             Content =
                                 "Алгори́тм (лат. algorithmi — от арабского имени математика Аль-Хорезми) — конечная совокупность точно заданных правил решения произвольного класса задач или набор инструкций, описывающих порядок действий исполнителя для решения некоторой задачи."
                         },
-                    Raiting = 5
+                    Rating = 0,
+                    TotalRaters = 0,
+                    AverageRating = 0,
                 };
 
                 var item5 = new Item
@@ -128,7 +136,9 @@ namespace Http.News.Data.EntityFramework.Migrations
                                     Content =
                                         "Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to effectively perform a specific task without using explicit instructions, relying on patterns and inference instead. It is seen as a subset of artificial intelligence."
                                 },
-                    Raiting = 5
+                    Rating = 0,
+                    TotalRaters = 0,
+                    AverageRating = 0,
                 };
 
                 var cat1 = new Category { Name = "C#", CreatedDate = DateTime.UtcNow, CreatedBy = "Roman Vasilyev", Items = new Collection<Item> { item1 } };

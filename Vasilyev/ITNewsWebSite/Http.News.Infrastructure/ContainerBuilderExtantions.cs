@@ -18,7 +18,7 @@ namespace Http.News.Infrastructure
             // Register the repository
             builder.RegisterType<NewsRepository>()
                 .AsImplementedInterfaces()
-                .WithParameter((pi, c) => pi.ParameterType == typeof(INewsDbContext),
+                .WithParameter((pi, c) => pi.ParameterType == typeof(NewsDbContext),
                     (pi, c) => c.Resolve<NewsDbContext>())
                 .SingleInstance();
             return builder;
@@ -27,11 +27,11 @@ namespace Http.News.Infrastructure
         public static ContainerBuilder AddDomainDependencies(this ContainerBuilder builder)
         {
             // registering all application instances
-            builder.RegisterType<NewsUnitOfWork>()
+            builder.RegisterType<NewsService>()
                 .AsImplementedInterfaces();
             // registering all services
-            builder.RegisterType<ItemService>().As<IItemService>().InstancePerLifetimeScope();
-            builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
+            //builder.RegisterType<ItemService>().As<IItemService>().InstancePerLifetimeScope();
+            //builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             return builder;
         }
     }

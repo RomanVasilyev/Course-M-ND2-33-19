@@ -12,8 +12,12 @@ namespace Http.News.Domain.Contracts
 
         public string ModifiedBy { get; set; }
 
-        public DateTime? ModifiedDate { get; set; } 
+        public DateTime? ModifiedDate { get; set; }
 
-        public int Raiting { get; set; }
+        public int Rating { get; set; }
+
+        public int TotalRaters { get; set; }
+
+        public double AverageRating { get; set; }
     }
 }

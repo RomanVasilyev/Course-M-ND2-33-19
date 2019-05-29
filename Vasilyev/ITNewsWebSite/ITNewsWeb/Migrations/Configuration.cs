@@ -17,7 +17,7 @@ namespace ITNewsWeb.Migrations
 
         protected override void Seed(ITNewsWeb.Models.ApplicationDbContext context)
         {
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            //var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 

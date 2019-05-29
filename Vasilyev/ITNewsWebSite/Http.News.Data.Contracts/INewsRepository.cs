@@ -8,5 +8,9 @@ namespace Http.News.Data.Contracts
         IQueryable<Category> GetAllCategories();
 
         IQueryable<Item> GetAllItems();
+
+        void Save();
+
+        ITransaction BeginTransaction();
     }
 }

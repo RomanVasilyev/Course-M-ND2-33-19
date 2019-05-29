@@ -41,26 +41,26 @@
                             <ul class="nav pull-right" id="topmenucontrol">
                                 @RenderSection("topmenu", required: false)
                             </ul>
-                            @Html.Partial("_LoginPartial")
                         </div>
                     </div>
-                    <form class="form-inline" action="/action_page.php">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                        <button class="btn btn-success" type="submit">Search</button>
-                    </form>
+                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </div>
     </div>
     <!-- Site Description -->
-    <div class="presentation container">
-        <h2>The simple <span class="darkturquoise">IT News website</span> application.</h2>
-        <p>Using 
-            <a href="http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started">asp.net mvc 5.0</a>
-            for front-end page and 
-            @*<a href="http://www.asp.net/vnext/overview/aspnet-web-api">asp.net web api 2.0</a> &*@ 
-            <a href="http://angularjs.org/">angularjs</a> for admin page</p>
-    </div>
+<div class="presentation container">
+    <form class="form-inline" action="/action_page.php">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+    <h2>The simple <span class="darkturquoise">IT News website</span> application.</h2>
+    <p>Using
+        <a href="http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started">asp.net mvc 5.0</a>
+        for front-end page and
+        @*<a href="http://www.asp.net/vnext/overview/aspnet-web-api">asp.net web api 2.0</a> &*@
+        <a href="http://angularjs.org/">angularjs</a> for admin page</p>
+</div>
     <div class="container">
         @RenderBody()
     </div>

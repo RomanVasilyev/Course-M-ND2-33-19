@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HistoryLog.cs" />
-    <Compile Include="Migrations\201905231218423_FirstMigration.cs" />
-    <Compile Include="Migrations\201905231218423_FirstMigration.Designer.cs">
-      <DependentUpon>201905231218423_FirstMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201905291417515_FirstMigration.cs" />
+    <Compile Include="Migrations\201905291417515_FirstMigration.Designer.cs">
+      <DependentUpon>201905291417515_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="NewsDbContext.cs" />
     <Compile Include="Migrations\NewsDbMigrationsConfiguration.cs" />
@@ -73,15 +73,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905231218423_FirstMigration.resx">
-      <DependentUpon>201905231218423_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Http.News.Data.Contracts\Http.News.Data.Contracts.csproj">
       <Project>{94b8d230-4cc4-4f76-954e-2e7dbfdafa5e}</Project>
       <Name>Http.News.Data.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201905291417515_FirstMigration.resx">
+      <DependentUpon>201905291417515_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

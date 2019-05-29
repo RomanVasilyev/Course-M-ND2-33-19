@@ -13,7 +13,7 @@ namespace Http.News.Data.EntityFramework.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905231218423_FirstMigration"; }
+            get { return "201905291417515_FirstMigration"; }
         }
         
         string IMigrationMetadata.Source

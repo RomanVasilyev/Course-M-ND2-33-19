@@ -11,7 +11,7 @@ namespace Http.News.Data.EntityFramework
     using System.Data.Entity.Core.Objects;
     using System.Linq;
 
-    public class NewsDbContext : DbContext, INewsDbContext
+    public class NewsDbContext : DbContext
     {
         // Your context has been configured to use a 'NewsDbContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
@@ -74,11 +74,5 @@ namespace Http.News.Data.EntityFramework
 
             return base.SaveChanges();
         }
-    }
-
-    public interface INewsDbContext : IObjectContextAdapter
-    {
-        DbSet<Category> Categories { get; set; }
-        DbSet<Item> Items { get; set; }
     }
 }

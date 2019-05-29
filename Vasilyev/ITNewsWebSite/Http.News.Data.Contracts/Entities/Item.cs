@@ -8,8 +8,6 @@ namespace Http.News.Data.Contracts.Entities
 
         public int ItemContentId { get; set; }
 
-        public int Raiting { get; set; }
-
         public virtual Category Category { get; set; }
 
         public virtual ItemContent ItemContent { get; set; }
@@ -21,5 +19,11 @@ namespace Http.News.Data.Contracts.Entities
         public DateTime CreatedDate { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+
+        public int Rating { get; set; }
+
+        public int TotalRaters { get; set; }
+
+        public double AverageRating { get; set; }
     }
 }

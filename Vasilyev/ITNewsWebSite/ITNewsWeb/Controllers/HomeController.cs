@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Http.News.Data.Contracts;
+using Http.News.Domain.Contracts.Dtos;
+using Http.News.Domain.Contracts.ViewModels;
 using Http.News.Domain.Services;
 using Http.News.Infrastructure;
 using ITNewsWeb.Models;
@@ -13,11 +16,11 @@ namespace ITNewsWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private INewsUnitOfWork _unitOfWork;
+        private INewsService NewsService;
 
-        public HomeController(INewsUnitOfWork unitOfWork)
+        public HomeController(INewsService newsService)
         {
-            _unitOfWork = unitOfWork;
+            NewsService = newsService;
         }
 
         //[Authorize]
@@ -34,14 +37,14 @@ namespace ITNewsWeb.Controllers
 
         public ActionResult Index()
         {
-            var viewModel = _unitOfWork.BuildHomePageViewModel(6);
+            var viewModel = NewsService.BuildHomePageViewModel(6);
             return View(viewModel);
         }
 
         [Route("Home/Details/{title?}/{categoryId:int}/{itemId:int}")]
         public ActionResult Details(int categoryId, int itemId, string title = null)
         {
-            var viewModel = _unitOfWork.BuildItemDetailsViewModel(categoryId, itemId);
+            var viewModel = NewsService.BuildItemDetailsViewModel(categoryId, itemId);
 
             return View(viewModel);
         }
@@ -49,8 +52,21 @@ namespace ITNewsWeb.Controllers
         [Route("Home/Category/{name}/{id:int}")]
         public ActionResult Category(string name, int id)
         {
-            var viewModel = _unitOfWork.BuildCategoryPageViewModel(id);
+            var viewModel = NewsService.BuildCategoryPageViewModel(id);
             return View(viewModel);
+        }
+
+        [AcceptVerbs("post")]
+        public ActionResult Rate(FormCollection form)
+        {
+            var rate = Convert.ToInt32(form["Score"]);
+            var id = Convert.ToInt32(form["ArticleID"]);
+            if (Request.Cookies["rating" + id] != null)
+                return Content("false");
+            Response.Cookies["rating" + id].Value = DateTime.Now.ToString();
+            Response.Cookies["rating" + id].Expires = DateTime.Now.AddYears(1);
+            ItemDetailsViewModel ar = NewsService.IncrementArticleRating(rate, id);
+            return Json(ar);
         }
 
         //[Authorize(Roles = "admin")]

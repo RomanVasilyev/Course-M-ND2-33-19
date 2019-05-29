@@ -20,6 +20,6 @@
     <h6>Modified By: @Model.ItemDetails.ModifiedBy</h6>
     <h6>Modified Date: @Model.ItemDetails.ModifiedDate</h6>
     <div>
-        Raiting : @Model.ItemDetails.Raiting
+        @Html.Partial("_Raiting", Model)
     </div>
 </div>

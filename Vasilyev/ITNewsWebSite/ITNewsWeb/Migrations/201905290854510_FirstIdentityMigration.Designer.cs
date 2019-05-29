@@ -13,7 +13,7 @@ namespace ITNewsWeb.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905281643386_FirstIdentityMigration"; }
+            get { return "201905290854510_FirstIdentityMigration"; }
         }
         
         string IMigrationMetadata.Source
