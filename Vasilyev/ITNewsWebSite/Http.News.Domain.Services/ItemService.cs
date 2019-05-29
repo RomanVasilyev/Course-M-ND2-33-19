@@ -56,7 +56,12 @@ namespace Http.News.Domain.Services
                 {
                     Title = item.ItemContent.Title,
                     Content = item.ItemContent.Content,
-                    SmallImageUrl = item.ItemContent.SmallImage
+                    SmallImageUrl = item.ItemContent.SmallImage,
+                    CreatedBy = item.CreatedBy,
+                    CreatedDate = item.CreatedDate,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    Raiting = item.Raiting,
                 }).FirstOrDefault();
         }
 
@@ -82,5 +87,8 @@ namespace Http.News.Domain.Services
 
             return queryableResult;
         }
+
+        /*TODO : Реализовать все методы "типо" UnitOfWork здесь и убрать все что касается UnitOfWork. 
+        Вместо этого реализовать работу непосредственно с сервисами в контроллере*/
     }
 }

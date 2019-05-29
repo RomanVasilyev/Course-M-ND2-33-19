@@ -28,5 +28,8 @@ namespace Http.News.Domain.Services
         {
             return _repository.GetAllCategories().FirstOrDefault(x => x.Id == id).MapTo<CategorySummaryDto>();
         }
+
+        /*TODO : Реализовать все методы "типо" UnitOfWork здесь и убрать все что касается UnitOfWork. 
+        Вместо этого реализовать работу непосредственно с сервисами в контроллере*/
     }
 }

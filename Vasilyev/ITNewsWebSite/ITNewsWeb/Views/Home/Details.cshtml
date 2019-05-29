@@ -6,13 +6,20 @@
 
 <div class="contact-us container">
     <div class="row">
+        <h5>Cetegory: @Model.CategoryName</h5>
         <div class="contact-form span7">
             <h4>@Model.ItemDetails.Title</h4>
-            <h6>Cetegory: @Model.CategoryName</h6>
             <p>@Model.ItemDetails.Content</p>
         </div>
         <div class="contact-address span5">
-            <img src="@Url.Content("~" + Model.ItemDetails.SmallImageUrl)" alt="@Model.ItemDetails.Title"/>
+            <img src="@Url.Content("~" + Model.ItemDetails.SmallImageUrl)" alt="@Model.ItemDetails.Title" />
         </div>
+    </div>
+    <h6>Created By: @Model.ItemDetails.CreatedBy</h6>
+    <h6>Creation Date: @Model.ItemDetails.CreatedDate</h6>
+    <h6>Modified By: @Model.ItemDetails.ModifiedBy</h6>
+    <h6>Modified Date: @Model.ItemDetails.ModifiedDate</h6>
+    <div>
+        Raiting : @Model.ItemDetails.Raiting
     </div>
 </div>

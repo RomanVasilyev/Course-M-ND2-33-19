@@ -204,6 +204,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905281643386_FirstIdentityMigration.cs" />
+    <Compile Include="Migrations\201905281643386_FirstIdentityMigration.Designer.cs">
+      <DependentUpon>201905281643386_FirstIdentityMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -456,6 +461,11 @@
       <Project>{b1745d84-dd2d-4ade-ae1a-ef08d523ca2c}</Project>
       <Name>Http.News.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201905281643386_FirstIdentityMigration.resx">
+      <DependentUpon>201905281643386_FirstIdentityMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

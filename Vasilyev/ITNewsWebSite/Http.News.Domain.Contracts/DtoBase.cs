@@ -13,5 +13,7 @@ namespace Http.News.Domain.Contracts
         public string ModifiedBy { get; set; }
 
         public DateTime? ModifiedDate { get; set; } 
+
+        public int Raiting { get; set; }
     }
 }

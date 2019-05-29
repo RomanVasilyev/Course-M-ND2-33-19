@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using ITNewsWeb.App_Start;
+using ITNewsWeb.Migrations;
 using ITNewsWeb.Models;
 
 namespace ITNewsWeb
@@ -17,7 +18,7 @@ namespace ITNewsWeb
         protected void Application_Start()
         {
             //Инициализация БД для создания ролей
-            Database.SetInitializer<ApplicationDbContext>(new AppDbInitializer());
+            //Database.SetInitializer<ApplicationDbContext>(new Configuration());
 
             AreaRegistration.RegisterAllAreas();
 

@@ -8,6 +8,8 @@ namespace Http.News.Data.Contracts.Entities
 
         public int ItemContentId { get; set; }
 
+        public int Raiting { get; set; }
+
         public virtual Category Category { get; set; }
 
         public virtual ItemContent ItemContent { get; set; }

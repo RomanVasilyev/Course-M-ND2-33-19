@@ -69,7 +69,7 @@ namespace Http.News.Infrastructure
         {
             var itemDetailsViewModel = new ItemDetailsViewModel();
             itemDetailsViewModel.TopMenu = GetCategoryMenu(categoryId);
-            itemDetailsViewModel.ItemDetails = _itemSummaryService.GetItemDetails(itemId);
+            itemDetailsViewModel.ItemDetails = _itemSummaryService.GetItemDetails(itemId);            
             var category = this.GetCategoryById(categoryId);
             itemDetailsViewModel.CategoryName = category.Name;
             return itemDetailsViewModel;

@@ -77,8 +77,6 @@
   <ItemGroup>
     <Compile Include="AutoMapperExtensions.cs" />
     <Compile Include="CategoryService.cs" />
-    <Compile Include="ICategoryService.cs" />
-    <Compile Include="IItemService.cs" />
     <Compile Include="ItemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
