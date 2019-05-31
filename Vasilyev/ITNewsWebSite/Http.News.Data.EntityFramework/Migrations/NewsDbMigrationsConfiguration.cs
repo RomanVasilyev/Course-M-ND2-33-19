@@ -136,9 +136,9 @@ namespace Http.News.Data.EntityFramework.Migrations
                                     Content =
                                         "Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to effectively perform a specific task without using explicit instructions, relying on patterns and inference instead. It is seen as a subset of artificial intelligence."
                                 },
-                    Rating = 0,
-                    TotalRaters = 0,
-                    AverageRating = 0,
+                    Rating = 10,
+                    TotalRaters = 3,
+                    AverageRating = 4.7,
                 };
 
                 var cat1 = new Category { Name = "C#", CreatedDate = DateTime.UtcNow, CreatedBy = "Roman Vasilyev", Items = new Collection<Item> { item1 } };

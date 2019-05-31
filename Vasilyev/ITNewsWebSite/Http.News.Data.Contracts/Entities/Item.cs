@@ -20,7 +20,7 @@ namespace Http.News.Data.Contracts.Entities
 
         public DateTime? ModifiedDate { get; set; }
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public int TotalRaters { get; set; }
 

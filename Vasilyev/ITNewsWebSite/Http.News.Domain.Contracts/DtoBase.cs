@@ -14,7 +14,7 @@ namespace Http.News.Domain.Contracts
 
         public DateTime? ModifiedDate { get; set; }
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public int TotalRaters { get; set; }
 

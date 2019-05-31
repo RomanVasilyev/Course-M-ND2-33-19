@@ -56,18 +56,30 @@ namespace ITNewsWeb.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
         [AcceptVerbs("post")]
+        //[Route("Home/Details/Rate")]
         public ActionResult Rate(FormCollection form)
         {
-            var rate = Convert.ToInt32(form["Score"]);
+            var rate = Convert.ToDouble(form["score"]);
             var id = Convert.ToInt32(form["ArticleID"]);
+            var catid = Convert.ToInt32(form["CategoryID"]);
             if (Request.Cookies["rating" + id] != null)
                 return Content("false");
             Response.Cookies["rating" + id].Value = DateTime.Now.ToString();
             Response.Cookies["rating" + id].Expires = DateTime.Now.AddYears(1);
-            ItemDetailsViewModel ar = NewsService.IncrementArticleRating(rate, id);
-            return Json(ar);
+            ItemDetailsViewModel viewModel = NewsService.IncrementArticleRating(rate, id, catid);
+            return View(viewModel);
         }
+
+        //[HttpPost]
+        //[AcceptVerbs("post")]
+        ////[Route("Home/Details/Rate")]
+        //public ActionResult Rate(ItemDetailsViewModel viewModel)
+        //{
+        //    ItemDetailsViewModel vm = NewsService.IncrementArticleRating(viewModel);
+        //    return View(vm);
+        //}
 
         //[Authorize(Roles = "admin")]
         public ActionResult About()

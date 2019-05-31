@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Http.News.Data.Contracts;
 using Http.News.Data.Contracts.Entities;
 using Http.News.Domain.Contracts.Dtos;
@@ -26,14 +27,14 @@ namespace Http.News.Domain.Services
             return _repository.GetAllCategories().ToList().MapTo<CategorySummaryDto>();
         }
 
-        public CategorySummaryDto GetCategoryById(int id)
+        public Category GetCategoryById(int id)
         {
-            return _repository.GetAllCategories().FirstOrDefault(x => x.Id == id).MapTo<CategorySummaryDto>();
+            return _repository.GetAllCategories().FirstOrDefault(x => x.Id == id);
         }
 
-        public ItemSummaryDto GetItemById(int id)
+        public Item GetItemById(int id)
         {
-            return _repository.GetAllItems().FirstOrDefault(x => x.Id == id).MapTo<ItemSummaryDto>();
+            return _repository.GetAllItems().FirstOrDefault(x => x.Id == id);
         }
 
         /*TODO : Реализовать все методы "типо" UnitOfWork здесь и убрать все что касается UnitOfWork. Вместо этого реализовать работу непосредственно с сервисами в контроллере*/
@@ -63,7 +64,7 @@ namespace Http.News.Domain.Services
         {
             var itemDetailsViewModel = new ItemDetailsViewModel();
             itemDetailsViewModel.TopMenu = GetCategoryMenu(categoryId);
-            itemDetailsViewModel.ItemDetails = this.GetItemDetails(itemId);
+            itemDetailsViewModel.ItemDetails = this.GetItemDetails(itemId, categoryId);
             var category = this.GetCategoryById(categoryId);
             itemDetailsViewModel.CategoryName = category.Name;
             return itemDetailsViewModel;
@@ -94,19 +95,20 @@ namespace Http.News.Domain.Services
         }
 
         /*TODO : Реализовать все методы "типо" UnitOfWork здесь и убрать все что касается UnitOfWork. Вместо этого реализовать работу непосредственно с сервисами в контроллере*/
-        public ItemDetailsViewModel IncrementArticleRating(int rate, int id)
+        public ItemDetailsViewModel IncrementArticleRating(double rate, int id, int catid)
         {
-            var item = GetItemById(id);
+            
+            var item = GetItemDetails(id, catid);
             item.Rating += rate;
             item.TotalRaters += 1;
-            _repository.Save();
             var itemDetailsViewModel = new ItemDetailsViewModel();
             itemDetailsViewModel.TopMenu = GetCategoryMenu(item.CategoryId);
-            itemDetailsViewModel.ItemDetails = this.GetItemDetails(id);
+            itemDetailsViewModel.ItemDetails = item;
             itemDetailsViewModel.ItemDetails.AverageRating =
-                Convert.ToDouble(item.Rating) / Convert.ToDouble(item.TotalRaters);
-            var category = this.GetCategoryById(item.CategoryId);
-            itemDetailsViewModel.CategoryName = category.Name;
+                item.Rating / Convert.ToDouble(item.TotalRaters);
+            Save(itemDetailsViewModel);
+            //var category = this.GetCategoryById(item.CategoryId);
+            //itemDetailsViewModel.CategoryName = category.Name;
             return itemDetailsViewModel;
             //var detailsViewModel = new ItemDetailsViewModel()
             //{
@@ -122,6 +124,45 @@ namespace Http.News.Domain.Services
             //    TopMenu = GetCategoryMenu(id)
             //};
             //return detailsViewModel;
+        }
+
+        public ItemDetailsViewModel IncrementArticleRating(ItemDetailsViewModel vm)
+        {
+
+            var item = GetItemDetails(vm.ItemDetails.Id, vm.ItemDetails.CategoryId);
+            item.Rating += vm.ItemDetails.Rating;
+            item.TotalRaters += 1;
+            var itemDetailsViewModel = new ItemDetailsViewModel();
+            itemDetailsViewModel.TopMenu = GetCategoryMenu(item.CategoryId);
+            itemDetailsViewModel.ItemDetails = item;
+            itemDetailsViewModel.ItemDetails.AverageRating =
+                item.Rating / Convert.ToDouble(item.TotalRaters);
+            Save(itemDetailsViewModel);
+            //var category = this.GetCategoryById(item.CategoryId);
+            //itemDetailsViewModel.CategoryName = category.Name;
+            return itemDetailsViewModel;
+        }
+
+        public void Save(ItemDetailsViewModel viewModel)
+        {
+            using (var transaction = _repository.BeginTransaction())
+            {
+                try
+                {
+                    Item item = GetItemById(viewModel.ItemDetails.Id);
+                    //if (book.LongVersion != viewModel.LongVersion)
+                    //{
+                    //    throw new Exception("Version redact error");
+                    //}
+                    Mapper.Map(viewModel, item);
+                    _repository.Save();
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
 
         private IEnumerable<CategorySummaryDto> GetAllCategorySummaries()
@@ -162,12 +203,14 @@ namespace Http.News.Domain.Services
                 .Where(item => item.CategoryId == categoryId);
         }
 
-        public ItemDetailsDto GetItemDetails(int itemId)
+        public ItemDetailsDto GetItemDetails(int itemId, int catId)
         {
             return (from item in _repository.GetAllItems()
                     where item.Id == itemId
                     select new ItemDetailsDto
                     {
+                        Id = itemId,
+                        CategoryId = catId,
                         Title = item.ItemContent.Title,
                         Content = item.ItemContent.Content,
                         SmallImageUrl = item.ItemContent.SmallImage,

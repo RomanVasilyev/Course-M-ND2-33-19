@@ -57,6 +57,11 @@
     <Compile Include="ViewModels\ItemDetailsViewModel.cs" />
     <Compile Include="ViewModels\ItemSummaryViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Http.News.Data.Contracts\Http.News.Data.Contracts.csproj">
+      <Project>{94B8D230-4CC4-4F76-954E-2E7DBFDAFA5E}</Project>
+      <Name>Http.News.Data.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
