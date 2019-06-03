@@ -9,7 +9,7 @@ namespace ITNewsWeb
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-3.3.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -31,6 +31,7 @@ namespace ITNewsWeb
             // Those bundles for the front-end page 
             bundles.Add(
                 new ScriptBundle("~/andia-agency/scripts")
+                    .Include("~/Scripts/jquery-3.3.1.js")
                     .Include("~/Scripts/jquery-3.3.1.min.js")
                     .Include("~/Content/bootstrap.min.js")
                     .Include("~/Content/andia-agency/assets/js/jquery.flexslider.js")

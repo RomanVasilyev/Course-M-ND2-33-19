@@ -95,35 +95,48 @@ namespace Http.News.Domain.Services
         }
 
         /*TODO : Реализовать все методы "типо" UnitOfWork здесь и убрать все что касается UnitOfWork. Вместо этого реализовать работу непосредственно с сервисами в контроллере*/
-        public ItemDetailsViewModel IncrementArticleRating(double rate, int id, int catid)
+        //public ItemDetailsViewModel IncrementArticleRating(double rate, int id, int catid)
+        //{
+        //    var itemDetailsViewModel = BuildItemDetailsViewModel(catid, id);
+        //    itemDetailsViewModel.ItemDetails.Rating += rate;
+        //    itemDetailsViewModel.ItemDetails.TotalRaters += 1;
+        //    itemDetailsViewModel.ItemDetails.AverageRating =
+        //        itemDetailsViewModel.ItemDetails.Rating / Convert.ToDouble(itemDetailsViewModel.ItemDetails.TotalRaters);
+        //    Save(itemDetailsViewModel);
+        //    return itemDetailsViewModel;
+        //}
+
+        public ItemDetailsDto IncrementArticleRating(double score, int id, int catid)
         {
-            
-            var item = GetItemDetails(id, catid);
-            item.Rating += rate;
-            item.TotalRaters += 1;
-            var itemDetailsViewModel = new ItemDetailsViewModel();
-            itemDetailsViewModel.TopMenu = GetCategoryMenu(item.CategoryId);
-            itemDetailsViewModel.ItemDetails = item;
-            itemDetailsViewModel.ItemDetails.AverageRating =
-                item.Rating / Convert.ToDouble(item.TotalRaters);
+            var itemDetailsViewModel = GetItemDetails(id, catid);
+            itemDetailsViewModel.Rating += score;
+            itemDetailsViewModel.TotalRaters += 1;
+            itemDetailsViewModel.AverageRating =
+                itemDetailsViewModel.Rating / Convert.ToDouble(itemDetailsViewModel.TotalRaters);
             Save(itemDetailsViewModel);
-            //var category = this.GetCategoryById(item.CategoryId);
-            //itemDetailsViewModel.CategoryName = category.Name;
             return itemDetailsViewModel;
-            //var detailsViewModel = new ItemDetailsViewModel()
-            //{
-            //    ItemDetails = new ItemDetailsDto
-            //    {
-            //        Id = item.Id,
-                    
-            //        Rating = item.Rating,
-            //        TotalRaters = item.TotalRaters,
-            //        AverageRating = Convert.ToDouble(item.Rating) / Convert.ToDouble(item.TotalRaters)
-            //    },
-            //    CategoryName = item.Category.Name,
-            //    TopMenu = GetCategoryMenu(id)
-            //};
-            //return detailsViewModel;
+        }
+
+        private void Save(ItemDetailsDto viewModel)
+        {
+            using (var transaction = _repository.BeginTransaction())
+            {
+                try
+                {
+                    Item item = GetItemById(viewModel.Id);
+                    //if (book.LongVersion != viewModel.LongVersion)
+                    //{
+                    //    throw new Exception("Version redact error");
+                    //}
+                    Mapper.Map(viewModel, item);
+                    _repository.Save();
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
 
         public ItemDetailsViewModel IncrementArticleRating(ItemDetailsViewModel vm)

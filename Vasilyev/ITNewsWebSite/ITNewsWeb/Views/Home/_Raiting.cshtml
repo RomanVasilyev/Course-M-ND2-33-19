@@ -1,39 +1,47 @@
 ﻿@using ITNewsWeb.Utils
-@model Http.News.Domain.Contracts.ViewModels.ItemDetailsViewModel
+@model Http.News.Domain.Contracts.Dtos.ItemDetailsDto
 <!-- Star raiting -->
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="~/Content/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <!--suppress JSUnresolvedLibraryURL -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/star-rating.js" type="text/javascript"></script>
 <script src="~/Scripts/straiting.js"></script>
-<div class="container">
+<div class="container" id="MyRate">
     <div class="page-header">
         <h2>
             Bootstrap Star Rating Examples
             <small>&copy; Kartik Visweswaran, Krajee.com</small>
         </h2>
     </div>
-
-    <form id="rate" method="post" action="">
-        <input type="text" class="rating rating-loading" name="score" value="@Model.ItemDetails.AverageRating" data-size="md" title="Total users rating:">
-        <input type="hidden" name="ArticleID" value="@Model.ItemDetails.Id"/>
-        <input type="hidden" name="CategoryID" value="@Model.ItemDetails.CategoryId"/>
+    @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { viewModel = Model, score = "$(#score).value"}))
+    {
+        <input type="text" class="rating rating-loading" name="score" value="@Model.AverageRating" data-size="md" title="Total users rating:">
+        <input type="hidden" name="ArticleID" value="@Model.Id"/>
+        <input type="hidden" name="CategoryID" value="@Model.CategoryId"/>
+        @Html.HiddenFor(model => model.CategoryId)
+        @Html.HiddenFor(model => model.BigImageUrl)
+        @Html.HiddenFor(model => model.Content)
+        @Html.HiddenFor(model => model.MediumImageUrl)
+        @Html.HiddenFor(model => model.NumOfView)
+        @Html.HiddenFor(model => model.ShortDescription)
+        @Html.HiddenFor(model => model.SmallImageUrl)
+        @Html.HiddenFor(model => model.Title)
+        @Html.HiddenFor(model => model.AverageRating)
+        @Html.HiddenFor(model => model.CreatedBy)
+        @Html.HiddenFor(model => model.CreatedDate)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ModifiedBy)
+        @Html.HiddenFor(model => model.ModifiedDate)
+        @Html.HiddenFor(model => model.Rating)
+        @Html.HiddenFor(model => model.TotalRaters)
         <br>
-    </form>
+        <div class="form-group" style="margin-top: 10px">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+    }
     <hr>
 </div>
-    @*<p id="currentlyrated" style="float:left;padding-left:20px;">
-        @{
-            if (Model.ItemDetails.AverageRating > 0)
-            {
-                var str = "Currently rated " + Model.ItemDetails.AverageRating.ToString("f") + " by " + Model.ItemDetails.TotalRaters + " people";
-                @Html.Raw(str)
-            }
-            else
-            {
-                @Html.Raw("<span style=\"color:red\">Not yet rated.  Be the first to rate this article!</span>")
-            }
-        }
-    </p>*@

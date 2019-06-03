@@ -18,7 +18,7 @@ namespace Http.News.Domain.Services
         HomePageViewModel BuildHomePageViewModel(int p);
         ItemDetailsViewModel BuildItemDetailsViewModel(int categoryId, int itemId);
         CategoryPageViewModel BuildCategoryPageViewModel(int id);
-        ItemDetailsViewModel IncrementArticleRating(double rate, int id, int catid);
+        ItemDetailsDto IncrementArticleRating(double score, int id, int catid);
         void Save(ItemDetailsViewModel viewModel);
         ItemDetailsViewModel IncrementArticleRating(ItemDetailsViewModel viewModel);
     }

@@ -336,14 +336,22 @@
                         params = [self.$element.val(), self._getCaption()];
                         self._trigChange(params);
                         self.starClicked = true;
-                        $.ajax({
-                            type: "POST",
-                            url: "/Home/Rate",
-                            data: $("#rate").serialize(),
-                            dataType: "text/plain",
-                        }).done(function () {
-                            alert('Added');
-                            });
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "/Home/Rate",
+                        //    data: $("#rate").serialize(),
+                        //    dataType: "json",
+                        //    success: function(response) {
+                        //        if (response != 'false') {
+                        //            parent.document.getElementById("MyRate").reload();
+                        //        }
+                        //    },
+                        //    error: function (req, status, error) {
+                        //        // do something with error   
+                        //    }
+                        //});
+                        
+                        //location.reload();
                         //$.ajax({
                         //    type: "POST",
                         //    url: "/Home/Rate",

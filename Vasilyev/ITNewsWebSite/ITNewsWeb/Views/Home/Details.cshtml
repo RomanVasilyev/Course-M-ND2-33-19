@@ -3,8 +3,9 @@
 @section topmenu {
     @Html.Partial("_TopMenu", Model.TopMenu)
 }
-
-<div class="contact-us container">
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+@*<div class="contact-us container">
     <div class="row">
         <h5>Cetegory: @Model.CategoryName</h5>
         <div class="contact-form span7">
@@ -18,8 +19,20 @@
     <h6>Created By: @Model.ItemDetails.CreatedBy</h6>
     <h6>Creation Date: @Model.ItemDetails.CreatedDate</h6>
     <h6>Modified By: @Model.ItemDetails.ModifiedBy</h6>
-    <h6>Modified Date: @Model.ItemDetails.ModifiedDate</h6>
-    <div>
-        @Html.Partial("_Raiting", Model)
+    <h6>Modified Date: @Model.ItemDetails.ModifiedDate</h6>*@
+<div class="card">
+    <img class="card-img-top" src="@Url.Content("~" + Model.ItemDetails.SmallImageUrl)" alt="@Model.ItemDetails.Title" style="width: 30rem;"/>
+    <div class="card-body">
+        <h5 class="card-title">@Model.ItemDetails.Title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Cetegory: @Model.CategoryName</h6>
+        <p class="carbonad-text">@Model.ItemDetails.Content</p>
+        <h6 class="card-subtitle mb-2 text-muted">Created By: @Model.ItemDetails.CreatedBy</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Creation Date: @Model.ItemDetails.CreatedDate</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Modified By: @Model.ItemDetails.ModifiedBy</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Modified Date: @Model.ItemDetails.ModifiedDate</h6>
     </div>
 </div>
+    <div>
+        @Html.Partial("_Raiting", Model.ItemDetails)
+    </div>
+@*</div>*@
