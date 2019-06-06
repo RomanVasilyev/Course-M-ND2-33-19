@@ -1,7 +1,6 @@
-﻿@using ITNewsWeb.Utils
-@model Http.News.Domain.Contracts.Dtos.ItemDetailsDto
+﻿@model Http.News.Domain.Contracts.Dtos.ItemDetailsDto
 <!-- Star raiting -->
-<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+@*<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">*@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="~/Content/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <!--suppress JSUnresolvedLibraryURL -->
@@ -10,12 +9,6 @@
 <script src="~/Scripts/star-rating.js" type="text/javascript"></script>
 <script src="~/Scripts/straiting.js"></script>
 <div class="container" id="MyRate">
-    <div class="page-header">
-        <h2>
-            Bootstrap Star Rating Examples
-            <small>&copy; Kartik Visweswaran, Krajee.com</small>
-        </h2>
-    </div>
     @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { viewModel = Model, score = "$(#score).value"}))
     {
         <input type="text" class="rating rating-loading" name="score" value="@Model.AverageRating" data-size="md" title="Total users rating:">
@@ -42,6 +35,14 @@
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="reset" class="btn btn-default">Reset</button>
         </div>
+    }
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
     }
     <hr>
 </div>

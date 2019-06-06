@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Http.News.Data.Contracts;
 using Http.News.Domain.Contracts.Dtos;
-using Http.News.Domain.Contracts.ViewModels;
 using Http.News.Domain.Services;
-using Http.News.Infrastructure;
-using ITNewsWeb.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace ITNewsWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private INewsService NewsService;
+        private readonly INewsService NewsService;
 
         public HomeController(INewsService newsService)
         {
@@ -57,70 +48,22 @@ namespace ITNewsWeb.Controllers
             return View(viewModel);
         }
 
-        //[HttpPost]
-        //[AcceptVerbs("post")]
-        ////[Route("Home/Details/Rate")]
-        //public ActionResult Rate(FormCollection form)
-        //{
-        //    var rate = Convert.ToDouble(form["score"]);
-        //    var id = Convert.ToInt32(form["ArticleID"]);
-        //    var catid = Convert.ToInt32(form["CategoryID"]);
-        //    if (Request.Cookies["rating" + id] != null)
-        //    {
-        //        //return Json(true);
-        //        return Content("false");
-        //    }
-        //    Response.Cookies["rating" + +id].Value = DateTime.Now.ToString();
-        //    Response.Cookies["rating" + id].Expires = DateTime.Now.AddYears(1);
-        //    ItemDetailsViewModel viewModel = NewsService.IncrementArticleRating(rate, id, catid);
-        //    //viewModel = NewsService.BuildItemDetailsViewModel(catid, id);
-        //    return RedirectToAction("Details", new { categoryId = catid, itemId = id });
-        //}
-
-        //[HttpPost]
-        //public ActionResult Rate(ItemDetailsViewModel viewModel)
-        //{
-        //    var rate = viewModel.ItemDetails.Rating;
-        //    var id = viewModel.ItemDetails.Id;
-        //    var catid = viewModel.ItemDetails.CategoryId;
-        //    if (Request.Cookies["rating" + id] != null)
-        //    {
-        //        //return Json(true);
-        //        return Content("false");
-        //    }
-        //    Response.Cookies["rating" + +id].Value = DateTime.Now.ToString();
-        //    Response.Cookies["rating" + id].Expires = DateTime.Now.AddYears(1);
-        //    viewModel = NewsService.IncrementArticleRating(rate, id, catid);
-        //    //viewModel = NewsService.BuildItemDetailsViewModel(catid, id);
-        //    return RedirectToAction("Details", new { categoryId = catid, itemId = id });
-        //}
-
         [HttpPost]
         public ActionResult Details(ItemDetailsDto viewModel, double score)
         {
-            //var rate = viewModel.Rating;
             var id = viewModel.Id;
             var catid = viewModel.CategoryId;
             if (Request.Cookies["rating" + id] != null)
             {
-                //return Json(true);
-                return Content("false");
+                ViewBag.Message = "You have already rated this article";
+                return View(NewsService.BuildItemDetailsViewModel(catid, id));
             }
+
             Response.Cookies["rating" + +id].Value = DateTime.Now.ToString();
             Response.Cookies["rating" + id].Expires = DateTime.Now.AddYears(1);
             viewModel = NewsService.IncrementArticleRating(score, id, catid);
-            //viewModel = NewsService.BuildItemDetailsViewModel(catid, id);
             return View(NewsService.BuildItemDetailsViewModel(catid, id));
         }
-
-        //[HttpPost]
-        //[AcceptVerbs("post")]
-        ////[Route("Home/Details/Rate")]
-        //public ActionResult Rate(ItemDetailsViewModel viewModel)
-        //{
-        //    ItemDetailsViewModel vm = NewsService.IncrementArticleRating(viewModel);
-        //    return View(vm);
-        //}
 
         //[Authorize(Roles = "admin")]
         public ActionResult About()
