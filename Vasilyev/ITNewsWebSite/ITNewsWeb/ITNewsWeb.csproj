@@ -233,10 +233,11 @@
     <Content Include="Content\andia-agency\assets\ico\apple-touch-icon-57-precomposed.png" />
     <Content Include="Content\andia-agency\assets\ico\apple-touch-icon-72-precomposed.png" />
     <Content Include="Content\andia-agency\assets\ico\favicon.ico" />
-    <Content Include="Content\andia-agency\assets\img\creative-idea-512.png" />
     <Content Include="Content\andia-agency\assets\img\creative-idea.png" />
-    <Content Include="Content\andia-agency\assets\img\cyber.png" />
-    <Content Include="Content\andia-agency\assets\img\cyber200px.png" />
+    <Content Include="Content\img\creative-idea-512.png" />
+    <Content Include="Content\img\creative-idea.png" />
+    <Content Include="Content\img\cyber.png" />
+    <Content Include="Content\img\cyber200px.png" />
     <Content Include="Content\andia-agency\assets\img\line.png" />
     <Content Include="Content\andia-agency\assets\img\line1.jpg" />
     <Content Include="Content\andia-agency\assets\img\logo.png" />
