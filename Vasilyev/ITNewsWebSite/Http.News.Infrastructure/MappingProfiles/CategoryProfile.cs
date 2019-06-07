@@ -20,7 +20,22 @@ namespace Http.News.Infrastructure.MappingProfiles
         private void MapItemToItemDetailsDto()
         {
             CreateMap<ItemDetailsDto, Item>()
-                .ForMember(dest => dest.Id, c => c.MapFrom(src => src.Id))
+                //.ForMember(dest => dest.Id, c => c.MapFrom(src => src.Id))
+
+                .ForPath(dest => dest.ItemContent.Content, c => c.MapFrom(src => src.Content))
+                .ForPath(dest => dest.ItemContent.CreatedBy, c => c.MapFrom(src => src.CreatedBy))
+                .ForPath(dest => dest.ItemContent.CreatedDate, c => c.MapFrom(src => src.CreatedDate))
+                .ForPath(dest => dest.ItemContent.ModifiedBy, c => c.MapFrom(src => src.ModifiedBy))
+                .ForPath(dest => dest.ItemContent.ModifiedDate, c => c.MapFrom(src => src.ModifiedDate))
+                .ForPath(dest => dest.ItemContent.ShortDescription, c => c.MapFrom(src => src.ShortDescription))
+                .ForPath(dest => dest.ItemContent.Title, c => c.MapFrom(src => src.Title))
+                .ForPath(dest => dest.ItemContent.NumOfView, c => c.MapFrom(src => src.NumOfView))
+                .ForPath(dest => dest.ItemContent.BigImage, c => c.MapFrom(src => src.BigImageUrl))
+                .ForPath(dest => dest.ItemContent.MediumImage, c => c.MapFrom(src => src.MediumImageUrl))
+                .ForPath(dest => dest.ItemContent.SmallImage, c => c.MapFrom(src => src.SmallImageUrl))
+
+                .ForPath(dest => dest.Category.Id, c => c.MapFrom(src => src.CategoryId))
+
                 .ForMember(dest => dest.CreatedBy, c => c.MapFrom(src => src.CreatedBy))
                 .ForMember(dest => dest.CreatedDate, c => c.MapFrom(src => src.CreatedDate))
                 .ForMember(dest => dest.ModifiedBy, c => c.MapFrom(src => src.ModifiedBy))

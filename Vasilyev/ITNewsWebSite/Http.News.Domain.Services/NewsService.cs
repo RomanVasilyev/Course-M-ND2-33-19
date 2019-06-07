@@ -117,7 +117,30 @@ namespace Http.News.Domain.Services
             return itemDetailsViewModel;
         }
 
-        private void Save(ItemDetailsDto viewModel)
+        public void Add(ItemDetailsDto viewModel)
+        {
+            //viewModel.Id = unitOfWork.GetAll<Book>().OrderBy(x => x.Id).Last().Id + 1;
+            Item item = new Item();
+            Mapper.Map(viewModel, item);
+            item.Category = GetCategoryById(viewModel.CategoryId);
+            _repository.Add(item);
+            //_repository.Add(item.ItemContent);
+            using (var transaction = _repository.BeginTransaction())
+            {
+                try
+                {
+                    _repository.Save();
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    throw e;
+                }
+            }
+        }
+
+        public void Save(ItemDetailsDto viewModel)
         {
             using (var transaction = _repository.BeginTransaction())
             {

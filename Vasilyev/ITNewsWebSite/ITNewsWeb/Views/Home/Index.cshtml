@@ -35,14 +35,26 @@
         @foreach (var item in Model.LatestItems)
         {
             <div class="work span3">
-                <img src="@Url.Content("~" + @item.AvatarImage)" alt="#">
+                @try
+                {
+                    <img src="@Url.Content("~" + @item.AvatarImage)" alt="#">
+                }
+                catch
+                {
+                }
                 <h4>@item.Title</h4>
                 <p>@item.ShortDescription</p>
                 <div class="icon-awesome">
-                    <a href="@Url.Content("~" + @item.AvatarImage)" rel="prettyPhoto"><i class="icon-search"></i></a>
+                    @try
+                    {
+                        <a href="@Url.Content("~" + @item.AvatarImage)" rel="prettyPhoto"><i class="icon-search"></i></a>
+                    }
+                    catch
+                    {
+                    }
                     @*<a href="@Url.Content("/Home/Details/" + @item.Title + "/" + @item.CategoryId + "/" + @item.ItemId)"><i class="icon-link"></i></a>*@
-                    @Html.ActionLink(" ", "Details", new { controller = "Home", categoryId = @item.CategoryId, itemId = @item.ItemId, title = @item.Title }, new { @class = "icon-link" })
-                    </div>
+                    @Html.ActionLink(" ", "Details", new {controller = "Home", categoryId = @item.CategoryId, itemId = @item.ItemId, title = @item.Title}, new {@class = "icon-link"})
+                </div>
             </div>
         }
     </div>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Http.News.Data.Contracts;
 using Http.News.Data.Contracts.Entities;
 
@@ -23,6 +24,18 @@ namespace Http.News.Data.EntityFramework
         public IQueryable<Item> GetAllItems()
         {
             return _dbContext.Items;
+        }
+
+        public void Add(Item item)
+        {
+            var dbSet = _dbContext.Set<Item>();
+            dbSet.Add(item);
+        }
+
+        public void Add(ItemContent itemContent)
+        {
+            var dbSet = _dbContext.Set<ItemContent>();
+            dbSet.Add(itemContent);
         }
 
         public void Save()

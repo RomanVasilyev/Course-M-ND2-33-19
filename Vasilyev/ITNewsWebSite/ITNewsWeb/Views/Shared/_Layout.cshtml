@@ -42,8 +42,16 @@
                                 @RenderSection("topmenu", required: false)
                             </ul>
                         </div>
+                        @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    @Html.ActionLink("Add news", "Create", "Home")
+                                </li>
+                            </ul>
+                        }
+                        @Html.Partial("_LoginPartial")
                     </div>
-                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </div>

@@ -65,6 +65,32 @@ namespace ITNewsWeb.Controllers
             return View(NewsService.BuildItemDetailsViewModel(catid, id));
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var viewModel = new ItemDetailsDto();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Create(ItemDetailsDto viewModel)
+        {
+            try
+            {
+                viewModel.CreatedBy = User.Identity.Name;
+                viewModel.CreatedDate = DateTime.Now;
+                var id = viewModel.Id;
+                var catid = viewModel.CategoryId;
+                NewsService.Add(viewModel);
+                //NewsService.Save(viewModel);
+                return RedirectToAction("Details", "Home", new {categoryId = catid, itemId = id});
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+        }
+
         //[Authorize(Roles = "admin")]
         public ActionResult About()
         {
