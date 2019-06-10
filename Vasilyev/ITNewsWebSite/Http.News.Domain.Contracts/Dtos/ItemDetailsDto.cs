@@ -1,4 +1,7 @@
-﻿namespace Http.News.Domain.Contracts.Dtos
+﻿using System.ComponentModel;
+using System.Web;
+
+namespace Http.News.Domain.Contracts.Dtos
 {
     public class ItemDetailsDto : DtoBase
     {
@@ -10,7 +13,10 @@
 
         public string Content { get; set; }
 
+        [DisplayName("Upload image")]
         public string SmallImageUrl { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
 
         public string MediumImageUrl { get; set; }
 

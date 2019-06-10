@@ -4,65 +4,65 @@
     ViewBag.Title = "Create";
 }
 
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+@*<script src="~/Scripts/easymde.js"></script>*@
+
 <h2>Create</h2>
 
-@Html.HiddenFor(model => model.ModifiedBy)
-@Html.HiddenFor(model => model.ModifiedDate)
-@Html.HiddenFor(model => model.CreatedBy)
-@Html.HiddenFor(model => model.CreatedDate)
-@Html.HiddenFor(model => model.TotalRaters)
-@Html.HiddenFor(model => model.Rating)
-@Html.HiddenFor(model => model.AverageRating)
-@Html.HiddenFor(model => model.NumOfView)
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { enctype="multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ModifiedBy)
+    @Html.HiddenFor(model => model.ModifiedDate)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.TotalRaters)
+    @Html.HiddenFor(model => model.Rating)
+    @Html.HiddenFor(model => model.AverageRating)
+    @Html.HiddenFor(model => model.NumOfView)
+    @Html.HiddenFor(model => model.Content)
 
-    <div class="form-horizontal">
-        <h4>ItemDetailsDto</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
+<div class="form-horizontal">
+    <h4>ItemDetailsDto</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <textarea id="my-text-area">@Model.Content</textarea>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
+    <div class="form-group">
             @Html.LabelFor(model => model.SmallImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SmallImageUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SmallImageUrl, "", new { @class = "text-danger" })
+                <input type="file" name="ImageFile" required=""/>
             </div>
         </div>
 
-        <div class="form-group">
+    @*<div class="form-group">
             @Html.LabelFor(model => model.MediumImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MediumImageUrl, new { htmlAttributes = new { @class = "form-control" } })
@@ -76,14 +76,14 @@
                 @Html.EditorFor(model => model.BigImageUrl, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BigImageUrl, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" id="save-button" class="btn btn-default" />
         </div>
     </div>
+</div>
 }
 
 <div>
@@ -92,4 +92,15 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var easyMDE = new EasyMDE({
+            element: document.getElementById('my-text-area'),
+            showIcons: ["code", "table"] });
+
+        document.getElementById("save-button").addEventListener("click", onSubmitClick);
+
+        function onSubmitClick() {
+            document.getElementsByName("Content")[0].value = easyMDE.value();
+        }
+    </script>
 }

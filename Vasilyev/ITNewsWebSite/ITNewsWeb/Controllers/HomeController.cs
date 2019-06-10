@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using Http.News.Domain.Contracts.Dtos;
 using Http.News.Domain.Services;
@@ -65,7 +67,6 @@ namespace ITNewsWeb.Controllers
             return View(NewsService.BuildItemDetailsViewModel(catid, id));
         }
 
-        [HttpGet]
         public ActionResult Create()
         {
             var viewModel = new ItemDetailsDto();
@@ -79,10 +80,16 @@ namespace ITNewsWeb.Controllers
             {
                 viewModel.CreatedBy = User.Identity.Name;
                 viewModel.CreatedDate = DateTime.Now;
-                var id = viewModel.Id;
                 var catid = viewModel.CategoryId;
+                string filename = Path.GetFileNameWithoutExtension(viewModel.ImageFile.FileName);
+                string extention = Path.GetExtension(viewModel.ImageFile.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssfff") + extention;
+                viewModel.SmallImageUrl = viewModel.BigImageUrl = viewModel.MediumImageUrl = "/Upload/img/" + filename;
                 NewsService.Add(viewModel);
+                filename = Path.Combine(Server.MapPath("~/Upload/img/"), filename);
+                viewModel.ImageFile.SaveAs(filename);
                 //NewsService.Save(viewModel);
+                var id = NewsService.GetItemsByCategoryId(catid).OrderBy(x => x.ItemId).Last().ItemId;
                 return RedirectToAction("Details", "Home", new {categoryId = catid, itemId = id});
             }
             catch (Exception e)
