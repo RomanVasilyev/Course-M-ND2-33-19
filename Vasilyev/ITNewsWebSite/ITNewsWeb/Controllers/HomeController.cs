@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -50,6 +51,7 @@ namespace ITNewsWeb.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Details(ItemDetailsDto viewModel, double score)
         {
@@ -67,12 +69,25 @@ namespace ITNewsWeb.Controllers
             return View(NewsService.BuildItemDetailsViewModel(catid, id));
         }
 
+        [Authorize(Roles = "admin, writer")]
         public ActionResult Create()
         {
             var viewModel = new ItemDetailsDto();
+            PrepareView(viewModel);
             return View(viewModel);
         }
 
+        private void PrepareView(ItemDetailsDto viewModel)
+        {
+            viewModel.CatList = new List<SelectListItem>();
+            var cat = NewsService.GetCategoryForMenu();
+            for (int i = 0; i < cat.Count; i++)
+            {
+                viewModel.CatList.Add(new SelectListItem { Value = ( i + 1 ).ToString(), Text = cat.ElementAt(i).Name });
+            }
+        }
+
+        [Authorize(Roles = "admin, writer")]
         [HttpPost]
         public ActionResult Create(ItemDetailsDto viewModel)
         {

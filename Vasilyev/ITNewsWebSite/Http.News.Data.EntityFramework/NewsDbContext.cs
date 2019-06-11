@@ -45,34 +45,34 @@ namespace Http.News.Data.EntityFramework
         //    bookConfiguration.Property(x => x.Title).IsRequired();
         //}
 
-        public override int SaveChanges()
-        {
-            var listOfChanges = new List<HistoryLog>();
+        //public override int SaveChanges()
+        //{
+        //    var listOfChanges = new List<HistoryLog>();
 
-            var entries = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified);
+        //    var entries = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified);
 
 
-            foreach (var entry in entries)
-            {
-                var entityType = ObjectContext.GetObjectType(entry.Entity.GetType());
-                if (entityType == typeof(Item))
-                {
-                    var postId = ((Item)entry.Entity).Id;
-                    var originalEntity = Set(entityType).AsNoTracking().Cast<Item>().First(x => x.Id == postId);
+        //    foreach (var entry in entries)
+        //    {
+        //        var entityType = ObjectContext.GetObjectType(entry.Entity.GetType());
+        //        if (entityType == typeof(Item))
+        //        {
+        //            var postId = ((Item)entry.Entity).Id;
+        //            var originalEntity = Set(entityType).AsNoTracking().Cast<Item>().First(x => x.Id == postId);
 
-                    var settings = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
-                    var log = new HistoryLog
-                    {
-                        EntityId = postId,
-                        EntityType = entityType.Name,
-                        OriginalValue = JsonConvert.SerializeObject(originalEntity, settings),
-                        ActualValue = JsonConvert.SerializeObject(entry.Entity, settings)
-                    };
-                    listOfChanges.Add(log);
-                }
-            }
+        //            var settings = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+        //            var log = new HistoryLog
+        //            {
+        //                EntityId = postId,
+        //                EntityType = entityType.Name,
+        //                OriginalValue = JsonConvert.SerializeObject(originalEntity, settings),
+        //                ActualValue = JsonConvert.SerializeObject(entry.Entity, settings)
+        //            };
+        //            listOfChanges.Add(log);
+        //        }
+        //    }
 
-            return base.SaveChanges();
-        }
+        //    return base.SaveChanges();
+        //}
     }
 }

@@ -124,7 +124,7 @@ namespace Http.News.Domain.Services
             Mapper.Map(viewModel, item);
             item.Category = GetCategoryById(viewModel.CategoryId);
             _repository.Add(item);
-            //_repository.Add(item.ItemContent);
+            _repository.Add(item.ItemContent);
             using (var transaction = _repository.BeginTransaction())
             {
                 try
@@ -248,6 +248,7 @@ namespace Http.News.Domain.Services
                         Id = itemId,
                         CategoryId = catId,
                         Title = item.ItemContent.Title,
+                        ShortDescription = item.ItemContent.ShortDescription,
                         Content = item.ItemContent.Content,
                         SmallImageUrl = item.ItemContent.SmallImage,
                         CreatedBy = item.CreatedBy,
