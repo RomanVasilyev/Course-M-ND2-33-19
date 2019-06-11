@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Http.News.Data.Contracts.Entities
 {
@@ -25,5 +26,7 @@ namespace Http.News.Data.Contracts.Entities
         public int TotalRaters { get; set; }
 
         public double AverageRating { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }

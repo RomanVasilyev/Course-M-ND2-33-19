@@ -36,6 +36,7 @@ namespace Http.News.Data.EntityFramework
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

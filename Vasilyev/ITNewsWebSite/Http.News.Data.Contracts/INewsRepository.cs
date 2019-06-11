@@ -9,9 +9,13 @@ namespace Http.News.Data.Contracts
 
         IQueryable<Item> GetAllItems();
 
+        IQueryable<Comment> GetAllComments();
+
         void Add(Item item);
 
         void Add(ItemContent itemContent);
+
+        void Add(Comment comment);
 
         void Save();
 

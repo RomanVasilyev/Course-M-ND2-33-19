@@ -26,6 +26,11 @@ namespace Http.News.Data.EntityFramework
             return _dbContext.Items;
         }
 
+        public IQueryable<Comment> GetAllComments()
+        {
+            return _dbContext.Comments;
+        }
+
         public void Add(Item item)
         {
             var dbSet = _dbContext.Set<Item>();
@@ -36,6 +41,12 @@ namespace Http.News.Data.EntityFramework
         {
             var dbSet = _dbContext.Set<ItemContent>();
             dbSet.Add(itemContent);
+        }
+
+        public void Add(Comment comment)
+        {
+            var dbSet = _dbContext.Set<Comment>();
+            dbSet.Add(comment);
         }
 
         public void Save()

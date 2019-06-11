@@ -42,6 +42,19 @@ namespace Http.News.Data.EntityFramework.Migrations
                 .Index(t => t.Category_Id);
             
             CreateTable(
+                "dbo.Comments",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Content = c.String(),
+                        Author = c.String(),
+                        ItemId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Items", t => t.ItemId, cascadeDelete: true)
+                .Index(t => t.ItemId);
+            
+            CreateTable(
                 "dbo.ItemContents",
                 c => new
                     {
@@ -65,10 +78,13 @@ namespace Http.News.Data.EntityFramework.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Items", "ItemContentId", "dbo.ItemContents");
+            DropForeignKey("dbo.Comments", "ItemId", "dbo.Items");
             DropForeignKey("dbo.Items", "Category_Id", "dbo.Categories");
+            DropIndex("dbo.Comments", new[] { "ItemId" });
             DropIndex("dbo.Items", new[] { "Category_Id" });
             DropIndex("dbo.Items", new[] { "ItemContentId" });
             DropTable("dbo.ItemContents");
+            DropTable("dbo.Comments");
             DropTable("dbo.Items");
             DropTable("dbo.Categories");
         }

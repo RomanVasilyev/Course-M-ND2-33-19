@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemContent.cs" />
     <Compile Include="INewsRepository.cs" />
