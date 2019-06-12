@@ -10,18 +10,19 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
     @*<link rel="stylesheet" href="~/Content/bootstrap.css">*@
     @Styles.Render("~/andia-agency/css")
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<!-- Favicon and touch icons -->
-<link rel="shortcut icon" href="/Content/andia-agency/assets/ico/favicon.ico">
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-144-precomposed.png")">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-114-precomposed.png")">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-72-precomposed.png")">
-<link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-57-precomposed.png")">
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="/Content/andia-agency/assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-144-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-114-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-72-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-57-precomposed.png")">
 </head>
 <body>
     <!-- Header -->
@@ -78,44 +79,7 @@
     </div>
     <div class="testimonials container">
     </div>
-    @*
-        <!-- history -->
-        <div class="testimonials container">
-            <div class="testimonials-title">
-                <h3>Histories</h3>
-            </div>
-            <div class="row">
-                <div class="testimonial-list span12">
-                    <div class="tabbable tabs-below">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="A">
-                                <img src="@Url.Content("~/Content/andia-agency/assets/img/testimonials/1.jpg")" title="" alt="">
-                                <p>"1.3: We applied some new third javascript library into the admin page and change the appearance of the front-end page"<br /><span class="violet">thangchung</span></p>
-                            </div>
-                            <div class="tab-pane" id="B">
-                                <img src="@Url.Content("~/Content/andia-agency/assets/img/testimonials/3.jpg")" title="" alt="">
-                                <p>"1.2: We edited some contents in this site"<br /><span class="violet">thangchung</span></p>
-                            </div>
-                            <div class="tab-pane" id="C">
-                                <img src="@Url.Content("~/Content/andia-agency/assets/img/testimonials/2.jpg")" title="" alt="">
-                                <p>"1.1: We removed some redundant codes that commented from the community. Fixed bug, and removed the complex security model and changed it to the simple one. Re-structure the architecture of the application"<br /><span class="violet">thangchung</span></p>
-                            </div>
-                            <div class="tab-pane" id="D">
-                                <img src="@Url.Content("~/Content/andia-agency/assets/img/testimonials/1.jpg")" title="" alt="">
-                                <p>"1.0: We are finish the draft version of this example"<br /><span class="violet">thangchung</span></p>
-                            </div>
-                        </div>
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#A" data-toggle="tab"></a></li>
-                            <li class=""><a href="#B" data-toggle="tab"></a></li>
-                            <li class=""><a href="#C" data-toggle="tab"></a></li>
-                            <li class=""><a href="#D" data-toggle="tab"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div> *@
-    <!-- Footer -->
+     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -143,7 +107,7 @@
             <div class="footer-border"></div>
             <div class="row">
                 <div class="copyright span4">
-                    <p>Copyright &copy; @DateTime.Now.Year by <a href="http://weblogs.asp.net/thangchung">thangchung</a> - All rights reserved. Template by <a href="http://azmind.com">Azmind</a>.</p>
+                    <p>Copyright &copy; @DateTime.Now.Year</p>
                 </div>
                 <div class="social span8">
                     <a class="twitter" href="https://twitter.com/"></a>

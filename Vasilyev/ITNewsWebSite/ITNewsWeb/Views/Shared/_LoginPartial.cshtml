@@ -10,7 +10,7 @@
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        @if (Context.User.IsInRole("admin") || Context.User.IsInRole("writer"))
+        @if (Context.User.Identity.IsAuthenticated)
         {
             <li>@Html.ActionLink("User account", "Index")</li>
         }
