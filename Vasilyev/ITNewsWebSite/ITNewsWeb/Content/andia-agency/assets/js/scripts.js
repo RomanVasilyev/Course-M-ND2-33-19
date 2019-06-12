@@ -1,7 +1,7 @@
 /*
     Slider
 */
-$(window).load(function() {
+$(window).onload(function() {
     $('.flexslider').flexslider({
         animation: "slide",
         controlNav: "thumbnails"

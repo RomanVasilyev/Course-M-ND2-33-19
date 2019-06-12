@@ -53,6 +53,13 @@ namespace ITNewsWeb.Controllers
 
         [Authorize]
         [HttpPost]
+        public ActionResult SetRating(int itemId, double ratingValue)
+        {
+            return Json(new { Result = ratingValue }); 
+        }
+
+        [Authorize]
+        [HttpPost]
         public ActionResult Details(ItemDetailsDto viewModel, double score)
         {
             var id = viewModel.Id;
