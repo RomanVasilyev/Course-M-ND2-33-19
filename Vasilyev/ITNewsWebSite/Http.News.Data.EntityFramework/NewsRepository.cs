@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using Http.News.Data.Contracts;
 using Http.News.Data.Contracts.Entities;
@@ -24,6 +25,11 @@ namespace Http.News.Data.EntityFramework
         public IQueryable<Item> GetAllItems()
         {
             return _dbContext.Items;
+        }
+
+        public IQueryable<Item> GetItems(Func<Item, bool> predicate)
+        {
+            return _dbContext.Items.Include(x => x.ItemContent).Where(predicate).AsQueryable();
         }
 
         public IQueryable<Comment> GetAllComments()

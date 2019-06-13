@@ -1,7 +1,7 @@
 /*
     Slider
 */
-$(window).load(function() {
+$(window).onload(function() {
     $('.flexslider').flexslider({
         animation: "slide",
         controlNav: "thumbnails"
@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
 */
 jQuery(function($) {
     $(".show-tweets").tweet({
-        username: "thangchung",
+        username: "...",
         page: 1,
         count: 10,
         loading_text: "loading ..."
@@ -76,7 +76,7 @@ $(document).ready(function() {
     $('.flickr-feed').jflickrfeed({
         limit: 8,
         qstrings: {
-            id: '44764810@N04'
+            id: '...'
         },
         itemTemplate: '<li><a href="{{link}}" target="_blank"><img src="{{image_s}}" alt="{{title}}" /></a></li>'
     });

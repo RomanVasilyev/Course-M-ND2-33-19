@@ -10,11 +10,13 @@ namespace Http.News.Domain.Contracts.Dtos
         [DisplayName("Category")]
         public int CategoryId { get; set; }
 
+        [DisplayName("Title")]
         public string Title { get; set; }
 
         [DisplayName("Short description")]
         public string ShortDescription { get; set; }
 
+        [DisplayName("Content")]
         public string Content { get; set; }
 
         [DisplayName("Upload image")]
@@ -26,6 +28,7 @@ namespace Http.News.Domain.Contracts.Dtos
 
         public string BigImageUrl { get; set; }
 
+        [DisplayName("Number of views")]
         public long NumOfView { get; set; }
 
         public List<SelectListItem> CatList { get; set; }

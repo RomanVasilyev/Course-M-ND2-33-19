@@ -70,6 +70,7 @@ namespace Http.News.Domain.Services
             return itemDetailsViewModel;
         }
 
+
         public CategoryMenuViewModel GetCategoryMenu(int id)
         {
             var viewModel = new CategoryMenuViewModel();
@@ -222,6 +223,13 @@ namespace Http.News.Domain.Services
                 numOfItemOnHomePage);
         }
 
+        public IEnumerable<ItemSummaryDto> GetAllItems()
+        {
+            var queryable = _repository.GetAllItems();
+            return ConvertToItemSummaryDtoQuery(
+                queryable.OrderByDescending(item => item.CreatedDate));
+        }
+
         public IEnumerable<ItemSummaryDto> GetLatestItems(int numOfItemOnHomePage)
         {
             var queryable = _repository.GetAllItems();
@@ -261,12 +269,60 @@ namespace Http.News.Domain.Services
                     }).FirstOrDefault();
         }
 
+        public ItemDetailsDto GetItemDtoById(int itemId)
+        {
+            var item = _repository.GetItems(x => x.Id == itemId).FirstOrDefault();
+
+            if(item != null)
+            {
+                return new ItemDetailsDto
+                {
+                    Id = item.Id,
+                    CategoryId = item.Category.Id,
+                    Title = item.ItemContent.Title,
+                    ShortDescription = item.ItemContent.ShortDescription,
+                    Content = item.ItemContent.Content,
+                    SmallImageUrl = item.ItemContent.SmallImage,
+                    CreatedBy = item.CreatedBy,
+                    CreatedDate = item.CreatedDate,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    Rating = item.Rating,
+                    TotalRaters = item.TotalRaters,
+                    AverageRating = item.AverageRating
+                };
+            }
+
+            return null;
+
+            //return _repository.GetItems(x => x.Id == itemId).FirstOrDefault();
+            //return (from item in _repository.GetAllItems()
+            //        where item.Id == itemId
+            //        select new ItemDetailsDto
+            //        {
+            //            Id = itemId,
+            //            CategoryId = catId,
+            //            Title = item.ItemContent.Title,
+            //            ShortDescription = item.ItemContent.ShortDescription,
+            //            Content = item.ItemContent.Content,
+            //            SmallImageUrl = item.ItemContent.SmallImage,
+            //            CreatedBy = item.CreatedBy,
+            //            CreatedDate = item.CreatedDate,
+            //            ModifiedBy = item.ModifiedBy,
+            //            ModifiedDate = item.ModifiedDate,
+            //            Rating = item.Rating,
+            //            TotalRaters = item.TotalRaters,
+            //            AverageRating = item.AverageRating
+            //        }).FirstOrDefault();
+        }
+
         private IEnumerable<ItemSummaryDto> ConvertToItemSummaryDtoQuery(IQueryable<Item> sourceQuery,
             int? numOfItemOnHomePage = null)
         {
             var queryableResult = sourceQuery.Select(
                 item => new ItemSummaryDto
                 {
+                    Id = item.Id,
                     CategoryId = item.Category.Id,
                     CategoryName = item.Category.Name,
                     ItemId = item.Id,

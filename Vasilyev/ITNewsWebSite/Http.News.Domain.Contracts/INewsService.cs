@@ -23,5 +23,7 @@ namespace Http.News.Domain.Services
         void Save(ItemDetailsDto viewModel);
         void Save(ItemDetailsViewModel viewModel);
         ItemDetailsViewModel IncrementArticleRating(ItemDetailsViewModel viewModel);
+        ItemDetailsDto GetItemDtoById(int itemId);
+        IEnumerable<ItemSummaryDto> GetAllItems();
     }
 }

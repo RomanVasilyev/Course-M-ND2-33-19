@@ -13,7 +13,7 @@ namespace Http.News.Infrastructure.MappingProfiles
             MapSumDtoToCategory();
             MapItemToItemDetails();
             MapItemDetailsToItem();
-            MapItemDetailsDtoToItem();
+            //MapItemDetailsDtoToItem();
             MapItemToItemDetailsDto();
         }
 
@@ -46,10 +46,10 @@ namespace Http.News.Infrastructure.MappingProfiles
                 .ForAllOtherMembers(c => c.Ignore());
         }
 
-        private void MapItemDetailsDtoToItem()
-        {
-            CreateMap<Item, ItemDetailsDto>();
-        }
+        //private void MapItemDetailsDtoToItem()
+        //{
+        //    CreateMap<Item, ItemDetailsDto>();
+        //}
 
         private void MapItemDetailsToItem()
         {

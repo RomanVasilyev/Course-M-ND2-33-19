@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Http.News.Data.Contracts.Entities;
 
 namespace Http.News.Data.Contracts
@@ -10,6 +11,8 @@ namespace Http.News.Data.Contracts
         IQueryable<Item> GetAllItems();
 
         IQueryable<Comment> GetAllComments();
+
+        IQueryable<Item> GetItems(Func<Item, bool> predicate);
 
         void Add(Item item);
 

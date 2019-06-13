@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using System.Threading;
 
 [assembly: OwinStartupAttribute(typeof(ITNewsWeb.Startup))]
 namespace ITNewsWeb

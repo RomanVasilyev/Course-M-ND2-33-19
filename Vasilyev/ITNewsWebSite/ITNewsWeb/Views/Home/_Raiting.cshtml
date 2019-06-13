@@ -7,7 +7,7 @@
 @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/star-rating.js" type="text/javascript"></script>
-<script src="~/Scripts/straiting.js"></script>
+
 <div class="container" id="MyRate">
     @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { viewModel = Model, score = "$(#score).value" }))
     {
@@ -46,3 +46,20 @@
     }
     <hr>
 </div>
+<script type="text/javascript">
+    
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @(Html.Raw("$(\".rating\").rating({ readonly: true });"));
+    }
+    
+    $('.rating').on('rating:change', function (event, value, caption) {
+        $.post("@Url.Action("SetRating")", { itemId: @Model.Id, ratingValue: value })
+            .done(function (result) {
+            console.log(result);
+        });
+
+        console.log(value);
+        console.log(@Model.Id);
+    });
+</script>
