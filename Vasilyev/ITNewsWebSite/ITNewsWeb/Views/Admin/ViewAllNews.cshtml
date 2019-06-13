@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Http.News.Domain.Contracts.Dtos.ItemSummaryDto>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", "Home")
 </p>
 <table class="table">
     <tr>
@@ -75,7 +75,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Home", new { id = item.Id }, null) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", "Home", new { categoryId = item.CategoryId , itemId = item.Id }, null) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>

@@ -11,7 +11,7 @@
 <div class="container" id="MyRate">
     @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { viewModel = Model, score = "$(#score).value" }))
     {
-        <input type="text" class="rating rating-loading" name="score" value="@Model.AverageRating" data-size="md" title="Total users rating:">
+        <input type="text" id ="starRating" name="score" value="@Model.AverageRating" data-size="md" title="Total users rating:">
         <input type="hidden" name="ArticleID" value="@Model.Id" />
         <input type="hidden" name="CategoryID" value="@Model.CategoryId" />
         @Html.HiddenFor(model => model.CategoryId)
@@ -31,10 +31,6 @@
         @Html.HiddenFor(model => model.Rating)
         @Html.HiddenFor(model => model.TotalRaters)
         <br>
-        <div class="form-group" style="margin-top: 10px">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-default">Reset</button>
-        </div>
     }
     @if (ViewBag.Message != null)
     {
@@ -47,19 +43,26 @@
     <hr>
 </div>
 <script type="text/javascript">
-    
+    $('#starRating').rating();
     @if (!User.Identity.IsAuthenticated)
     {
         @(Html.Raw("$(\".rating\").rating({ readonly: true });"));
     }
-    
-    $('.rating').on('rating:change', function (event, value, caption) {
-        $.post("@Url.Action("SetRating")", { itemId: @Model.Id, ratingValue: value })
-            .done(function (result) {
+
+    $('#starRating').on('rating:change', function (event, value, caption) {
+        var posting = $.post("@Url.Action("SetRating")", { itemId: @Model.Id, ratingValue: value });
+        posting.done(function (result) {
             console.log(result);
+            if (result === "")
+            {
+                alert('You have already rated this article');
+            }
+            var elem = $('#starRating');
+            //elem.value = result;
+            //console.log(elem.rating('update', value));
+            //$('#starRating').rating('update', value);
         });
 
-        console.log(value);
-        console.log(@Model.Id);
     });
+
 </script>

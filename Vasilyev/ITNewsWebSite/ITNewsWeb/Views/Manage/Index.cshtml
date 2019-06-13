@@ -9,9 +9,11 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    @Html.ActionLink("List News", "ViewAllNews", "Admin")
+    <h4>
+        @Html.ActionLink("News List", "ViewAllNews", "Admin")
+    </h4>
     <h4>Change your account settings</h4>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
@@ -89,12 +91,13 @@
         <dt>User roles:</dt>
         @if (Request.IsAuthenticated)
         {
-            var roles = ((ClaimsIdentity)User.Identity).Claims
+            var roles = ((ClaimsIdentity) User.Identity).Claims
                 .Where(c => c.Type == ClaimTypes.Role)
                 .Select(c => c.Value);
             foreach (var role in roles)
             {
-                <dd><p>@role.ToString()</p></dd>
+                <dd>
+                    <p>@role.ToString()</p></dd>
             }
             //УЗНАТЬ, ПОЧЕМУ НЕ РАБОТАЕТ
             @*foreach (var role in Roles.GetRolesForUser(User.Identity.Name.ToString()))

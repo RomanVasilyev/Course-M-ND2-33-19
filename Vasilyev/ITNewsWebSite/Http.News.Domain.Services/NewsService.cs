@@ -107,9 +107,9 @@ namespace Http.News.Domain.Services
         //    return itemDetailsViewModel;
         //}
 
-        public ItemDetailsDto IncrementArticleRating(double score, int id, int catid)
+        public ItemDetailsDto IncrementArticleRating(double score, int id)
         {
-            var itemDetailsViewModel = GetItemDetails(id, catid);
+            var itemDetailsViewModel = GetItemDtoById(id);
             itemDetailsViewModel.Rating += score;
             itemDetailsViewModel.TotalRaters += 1;
             itemDetailsViewModel.AverageRating =

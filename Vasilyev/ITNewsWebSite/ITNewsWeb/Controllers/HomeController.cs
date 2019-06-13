@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using Http.News.Domain.Contracts.Dtos;
+using Http.News.Domain.Contracts.ViewModels;
 using Http.News.Domain.Services;
 
 namespace ITNewsWeb.Controllers
@@ -39,7 +42,7 @@ namespace ITNewsWeb.Controllers
         [Route("Home/Details/{title?}/{categoryId:int}/{itemId:int}")]
         public ActionResult Details(int categoryId, int itemId, string title = null)
         {
-            var viewModel = _newsService.BuildItemDetailsViewModel(categoryId, itemId);
+            ItemDetailsViewModel viewModel = _newsService.BuildItemDetailsViewModel(categoryId, itemId);
 
             return View(viewModel);
         }
@@ -55,15 +58,15 @@ namespace ITNewsWeb.Controllers
         [HttpPost]
         public ActionResult SetRating(int itemId, double ratingValue)
         {
-            //if (Request.Cookies["rating" + itemId] != null)
-            //{
-            //    ViewBag.Message = "You have already rated this article";
-            //    //return View(NewsService.BuildItemDetailsViewModel(catid, itemId));
-            //}
-
-            var value = _newsService.GetItemById(itemId);
-
-            return Json(new { Result = ratingValue }); 
+            if (Request.Cookies["rating" + itemId] != null)
+            {
+                ViewBag.Message = "You have already rated this article";
+                return null;
+            }
+            Response.Cookies["rating" + itemId].Value = DateTime.Now.ToString();
+            Response.Cookies["rating" + itemId].Expires = DateTime.Now.AddYears(1);
+            var viewModel = _newsService.IncrementArticleRating(ratingValue, itemId);
+            return Json(new { Result = viewModel.AverageRating }); 
         }
 
         [Authorize]
@@ -80,8 +83,27 @@ namespace ITNewsWeb.Controllers
 
             Response.Cookies["rating" + +id].Value = DateTime.Now.ToString();
             Response.Cookies["rating" + id].Expires = DateTime.Now.AddYears(1);
-            viewModel = _newsService.IncrementArticleRating(score, id, catid);
+            viewModel = _newsService.IncrementArticleRating(score, id);
             return View(_newsService.BuildItemDetailsViewModel(catid, id));
+        }
+
+        public JsonResult OnPostFile(HttpPostedFileBase uploadedFile)
+        {
+            if (uploadedFile == null)
+            {
+                //var erorr = new FileViewModel() { Erorr = "Error while uploading file" };
+                var error = "error";
+                return Json(error);
+            }
+
+            var filePath = "/Upload/img/" + uploadedFile.FileName;
+            var filename = Path.Combine(Server.MapPath("~/Upload/img/"), filePath);
+            var fileUrl = $"{this.Request.Url.Scheme}://{this.Request.Url.Host}{this.Request.Url.AbsolutePath}{filePath}";
+            uploadedFile.SaveAs(filename);
+
+                //var file = new FileViewModel() { DownloadUrl = fileUrl };
+
+            return Json(uploadedFile);
         }
 
         [Authorize(Roles = "admin, writer")]
