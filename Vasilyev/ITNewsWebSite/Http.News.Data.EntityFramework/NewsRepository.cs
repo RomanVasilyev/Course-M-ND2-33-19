@@ -29,7 +29,7 @@ namespace Http.News.Data.EntityFramework
 
         public IQueryable<Item> GetItems(Func<Item, bool> predicate)
         {
-            return _dbContext.Items.Include(x => x.ItemContent).Where(predicate).AsQueryable();
+            return _dbContext.Items.Include(x => x.ItemContent).Include(x => x.Likes).Where(predicate).AsQueryable();
         }
 
         public IQueryable<Comment> GetAllComments()
@@ -53,6 +53,12 @@ namespace Http.News.Data.EntityFramework
         {
             var dbSet = _dbContext.Set<Comment>();
             dbSet.Add(comment);
+        }
+
+        public void Add(Like like)
+        {
+            var dbSet = _dbContext.Set<Like>();
+            dbSet.Add(like);
         }
 
         public void Save()

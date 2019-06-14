@@ -41,6 +41,8 @@ namespace Http.News.Data.EntityFramework.Migrations
                                     },
                     Rating = 0,
                     TotalRaters = 0,
+                    TotalLikes = 1121,
+                    TotalDislikes = 12,
                     AverageRating = 0,
                 };
 
@@ -65,6 +67,8 @@ namespace Http.News.Data.EntityFramework.Migrations
                                     },
                     Rating = 0,
                     TotalRaters = 0,
+                    TotalLikes = 455,
+                    TotalDislikes = 15,
                     AverageRating = 0,
 
                 };
@@ -90,6 +94,8 @@ namespace Http.News.Data.EntityFramework.Migrations
                         },
                     Rating = 0,
                     TotalRaters = 0,
+                    TotalLikes = 1234,
+                    TotalDislikes = 123,
                     AverageRating = 0,
                 };
 
@@ -114,6 +120,8 @@ namespace Http.News.Data.EntityFramework.Migrations
                         },
                     Rating = 0,
                     TotalRaters = 0,
+                    TotalLikes = 12345,
+                    TotalDislikes = 1234,
                     AverageRating = 0,
                 };
 
@@ -138,6 +146,8 @@ namespace Http.News.Data.EntityFramework.Migrations
                                 },
                     Rating = 10,
                     TotalRaters = 3,
+                    TotalLikes = 0,
+                    TotalDislikes = 0,
                     AverageRating = 4.7,
                 };
 

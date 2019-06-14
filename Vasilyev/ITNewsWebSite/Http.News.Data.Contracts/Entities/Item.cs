@@ -14,6 +14,8 @@ namespace Http.News.Data.Contracts.Entities
 
         public virtual ItemContent ItemContent { get; set; }
 
+        public virtual ICollection<Like> Likes { get; set; }
+
         public string CreatedBy { get; set; }
 
         public string ModifiedBy { get; set; }
@@ -25,6 +27,10 @@ namespace Http.News.Data.Contracts.Entities
         public double Rating { get; set; }
 
         public int TotalRaters { get; set; }
+
+        public int TotalLikes { get; set; }
+
+        public int TotalDislikes { get; set; }
 
         public double AverageRating { get; set; }
 

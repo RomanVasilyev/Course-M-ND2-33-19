@@ -20,6 +20,8 @@ namespace Http.News.Data.Contracts
 
         void Add(Comment comment);
 
+        void Add(Like like);
+
         void Save();
 
         ITransaction BeginTransaction();

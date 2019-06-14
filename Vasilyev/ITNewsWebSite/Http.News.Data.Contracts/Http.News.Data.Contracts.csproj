@@ -47,6 +47,7 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemContent.cs" />
+    <Compile Include="Entities\Like.cs" />
     <Compile Include="INewsRepository.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="ITransaction.cs" />

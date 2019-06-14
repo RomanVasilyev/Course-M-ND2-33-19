@@ -180,6 +180,24 @@ namespace Http.News.Domain.Services
             return itemDetailsViewModel;
         }
 
+        public ItemDetailsDto IncrementLike(int itemId, Guid userId, bool islike)
+        {
+            Like like = new Like { DateTime = DateTime.Now, UserId = userId };
+            var item = GetItemDtoById(itemId);
+            like.IsLike = islike;
+            if (islike)
+            {
+                item.TotalLikes++;
+            }
+            else
+            {
+                item.TotalDislikes++;
+            }
+            _repository.Add(like);
+            Save(item);
+            return item;
+        }
+
         public void Save(ItemDetailsViewModel viewModel)
         {
             using (var transaction = _repository.BeginTransaction())
@@ -265,7 +283,9 @@ namespace Http.News.Domain.Services
                         ModifiedDate = item.ModifiedDate,
                         Rating = item.Rating,
                         TotalRaters = item.TotalRaters,
-                        AverageRating = item.AverageRating
+                        AverageRating = item.AverageRating,
+                        TotalLikes = item.TotalLikes,
+                        TotalDislikes = item.TotalDislikes,
                     }).FirstOrDefault();
         }
 
@@ -289,7 +309,9 @@ namespace Http.News.Domain.Services
                     ModifiedDate = item.ModifiedDate,
                     Rating = item.Rating,
                     TotalRaters = item.TotalRaters,
-                    AverageRating = item.AverageRating
+                    AverageRating = item.AverageRating,
+                    TotalLikes = item.TotalLikes,
+                    TotalDislikes = item.TotalDislikes,
                 };
             }
 

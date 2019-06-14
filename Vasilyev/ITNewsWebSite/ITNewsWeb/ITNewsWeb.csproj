@@ -345,7 +345,9 @@
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\star-rating.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\icons.png" />
     <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\jquery.thumbs.css" />
     <Content Include="Content\pygments-manni.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\krajee-fas\theme.css" />
@@ -427,6 +429,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Scripts\jquery.thumbs.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

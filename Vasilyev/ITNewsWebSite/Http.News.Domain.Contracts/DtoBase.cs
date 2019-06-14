@@ -28,5 +28,11 @@ namespace Http.News.Domain.Contracts
 
         [DisplayName("Average Rating")]
         public double AverageRating { get; set; }
+
+        [DisplayName("Likes")]
+        public double TotalLikes { get; set; }
+
+        [DisplayName("Dislikes")]
+        public double TotalDislikes { get; set; }
     }
 }

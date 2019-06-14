@@ -43,6 +43,8 @@ namespace Http.News.Infrastructure.MappingProfiles
                 .ForMember(dest => dest.Rating, c => c.MapFrom(src => src.Rating))
                 .ForMember(dest => dest.TotalRaters, c => c.MapFrom(src => src.TotalRaters))
                 .ForMember(dest => dest.AverageRating, c => c.MapFrom(src => src.AverageRating))
+                .ForMember(dest => dest.TotalLikes, c => c.MapFrom(src => src.TotalLikes))
+                .ForMember(dest => dest.TotalDislikes, c => c.MapFrom(src => src.TotalDislikes))
                 .ForAllOtherMembers(c => c.Ignore());
         }
 
