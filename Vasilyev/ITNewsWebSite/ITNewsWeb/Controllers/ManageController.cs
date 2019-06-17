@@ -24,6 +24,8 @@ namespace ITNewsWeb.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            UserManager.UserLockoutEnabledByDefault = true; //разрешает блокировку пользователей
+            UserManager.DefaultAccountLockoutTimeSpan = DateTime.Now.AddYears(100).TimeOfDay; //время блокировки
         }
 
         public ApplicationSignInManager SignInManager

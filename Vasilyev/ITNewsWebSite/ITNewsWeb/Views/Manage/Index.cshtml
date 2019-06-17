@@ -28,6 +28,17 @@
             }
             ]
         </dd>
+        @if (User.IsInRole("admin"))
+        {
+            <dt>Users manager</dt>
+            <dd>
+                [ @Html.ActionLink("Manage Users", "UsersWithRoles", "ManageUsers") ]
+            </dd>
+            <dt>Roles manager</dt>
+            <dd>
+                [ @Html.ActionLink("Manage Roles", "Index", "Roles") ]
+            </dd>
+        }
         <dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [

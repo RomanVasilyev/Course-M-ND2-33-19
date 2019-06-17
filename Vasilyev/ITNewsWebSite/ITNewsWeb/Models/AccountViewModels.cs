@@ -100,6 +100,12 @@ namespace ITNewsWeb.Models
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
+
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        [Required] [Display(Name = "User ID")]
+        public string UserId { get; set; }
     }
 
     public class ForgotPasswordViewModel
