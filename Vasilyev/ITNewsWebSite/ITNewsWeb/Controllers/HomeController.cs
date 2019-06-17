@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Http.News.Domain.Contracts.Dtos;
 using Http.News.Domain.Contracts.ViewModels;
 using Http.News.Domain.Services;
+using Microsoft.AspNet.Identity;
 
 namespace ITNewsWeb.Controllers
 {
@@ -67,6 +68,21 @@ namespace ITNewsWeb.Controllers
             Response.Cookies["rating" + itemId].Expires = DateTime.Now.AddYears(1);
             var viewModel = _newsService.IncrementArticleRating(ratingValue, itemId);
             return Json(new { Result = viewModel.AverageRating }); 
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult SetLike(int itemId, bool isLike)
+        {
+            if (Request.Cookies["like" + itemId] != null)
+            {
+                ViewBag.Message = "You have already Liked this article";
+                return null;
+            }
+            Response.Cookies["like" + itemId].Value = DateTime.Now.ToString();
+            Response.Cookies["like" + itemId].Expires = DateTime.Now.AddYears(1);
+            var viewModel = _newsService.IncrementLike(itemId, User.Identity.GetUserId(), isLike);
+            return Json(new { Result = viewModel });
         }
 
         [Authorize]

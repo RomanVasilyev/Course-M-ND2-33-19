@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="~/Content/jquery.thumbs.css">
 <script src="~/Scripts/jquery.thumbs.js"></script>
 
-<div class="jq-rating" data-like="8" data-dislike="2"></div>
+<div class="jq-rating" data-like="@Model.TotalLikes" data-dislike="@Model.TotalDislikes"></div>
 <hr>
 <div class="container" id="MyRate">
     @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { viewModel = Model, score = "$(#score).value" }))
@@ -77,16 +77,28 @@
             $('.jq-rating').find('.sprite-fa-thumbs-up-grey')
                 .removeClass("sprite-fa-thumbs-up-grey")
                 .toggleClass("sprite-fa-thumbs-up-green");
-
-            alert ('Thank You For Voting.');
+            var posting = $.post("@Url.Action("SetLike")", { itemId: @Model.Id, isLike: true });
+            posting.done(function(result) {
+                console.log(result);
+                if (result === "") {
+                    alert('You have already rated this article');
+                }
+                alert('Thank You For Voting.');
+            });
         },
         onDislike: function (value) {
 
             $('.jq-rating').find('.sprite-fa-thumbs-down-grey')
                 .removeClass("sprite-fa-thumbs-down-grey")
                 .toggleClass("sprite-fa-thumbs-down-green");
-
-            alert ('Im sorry.');
+            var posting = $.post("@Url.Action("SetLike")", { itemId: @Model.Id, isLike: false });
+            posting.done(function(result) {
+                console.log(result);
+                if (result === "") {
+                    alert('You have already rated this article');
+                }
+                alert('Im sorry.');
+            });
         }
     });
 

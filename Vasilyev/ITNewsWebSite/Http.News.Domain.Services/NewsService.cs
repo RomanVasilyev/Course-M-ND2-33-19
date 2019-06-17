@@ -180,7 +180,7 @@ namespace Http.News.Domain.Services
             return itemDetailsViewModel;
         }
 
-        public ItemDetailsDto IncrementLike(int itemId, Guid userId, bool islike)
+        public ItemDetailsDto IncrementLike(int itemId, string userId, bool islike)
         {
             Like like = new Like { DateTime = DateTime.Now, UserId = userId };
             var item = GetItemDtoById(itemId);
