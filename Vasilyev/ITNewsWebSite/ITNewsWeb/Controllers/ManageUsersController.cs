@@ -81,7 +81,8 @@ namespace ITNewsWeb.Controllers
                 user.LockoutEndDateUtc = DateTime.Now;
                 await UserManager.UpdateAsync(user);
             }
-
+            TempData["Message"] = "User Locked Successfully. ";
+            TempData["MessageValue"] = "1";
             return RedirectToAction("UsersWithRoles");
         }
 
@@ -96,7 +97,8 @@ namespace ITNewsWeb.Controllers
                 user.LockoutEndDateUtc = null;
                 await UserManager.UpdateAsync(user);
             }
-
+            TempData["Message"] = "User Unlocked Successfully. ";
+            TempData["MessageValue"] = "1";
             return RedirectToAction("UsersWithRoles");
         }
 

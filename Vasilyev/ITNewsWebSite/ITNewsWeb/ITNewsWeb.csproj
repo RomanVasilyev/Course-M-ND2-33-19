@@ -601,6 +601,7 @@
     <Content Include="Views\ManageUsers\UsersWithRoles.cshtml" />
     <Content Include="Views\ManageUsers\View.cshtml" />
     <Content Include="Views\ManageUsers\ResetUserPassword.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
