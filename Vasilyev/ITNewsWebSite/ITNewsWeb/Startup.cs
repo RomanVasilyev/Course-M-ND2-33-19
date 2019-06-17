@@ -11,6 +11,15 @@ namespace ITNewsWeb
         {
             ConfigureAuth(app);
             app.MapSignalR();
+            var nfInfo = new System.Globalization.CultureInfo("en-US", false)
+            {
+                NumberFormat =
+                {
+                    NumberDecimalSeparator = "."
+                }
+            };
+            Thread.CurrentThread.CurrentCulture = nfInfo;
+            Thread.CurrentThread.CurrentUICulture = nfInfo;
         }
     }
 }
