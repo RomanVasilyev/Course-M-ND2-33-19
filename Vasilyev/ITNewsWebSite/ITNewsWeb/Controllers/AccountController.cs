@@ -78,7 +78,11 @@ namespace ITNewsWeb.Controllers
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
-                    ViewBag.errorMessage = "You must have a confirmed email to log on.";
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
+                    // Uncomment to debug locally  
+                    // ViewBag.Link = callbackUrl;
+                    ViewBag.errorMessage = "You must have a confirmed email to log on. "
+                                           + "The confirmation token has been resent to your email account.";
                     return View("Error");
                 }
             }
@@ -166,19 +170,21 @@ namespace ITNewsWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 user.Email = model.Email;
                 user.EmailConfirmed = false;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //  Comment the following line to prevent log in until the user is confirmed.
+                    //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
                     // если создание прошло успешно, то добавляем роль пользователя
                     await UserManager.AddToRoleAsync(user.Id, "user");
@@ -476,6 +482,17 @@ namespace ITNewsWeb.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, subject,
+                "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return callbackUrl;
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
