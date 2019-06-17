@@ -182,7 +182,7 @@ namespace Http.News.Domain.Services
 
         public ItemDetailsDto IncrementLike(int itemId, string userId, bool islike)
         {
-            Like like = new Like { DateTime = DateTime.Now, UserId = userId };
+            Like like = new Like { DateTime = DateTime.Now, UserId = userId, ItemId = itemId};
             var item = GetItemDtoById(itemId);
             like.IsLike = islike;
             if (islike)
