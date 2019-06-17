@@ -118,13 +118,14 @@
 
            inlineAttachment.editors.codemirror4.attach(easyMDE.codemirror,
             {
-                uploadUrl: 'OnPostFile?handler=File',
+                uploadUrl: '@Url.Action("OnPostFile", "Home", new { handler = "File" })',
                 uploadedFieldName: 'uploadedFile',
-                jsonFieldName: 'downloadUrl',
+                jsonFieldName: 'fileName',
                 progressText: '![Uploading file...]()',
                 extraHeaders: {"RequestVerificationToken":'@Html.AntiForgeryToken()'},
                 onFileUploadResponse: function (xhr) {
-                    var result = JSON.parse(xhr.responseText), filename = result[this.settings.jsonFieldName];
+                    var result = JSON.parse(xhr.responseText);
+                    var filename = result[this.settings.jsonFieldName];
                     if (result && filename) {
                         var newValue;
                         if (typeof this.settings.urlText === 'function') {
@@ -132,7 +133,7 @@
                         } else {
                             newValue = this.settings.urlText.replace(this.filenameTag, filename);
                         }
-                        var text = this.editor.GetValue().replace(this.lastValue, newValue);
+                        var text = this.editor.getValue().replace(this.lastValue, newValue);
                         this.editor.setValue(text);
                         this.settings.onFileUploaded.call(this, filename);
                     }

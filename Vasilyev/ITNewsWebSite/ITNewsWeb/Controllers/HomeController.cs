@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Http.News.Data.Contracts.Entities;
 using Http.News.Domain.Contracts.Dtos;
 using Http.News.Domain.Contracts.ViewModels;
 using Http.News.Domain.Services;
+using ITNewsWeb.Models;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ITNewsWeb.Controllers
 {
@@ -43,7 +48,7 @@ namespace ITNewsWeb.Controllers
         [Route("Home/Details/{title?}/{categoryId:int}/{itemId:int}")]
         public ActionResult Details(int categoryId, int itemId, string title = null)
         {
-            ItemDetailsViewModel viewModel = _newsService.BuildItemDetailsViewModel(categoryId, itemId);
+            ItemDetailsViewModel viewModel = _newsService.BuildItemDetailsViewModel(categoryId, itemId, User.Identity.GetUserId());
 
             return View(viewModel);
         }
@@ -72,17 +77,12 @@ namespace ITNewsWeb.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult SetLike(int itemId, bool isLike)
+        public ActionResult SetLike(int itemId)
         {
-            if (Request.Cookies["like" + itemId] != null)
-            {
-                ViewBag.Message = "You have already Liked this article";
-                return null;
-            }
-            Response.Cookies["like" + itemId].Value = DateTime.Now.ToString();
-            Response.Cookies["like" + itemId].Expires = DateTime.Now.AddYears(1);
-            var viewModel = _newsService.IncrementLike(itemId, User.Identity.GetUserId(), isLike);
-            return Json(new { Result = viewModel });
+            var viewModel = _newsService.GetItemDtoById(itemId, User.Identity.GetUserId());
+            
+            _newsService.SetLike(itemId, User.Identity.GetUserId(), !viewModel.IsLiked);
+            return Json(new { IsLiked = !viewModel.IsLiked, HasError = false });
         }
 
         [Authorize]
@@ -94,33 +94,30 @@ namespace ITNewsWeb.Controllers
             if (Request.Cookies["rating" + id] != null)
             {
                 ViewBag.Message = "You have already rated this article";
-                return View(_newsService.BuildItemDetailsViewModel(catid, id));
+                return View(_newsService.BuildItemDetailsViewModel(catid, id, User.Identity.GetUserId()));
             }
 
             Response.Cookies["rating" + +id].Value = DateTime.Now.ToString();
             Response.Cookies["rating" + id].Expires = DateTime.Now.AddYears(1);
             viewModel = _newsService.IncrementArticleRating(score, id);
-            return View(_newsService.BuildItemDetailsViewModel(catid, id));
+            return View(_newsService.BuildItemDetailsViewModel(catid, id, User.Identity.GetUserId()));
         }
 
-        public JsonResult OnPostFile(HttpPostedFileBase uploadedFile)
+        public JsonResult OnPostFile()
         {
-            if (uploadedFile == null)
-            {
-                //var erorr = new FileViewModel() { Erorr = "Error while uploading file" };
-                var error = "error";
-                return Json(error);
+            HttpPostedFileBase file = Request.Files[0];
+                                                  
+            int fileSize = file.ContentLength;
+            string fileName = file.FileName;
+            string mimeType = file.ContentType;
+            Stream fileContent = file.InputStream;
+            file.SaveAs(Server.MapPath("~/") + fileName);
+
+            var filePath = Path.Combine(Server.MapPath("~/Upload/img/"), fileName);
+            file.SaveAs(filePath);
+
+            return Json(new { fileName = "/Upload/img/" + fileName });
             }
-
-            var filePath = "/Upload/img/" + uploadedFile.FileName;
-            var filename = Path.Combine(Server.MapPath("~/Upload/img/"), filePath);
-            var fileUrl = $"{this.Request.Url.Scheme}://{this.Request.Url.Host}{this.Request.Url.AbsolutePath}{filePath}";
-            uploadedFile.SaveAs(filename);
-
-                //var file = new FileViewModel() { DownloadUrl = fileUrl };
-
-            return Json(uploadedFile);
-        }
 
         [Authorize(Roles = "admin, writer")]
         public ActionResult Create()
@@ -134,7 +131,7 @@ namespace ITNewsWeb.Controllers
         [Authorize(Roles = "admin, writer")]
         public ActionResult Edit(int id)
         {
-            var viewModel = _newsService.GetItemDtoById(id);
+            var viewModel = _newsService.GetItemDtoById(id, User.Identity.GetUserId());
             PrepareView(viewModel);
             ViewBag.Title = "Edit";
             return View("Create", viewModel);
@@ -218,6 +215,35 @@ namespace ITNewsWeb.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+
+        public ActionResult GetAllTags()
+        {
+            var tags = new List<Tag>
+            {
+                new Tag { Text = "C#", ItemId = 1 },
+                new Tag { Text = "Java", ItemId = 2 },
+                new Tag { Text = "C++", ItemId = 3 },
+                new Tag { Text = "Some text", ItemId = 4 },
+                new Tag { Text = "Category", ItemId = 5 },
+                new Tag { Text = "I don't know", ItemId = 6 },
+                new Tag { Text = "Text name", ItemId = 7 },
+                new Tag { Text = "Wow!", ItemId = 8 }
+            };
+
+            var tagsViewModel = tags.Select(x => new TagViewModel
+            {
+                Text = x.Text,
+                Link = Url.Action("Details", "Home", new { Id = x.ItemId })
+            });
+
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = JsonConvert.SerializeObject(tagsViewModel, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }),
+                ContentEncoding = Encoding.UTF8
+            };
         }
     }
 }

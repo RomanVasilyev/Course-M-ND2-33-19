@@ -58,4 +58,24 @@
             </div>
         }
     </div>
+    <div id="cloud-tags">
+
+    </div>
 </div>
+
+@section scripts{
+<script>
+
+    $.get("@Url.Action("GetAllTags", "Home")", function (data) {
+        $("#cloud-tags").jQCloud(data, {
+            width: 500,
+            height: 500,
+            delayedMode: data.length > 50,
+            shape: false, // or 'rectangular'
+            encodeURI: true,
+            removeOverflowing: true
+        });
+    });
+
+</script>
+}

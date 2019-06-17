@@ -38,6 +38,8 @@ namespace Http.News.Data.EntityFramework
         public DbSet<Item> Items { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Like> Likes { get; set; }
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    var bookConfiguration = modelBuilder.Entity<Item>();

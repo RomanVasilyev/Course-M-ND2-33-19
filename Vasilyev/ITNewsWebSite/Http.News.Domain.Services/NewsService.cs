@@ -34,6 +34,11 @@ namespace Http.News.Domain.Services
 
         public Item GetItemById(int id)
         {
+            //Code example for getting tags 
+            var items = _repository.GetAllItems();
+
+            var tags = items.SelectMany(x => x.Likes);
+
             return _repository.GetAllItems().FirstOrDefault(x => x.Id == id);
         }
 
@@ -60,12 +65,13 @@ namespace Http.News.Domain.Services
             return categoryPageViewModel;
         }
 
-        public ItemDetailsViewModel BuildItemDetailsViewModel(int categoryId, int itemId)
+        public ItemDetailsViewModel BuildItemDetailsViewModel(int categoryId, int itemId, string userId)
         {
             var itemDetailsViewModel = new ItemDetailsViewModel();
             itemDetailsViewModel.TopMenu = GetCategoryMenu(categoryId);
-            itemDetailsViewModel.ItemDetails = this.GetItemDetails(itemId, categoryId);
+            itemDetailsViewModel.ItemDetails = this.GetItemDetails(itemId, categoryId, userId);
             var category = this.GetCategoryById(categoryId);
+
             itemDetailsViewModel.CategoryName = category.Name;
             return itemDetailsViewModel;
         }
@@ -109,7 +115,7 @@ namespace Http.News.Domain.Services
 
         public ItemDetailsDto IncrementArticleRating(double score, int id)
         {
-            var itemDetailsViewModel = GetItemDtoById(id);
+            var itemDetailsViewModel = GetItemDtoById(id, null);
             itemDetailsViewModel.Rating += score;
             itemDetailsViewModel.TotalRaters += 1;
             itemDetailsViewModel.AverageRating =
@@ -166,7 +172,7 @@ namespace Http.News.Domain.Services
         public ItemDetailsViewModel IncrementArticleRating(ItemDetailsViewModel vm)
         {
 
-            var item = GetItemDetails(vm.ItemDetails.Id, vm.ItemDetails.CategoryId);
+            var item = GetItemDetails(vm.ItemDetails.Id, vm.ItemDetails.CategoryId, null);
             item.Rating += vm.ItemDetails.Rating;
             item.TotalRaters += 1;
             var itemDetailsViewModel = new ItemDetailsViewModel();
@@ -180,22 +186,24 @@ namespace Http.News.Domain.Services
             return itemDetailsViewModel;
         }
 
-        public ItemDetailsDto IncrementLike(int itemId, string userId, bool islike)
+        public void SetLike(int itemId, string userId, bool islike)
         {
-            Like like = new Like { DateTime = DateTime.Now, UserId = userId, ItemId = itemId};
-            var item = GetItemDtoById(itemId);
-            like.IsLike = islike;
+            var item = GetItemById(itemId);
+            
             if (islike)
             {
+                var like = new Like { DateTime = DateTime.Now, UserId = userId, ItemId = itemId };
+                item.Likes.Add(like);
                 item.TotalLikes++;
             }
             else
             {
-                item.TotalDislikes++;
+                var like = item.Likes.Single(x => x.ItemId == itemId && x.UserId == userId);
+                item.Likes.Remove(like);
+                item.TotalLikes--;
             }
-            _repository.Add(like);
-            Save(item);
-            return item;
+
+            _repository.Save();
         }
 
         public void Save(ItemDetailsViewModel viewModel)
@@ -265,7 +273,7 @@ namespace Http.News.Domain.Services
                 .Where(item => item.CategoryId == categoryId);
         }
 
-        public ItemDetailsDto GetItemDetails(int itemId, int catId)
+        public ItemDetailsDto GetItemDetails(int itemId, int catId, string userId)
         {
             return (from item in _repository.GetAllItems()
                     where item.Id == itemId
@@ -286,10 +294,11 @@ namespace Http.News.Domain.Services
                         AverageRating = item.AverageRating,
                         TotalLikes = item.TotalLikes,
                         TotalDislikes = item.TotalDislikes,
+                        IsLiked = item.Likes.Any(x => x.UserId == userId)
                     }).FirstOrDefault();
         }
 
-        public ItemDetailsDto GetItemDtoById(int itemId)
+        public ItemDetailsDto GetItemDtoById(int itemId, string userId)
         {
             var item = _repository.GetItems(x => x.Id == itemId).FirstOrDefault();
 
@@ -312,6 +321,7 @@ namespace Http.News.Domain.Services
                     AverageRating = item.AverageRating,
                     TotalLikes = item.TotalLikes,
                     TotalDislikes = item.TotalDislikes,
+                    IsLiked = item.Likes.Any(x => x.UserId == userId)
                 };
             }
 

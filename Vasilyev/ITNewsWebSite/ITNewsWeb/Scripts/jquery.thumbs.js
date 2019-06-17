@@ -13,45 +13,61 @@
 
                 methods.destroy.call($(self));
 
-                $(self)
-                    .addClass(opt.classCss)
-                    .attr('data-id-review', id)
-                    .append($('<div>').addClass('sprite sprite-fa-thumbs-up-grey'),
-                        $('<div>').addClass('jq-rating-like').html(like),
-                        $('<div>').addClass('sprite sprite-fa-thumbs-down-grey'),
-                        $('<div>').addClass('jq-rating-dislike').html(dislike));
+                if ($(self).data('isliked')) {
+                    $(self)
+                        .addClass(opt.classCss)
+                        .attr('data-id-review', id)
+                        .append($('<div>').addClass('sprite sprite-fa-thumbs-up-green'),
+                            $('<div>').addClass('jq-rating-like').html(like));
+                } else {
+                    $(self)
+                        .addClass(opt.classCss)
+                        .attr('data-id-review', id)
+                        .append($('<div>').addClass('sprite sprite-fa-thumbs-up-grey'),
+                            $('<div>').addClass('jq-rating-like').html(like));
+                }
+
+                
 
 
                 $(self)
-                    .find('.sprite-fa-thumbs-up-grey')
-                    .one('click', function () {
+                    .find('.sprite')
+                    .on('click', function () {
                         var likes = methods.getLikes.call(self);
-                        likes++;
-
-                        methods.setLikes.call(self, likes);
+                        
+                        //methods.setLikes.call(self, likes);
                         if (typeof options !== 'undefined' && $.isFunction(options.onLike)) {
                             options.onLike(likes);
                         }
-                        $(self).find('.sprite-fa-thumbs-down-grey').unbind('click');
                     });
 
-                $(self)
-                    .find('.sprite-fa-thumbs-down-grey')
-                    .one('click', function () {
-                        var dislikes = methods.getDislikes.call(self);
-                        dislikes++;
+                //$(self)
+                //    .find('.sprite')
+                //    .one('click', function () {
+                //        var likes = methods.getLikes.call(self);
 
-                        methods.setDislikes.call(self, dislikes);
-                        if (typeof options !== 'undefined' && $.isFunction(options.onDislike)) {
-                            options.onDislike(dislikes);
-                        }
-                        $(self).find('.sprite-fa-thumbs-up-grey').unbind('click');
-                    });
+                //        methods.setLikes.call(self, likes);
+                //        if (typeof options !== 'undefined' && $.isFunction(options.onLike)) {
+                //            options.onLike(likes);
+                //        }
+                //    });
+
+                //$(self)
+                //    .find('.sprite-fa-thumbs-down-grey')
+                //    .one('click', function () {
+                //        var dislikes = methods.getDislikes.call(self);
+                //        dislikes++;
+
+                //        methods.setDislikes.call(self, dislikes);
+                //        if (typeof options !== 'undefined' && $.isFunction(options.onDislike)) {
+                //            options.onDislike(dislikes);
+                //        }
+                //    });
             });
         },
         setLikes: function (value) {
             $(this).attr('data-like', value);
-            $(this).find('.jq-rating-like').html(value);
+            $('.jq-rating-like').text(value);
         },
         setDislikes: function (value) {
             $(this).attr('data-dislike', value);

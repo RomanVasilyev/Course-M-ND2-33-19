@@ -25,5 +25,7 @@ namespace Http.News.Data.Contracts
         void Save();
 
         ITransaction BeginTransaction();
+
+        Like GetUserLike(string userId, int itemId);
     }
 }

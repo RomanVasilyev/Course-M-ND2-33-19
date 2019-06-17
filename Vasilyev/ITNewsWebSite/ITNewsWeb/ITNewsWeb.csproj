@@ -221,12 +221,14 @@
     <Compile Include="Models\CommentsHub.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Models\UsersInRoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\jqcloud.css" />
     <Content Include="Content\andia-agency\assets\css\flexslider.css" />
     <Content Include="Content\andia-agency\assets\css\font-awesome.css" />
     <Content Include="Content\andia-agency\assets\css\style.css" />
@@ -508,6 +510,8 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\inline-attachment.js" />
     <Content Include="Scripts\inline-attachment.min.js" />
+    <Content Include="Scripts\jqcloud-1.0.4.js" />
+    <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />

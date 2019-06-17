@@ -1,16 +1,6 @@
 ﻿@model Http.News.Domain.Contracts.Dtos.ItemDetailsDto
-<!-- Star raiting -->
-@*<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">*@
-<link rel="stylesheet" href="~/Content/font-awesome.min.css">
-<link href="~/Content/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-<!--suppress JSUnresolvedLibraryURL -->
-@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/star-rating.js" type="text/javascript"></script>
-<link rel="stylesheet" href="~/Content/jquery.thumbs.css">
-<script src="~/Scripts/jquery.thumbs.js"></script>
 
-<div class="jq-rating" data-like="@Model.TotalLikes" data-dislike="@Model.TotalDislikes"></div>
+<div class="jq-rating" data-like="@Model.TotalLikes" data-isliked="@(Model.IsLiked ? "true" : "false")"></div>
 <hr>
 <div class="container" id="MyRate">
     @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { viewModel = Model, score = "$(#score).value" }))
@@ -46,60 +36,3 @@
     }
     <hr>
 </div>
-<script type="text/javascript">
-    $('#starRating').rating();
-
-    //$('.js-rating-simple').thumbs();
-
-    @if (!User.Identity.IsAuthenticated)
-    {
-        @(Html.Raw("$(\".rating\").rating({ readonly: true });"));
-    }
-
-    $('#starRating').on('rating:change', function (event, value, caption) {
-        var posting = $.post("@Url.Action("SetRating")", { itemId: @Model.Id, ratingValue: value });
-        posting.done(function (result) {
-            console.log(result);
-            if (result === "")
-            {
-                alert('You have already rated this article');
-            }
-            var elem = $('#starRating');
-            //elem.value = result;
-            //console.log(elem.rating('update', value));
-            //$('#starRating').rating('update', value);
-        });
-    });
-
-    $('.jq-rating').thumbs({
-        onLike: function (value) {
-
-            $('.jq-rating').find('.sprite-fa-thumbs-up-grey')
-                .removeClass("sprite-fa-thumbs-up-grey")
-                .toggleClass("sprite-fa-thumbs-up-green");
-            var posting = $.post("@Url.Action("SetLike")", { itemId: @Model.Id, isLike: true });
-            posting.done(function(result) {
-                console.log(result);
-                if (result === "") {
-                    alert('You have already rated this article');
-                }
-                alert('Thank You For Voting.');
-            });
-        },
-        onDislike: function (value) {
-
-            $('.jq-rating').find('.sprite-fa-thumbs-down-grey')
-                .removeClass("sprite-fa-thumbs-down-grey")
-                .toggleClass("sprite-fa-thumbs-down-green");
-            var posting = $.post("@Url.Action("SetLike")", { itemId: @Model.Id, isLike: false });
-            posting.done(function(result) {
-                console.log(result);
-                if (result === "") {
-                    alert('You have already rated this article');
-                }
-                alert('Im sorry.');
-            });
-        }
-    });
-
-</script>

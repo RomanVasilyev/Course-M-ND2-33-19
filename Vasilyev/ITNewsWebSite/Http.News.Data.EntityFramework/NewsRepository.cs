@@ -71,5 +71,10 @@ namespace Http.News.Data.EntityFramework
             var transaction = new Transaction(_dbContext.Database.BeginTransaction());
             return transaction;
         }
+
+        public Like GetUserLike(string userId, int itemId)
+        {
+            return _dbContext.Likes.FirstOrDefault(x => x.UserId == userId && x.ItemId == itemId);
+        }
     }
 }
