@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-114-precomposed.png")">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-72-precomposed.png")">
     <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/andia-agency/assets/ico/apple-touch-icon-57-precomposed.png")">
+    <link href="~/Content/jqcloud.css" rel="stylesheet" />
 </head>
 <body>
     <!-- Header -->
@@ -69,7 +70,7 @@
             Using
             <a href="http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started">asp.net mvc 5.0</a>
             for front-end page, Comments using <a href="https://dotnet.microsoft.com/apps/aspnet/real-time">SingalR</a>
-            <i class="fa fa-paper-plane fa-fw"></i> and 
+            <i class="fa fa-paper-plane fa-fw"></i> and
             @*<a href="http://www.asp.net/vnext/overview/aspnet-web-api">asp.net web api 2.0</a> &*@
             <a href="http://angularjs.org/">angularjs</a> for admin page
         </p>
@@ -79,7 +80,7 @@
     </div>
     <div class="testimonials container">
     </div>
-     <!-- Footer -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -123,6 +124,8 @@
     @Scripts.Render("~/andia-agency/scripts")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jqcloud-1.0.4.js"></script>
+    <script src="~/Scripts/jqcloud-1.0.4.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

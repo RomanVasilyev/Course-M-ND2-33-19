@@ -33,7 +33,7 @@ namespace Http.News.Infrastructure.MappingProfiles
                 .ForPath(dest => dest.ItemContent.BigImage, c => c.MapFrom(src => src.BigImageUrl))
                 .ForPath(dest => dest.ItemContent.MediumImage, c => c.MapFrom(src => src.MediumImageUrl))
                 .ForPath(dest => dest.ItemContent.SmallImage, c => c.MapFrom(src => src.SmallImageUrl))
-
+                
                 .ForPath(dest => dest.Category.Id, c => c.MapFrom(src => src.CategoryId))
 
                 .ForMember(dest => dest.CreatedBy, c => c.MapFrom(src => src.CreatedBy))

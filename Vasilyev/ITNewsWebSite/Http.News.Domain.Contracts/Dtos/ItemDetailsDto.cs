@@ -34,5 +34,7 @@ namespace Http.News.Domain.Contracts.Dtos
         public long NumOfView { get; set; }
 
         public List<SelectListItem> CatList { get; set; }
+
+        public bool IsLiked { get; set;}
     }
 }
