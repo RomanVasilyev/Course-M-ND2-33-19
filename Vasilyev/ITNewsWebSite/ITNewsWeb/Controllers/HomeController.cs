@@ -46,11 +46,12 @@ namespace ITNewsWeb.Controllers
 
         public ActionResult Search(string searchString)
         {
-            if (string.IsNullOrEmpty(searchString))
+            string str = HttpUtility.UrlDecode(searchString);
+            if (string.IsNullOrEmpty(str))
             {
                 RedirectToAction("Index");
             }
-            var viewModel = _newsService.BuildSearchPageViewModel(searchString);
+            var viewModel = _newsService.BuildSearchPageViewModel(str);
             return View(viewModel);
         }
 
@@ -67,6 +68,21 @@ namespace ITNewsWeb.Controllers
         {
             var viewModel = _newsService.BuildCategoryPageViewModel(id);
             return View(viewModel);
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult AddCategory()
+        {
+            var viewModel = new Category();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult AddCategory(Category category)
+        {
+            _newsService.AddCategory(category.Name, User.Identity.GetUserName());
+            return RedirectToAction("Index");
         }
 
         [Authorize]
@@ -234,7 +250,7 @@ namespace ITNewsWeb.Controllers
             var tagsViewModel = tags.Select(x => new TagViewModel
             {
                 Text = x.Text,
-                Link = Url.Action("Index", "Home", new { searchString = x.Text })
+                Link = Url.Action("Search", "Home", new { searchString = x.Text })
             });
 
             return new ContentResult

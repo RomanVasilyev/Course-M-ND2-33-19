@@ -24,7 +24,7 @@
                         <p>@item.ShortDescription</p>
                         <div class="icon-awesome">
                             <a href="@Url.Content("~" + @item.AvatarImage)" rel="prettyPhoto"><i class="icon-search"></i></a>
-                            <a href="@Url.Content("/Home/Details/" + @item.Title + "/" + Model.CategoryId + "/" + @item.ItemId)"><i class="icon-link"></i></a>
+                            @Html.ActionLink(" ", "Details", new { controller = "Home", categoryId = item.CategoryId, itemId = item.ItemId, title = item.Title }, new { @class = "icon-link" })
                         </div>
                     </div>
                 }

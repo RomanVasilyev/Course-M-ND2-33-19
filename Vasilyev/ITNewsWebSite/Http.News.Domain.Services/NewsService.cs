@@ -67,6 +67,13 @@ namespace Http.News.Domain.Services
             return serchPageViewModel;
         }
 
+        public SearchPageViewModel BuildSearchPageViewModelByTag(string tag)
+        {
+            var serchPageViewModel = new SearchPageViewModel();
+            serchPageViewModel.TopMenu = this.GetCategoryMenu(0);
+            serchPageViewModel.SearchItems = this.GetTagItems(tag).ToList();
+            return serchPageViewModel;
+        }
 
         public CategoryPageViewModel BuildCategoryPageViewModel(int id)
         {
@@ -145,6 +152,27 @@ namespace Http.News.Domain.Services
             item.Category = GetCategoryById(viewModel.CategoryId);
             _repository.Add(item);
             _repository.Add(item.ItemContent);
+            using (var transaction = _repository.BeginTransaction())
+            {
+                try
+                {
+                    _repository.Save();
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    throw e;
+                }
+            }
+        }
+
+        public void AddCategory(string catname, string username)
+        {
+            Category category = new Category { CreatedBy = username, CreatedDate = DateTime.Now, Name = catname };
+            _repository.Add(category);
+            var tag = new Tag { Text = catname };
+            _repository.Add(tag);
             using (var transaction = _repository.BeginTransaction())
             {
                 try
@@ -268,6 +296,24 @@ namespace Http.News.Domain.Services
             var queryable = _repository.GetAllItems().Where(x => (x.ItemContent.Title.ToLower().Contains(str) || x.ItemContent.ShortDescription.ToLower().Contains(str)));
             return ConvertToItemSummaryDtoQuery(
                 queryable.OrderByDescending(item => item.CreatedDate));
+        }
+
+        public IEnumerable<ItemSummaryDto> GetTagItems(string tag)
+        {
+            List<Item> itms = new List<Item>();
+            var str = tag.ToLower();
+            var queryable = _repository.GetAllItems();
+            foreach (var item in queryable)
+            {
+                foreach (var t in item.Tags)
+                {
+                    if (t.Text.ToLower() == str)
+                    {
+                        itms.Add(item);
+                    }
+                }
+            }
+            return ConvertToItemSummaryDtoQuery(itms.AsQueryable());
         }
 
         public IEnumerable<ItemSummaryDto> GetAllItems()

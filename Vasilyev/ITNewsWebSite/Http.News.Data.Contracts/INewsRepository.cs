@@ -18,11 +18,15 @@ namespace Http.News.Data.Contracts
 
         void Add(Item item);
 
+        void Add(Category category);
+
         void Add(ItemContent itemContent);
 
         void Add(Comment comment);
 
         void Add(Like like);
+
+        void Add(Tag tag);
 
         void Save();
 

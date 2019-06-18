@@ -18,11 +18,13 @@ namespace Http.News.Domain.Services
         ItemDetailsDto GetItemDetails(int itemId, int catId, string userId);
         HomePageViewModel BuildHomePageViewModel(int p);
         SearchPageViewModel BuildSearchPageViewModel(string searchString);
+        SearchPageViewModel BuildSearchPageViewModelByTag(string tag);
         ItemDetailsViewModel BuildItemDetailsViewModel(int categoryId, int itemId, string userId);
         CategoryPageViewModel BuildCategoryPageViewModel(int id);
         ItemDetailsDto IncrementArticleRating(double score, int id);
         void SetLike(int itemId, string userId, bool islike);
         void Add(ItemDetailsDto viewModel);
+        void AddCategory(string catname, string username);
         void Save(ItemDetailsDto viewModel);
         void Save(ItemDetailsViewModel viewModel);
         ItemDetailsViewModel IncrementArticleRating(ItemDetailsViewModel viewModel);

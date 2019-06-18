@@ -9,6 +9,10 @@
     <div class="portfolio-title">
         <h3>Found news</h3>
     </div>
+    @if (Model.SearchItems == null || Model.SearchItems.Count <= 0)
+    {
+        <p>There is no news for this search tags!!!</p>
+    }
     <div class="row">
         @foreach (var item in Model.SearchItems)
         {

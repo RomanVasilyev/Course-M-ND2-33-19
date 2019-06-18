@@ -48,6 +48,18 @@ namespace Http.News.Data.EntityFramework
             dbSet.Add(item);
         }
 
+        public void Add(Tag tag)
+        {
+            var dbSet = _dbContext.Set<Tag>();
+            dbSet.Add(tag);
+        }
+
+        public void Add(Category category)
+        {
+            var dbSet = _dbContext.Set<Category>();
+            dbSet.Add(category);
+        }
+
         public void Add(ItemContent itemContent)
         {
             var dbSet = _dbContext.Set<ItemContent>();
