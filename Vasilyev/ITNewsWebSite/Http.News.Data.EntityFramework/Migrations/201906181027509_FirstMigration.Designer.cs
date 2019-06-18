@@ -7,13 +7,13 @@ namespace Http.News.Data.EntityFramework.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ThirdMigration : IMigrationMetadata
+    public sealed partial class FirstMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ThirdMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FirstMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906171509465_ThirdMigration"; }
+            get { return "201906181027509_FirstMigration"; }
         }
         
         string IMigrationMetadata.Source

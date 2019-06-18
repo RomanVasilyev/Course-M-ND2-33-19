@@ -37,8 +37,8 @@ namespace Http.News.Data.EntityFramework
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Comment> Comments { get; set; }
-
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

@@ -12,6 +12,8 @@ namespace Http.News.Data.Contracts
 
         IQueryable<Comment> GetAllComments();
 
+        IQueryable<Tag> GetAllTags();
+
         IQueryable<Item> GetItems(Func<Item, bool> predicate);
 
         void Add(Item item);

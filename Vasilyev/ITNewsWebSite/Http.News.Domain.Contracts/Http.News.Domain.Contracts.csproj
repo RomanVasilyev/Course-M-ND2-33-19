@@ -79,6 +79,7 @@
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\ItemDetailsViewModel.cs" />
     <Compile Include="ViewModels\ItemSummaryViewModel.cs" />
+    <Compile Include="ViewModels\SearchPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Http.News.Data.Contracts\Http.News.Data.Contracts.csproj">

@@ -16,6 +16,8 @@ namespace Http.News.Data.Contracts.Entities
 
         public virtual ICollection<Like> Likes { get; set; }
 
+        public virtual ICollection<Tag> Tags { get; set; }
+
         public string CreatedBy { get; set; }
 
         public string ModifiedBy { get; set; }

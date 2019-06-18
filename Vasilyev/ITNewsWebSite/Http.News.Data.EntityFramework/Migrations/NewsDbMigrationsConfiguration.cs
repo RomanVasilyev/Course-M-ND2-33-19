@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -70,7 +71,6 @@ namespace Http.News.Data.EntityFramework.Migrations
                     TotalLikes = 455,
                     TotalDislikes = 15,
                     AverageRating = 0,
-
                 };
 
                 var item3 = new Item
@@ -97,6 +97,7 @@ namespace Http.News.Data.EntityFramework.Migrations
                     TotalLikes = 1234,
                     TotalDislikes = 123,
                     AverageRating = 0,
+
                 };
 
                 var item4 = new Item
@@ -162,6 +163,19 @@ namespace Http.News.Data.EntityFramework.Migrations
                 context.Categories.Add(cat3);
                 context.Categories.Add(cat4);
                 context.Categories.Add(cat5);
+
+                context.Tags.AddRange(new List<Tag>
+                {
+                    new Tag { Text = "C#" },
+                    new Tag { Text = "C++" },
+                    new Tag { Text = "Java"},
+                    new Tag { Text = "Algorithms" },
+                    new Tag { Text = "Machine Learning"},
+                    new Tag { Text = "Category"},
+                    new Tag { Text = "Test tag"},
+                    new Tag { Text = "Wow!"}
+                });
+
                 try
                 {
                     context.SaveChanges();

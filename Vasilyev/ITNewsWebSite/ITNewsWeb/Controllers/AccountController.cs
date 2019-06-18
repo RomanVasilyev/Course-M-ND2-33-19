@@ -170,7 +170,7 @@ namespace ITNewsWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 user.Email = model.Email;
                 user.EmailConfirmed = false;
                 var result = await UserManager.CreateAsync(user, model.Password);

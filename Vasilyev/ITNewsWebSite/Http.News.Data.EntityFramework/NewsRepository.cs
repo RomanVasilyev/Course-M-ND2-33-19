@@ -27,9 +27,14 @@ namespace Http.News.Data.EntityFramework
             return _dbContext.Items;
         }
 
+        public IQueryable<Tag> GetAllTags()
+        {
+            return _dbContext.Tags;
+        }
+
         public IQueryable<Item> GetItems(Func<Item, bool> predicate)
         {
-            return _dbContext.Items.Include(x => x.ItemContent).Include(x => x.Likes).Where(predicate).AsQueryable();
+            return _dbContext.Items.Include(x => x.ItemContent).Include(x => x.Likes).Include(x => x.Tags).Where(predicate).AsQueryable();
         }
 
         public IQueryable<Comment> GetAllComments()

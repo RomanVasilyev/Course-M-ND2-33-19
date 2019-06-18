@@ -55,17 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HistoryLog.cs" />
-    <Compile Include="Migrations\201906111420447_FirstMigration.cs" />
-    <Compile Include="Migrations\201906111420447_FirstMigration.Designer.cs">
-      <DependentUpon>201906111420447_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906141337009_SecondMigration.cs" />
-    <Compile Include="Migrations\201906141337009_SecondMigration.Designer.cs">
-      <DependentUpon>201906141337009_SecondMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906171509465_ThirdMigration.cs" />
-    <Compile Include="Migrations\201906171509465_ThirdMigration.Designer.cs">
-      <DependentUpon>201906171509465_ThirdMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201906181027509_FirstMigration.cs" />
+    <Compile Include="Migrations\201906181027509_FirstMigration.Designer.cs">
+      <DependentUpon>201906181027509_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="NewsDbContext.cs" />
     <Compile Include="Migrations\NewsDbMigrationsConfiguration.cs" />
@@ -87,14 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906111420447_FirstMigration.resx">
-      <DependentUpon>201906111420447_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906141337009_SecondMigration.resx">
-      <DependentUpon>201906141337009_SecondMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906171509465_ThirdMigration.resx">
-      <DependentUpon>201906171509465_ThirdMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906181027509_FirstMigration.resx">
+      <DependentUpon>201906181027509_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

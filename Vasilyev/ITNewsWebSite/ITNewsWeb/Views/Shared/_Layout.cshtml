@@ -60,24 +60,33 @@
         </div>
     </div>
     <!-- Site Description -->
-    <div class="presentation container">
-        <form class="form-inline" action="/action_page.php">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-success" type="submit">Search</button>
-        </form>
-        <h2><span class="darkturquoise">IT News website</span> application.</h2>
-        <p>
-            Using
-            <a href="http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started">asp.net mvc 5.0</a>
-            for front-end page, Comments using <a href="https://dotnet.microsoft.com/apps/aspnet/real-time">SingalR</a>
-            <i class="fa fa-paper-plane fa-fw"></i> and
-            @*<a href="http://www.asp.net/vnext/overview/aspnet-web-api">asp.net web api 2.0</a> &*@
-            <a href="http://angularjs.org/">angularjs</a> for admin page
-        </p>
+<div class="presentation container">
+
+    <form class="form-inline" action=@Url.Action("Search")>
+        <input class="form-control mr-sm-2" type="text" name="searchString" placeholder="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+
+    <h2><span class="darkturquoise">IT News website</span> application.</h2>
+    <p>
+        Using
+        <a href="http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started">asp.net mvc 5.0</a>
+        for front-end page, Comments using <a href="https://dotnet.microsoft.com/apps/aspnet/real-time">SingalR</a>
+        <i class="fa fa-paper-plane fa-fw"></i> and
+        @*<a href="http://www.asp.net/vnext/overview/aspnet-web-api">asp.net web api 2.0</a> &*@
+        @*<a href="http://angularjs.org/">angularjs</a> for admin page*@
+    </p>
+</div>
+<div class="container">
+    @RenderBody()
+</div>
+<div class="portfolio container">
+    <div class="portfolio-title">
+        <h3>Tags cloud</h3>
     </div>
-    <div class="container">
-        @RenderBody()
     </div>
+<div class="container" id="cloud-tags"></div>
+
     <div class="testimonials container">
     </div>
     <!-- Footer -->
@@ -127,6 +136,20 @@
     <script src="~/Scripts/jqcloud-1.0.4.js"></script>
     <script src="~/Scripts/jqcloud-1.0.4.min.js"></script>
     @RenderSection("scripts", required: false)
+    <script>
+    $.get("@Url.Action("GetAllTags", "Home")",
+        function(data) {
+            $("#cloud-tags").jQCloud(data,
+                {
+                    width: 500,
+                    height: 500,
+                    delayedMode: data.length > 50,
+                    shape: false, // or 'rectangular'
+                    encodeURI: true,
+                    removeOverflowing: true
+                });
+        });
+
+    </script>
 </body>
 </html>
-

@@ -17,6 +17,7 @@ namespace Http.News.Domain.Services
         IEnumerable<ItemSummaryDto> GetItemsByCategoryId(int categoryId);
         ItemDetailsDto GetItemDetails(int itemId, int catId, string userId);
         HomePageViewModel BuildHomePageViewModel(int p);
+        SearchPageViewModel BuildSearchPageViewModel(string searchString);
         ItemDetailsViewModel BuildItemDetailsViewModel(int categoryId, int itemId, string userId);
         CategoryPageViewModel BuildCategoryPageViewModel(int id);
         ItemDetailsDto IncrementArticleRating(double score, int id);
@@ -27,5 +28,6 @@ namespace Http.News.Domain.Services
         ItemDetailsViewModel IncrementArticleRating(ItemDetailsViewModel viewModel);
         ItemDetailsDto GetItemDtoById(int itemId, string userId);
         IEnumerable<ItemSummaryDto> GetAllItems();
+        List<Tag> GetAllTags();
     }
 }

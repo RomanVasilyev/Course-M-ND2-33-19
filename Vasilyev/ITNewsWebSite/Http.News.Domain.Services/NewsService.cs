@@ -34,12 +34,16 @@ namespace Http.News.Domain.Services
 
         public Item GetItemById(int id)
         {
-            //Code example for getting tags 
-            var items = _repository.GetAllItems();
-
-            var tags = items.SelectMany(x => x.Likes);
-
             return _repository.GetAllItems().FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<Tag> GetAllTags()
+        {
+            //Code example for getting tags 
+            //var items = _repository.GetAllItems();
+            //var tags = items.SelectMany(x => x.Tags).ToList();
+            var tags = _repository.GetAllTags();
+            return tags.ToList();
         }
 
         /*TODO : Реализовать все методы "типо" UnitOfWork здесь и убрать все что касается UnitOfWork. Вместо этого реализовать работу непосредственно с сервисами в контроллере*/
@@ -54,6 +58,15 @@ namespace Http.News.Domain.Services
 
             return homePageViewModel;
         }
+
+        public SearchPageViewModel BuildSearchPageViewModel(string searchString)
+        {
+            var serchPageViewModel = new SearchPageViewModel();
+            serchPageViewModel.TopMenu = this.GetCategoryMenu(0);
+            serchPageViewModel.SearchItems = this.GetSearchItems(searchString).ToList();
+            return serchPageViewModel;
+        }
+
 
         public CategoryPageViewModel BuildCategoryPageViewModel(int id)
         {
@@ -245,8 +258,16 @@ namespace Http.News.Domain.Services
         {
             var queryable = _repository.GetAllItems();
             return ConvertToItemSummaryDtoQuery(
-                queryable.OrderByDescending(item => item.CreatedDate),
+                queryable.OrderBy(item => item.TotalLikes),
                 numOfItemOnHomePage);
+        }
+
+        public IEnumerable<ItemSummaryDto> GetSearchItems(string searchString)
+        {
+            var str = searchString.ToLower();
+            var queryable = _repository.GetAllItems().Where(x => (x.ItemContent.Title.ToLower().Contains(str) || x.ItemContent.ShortDescription.ToLower().Contains(str)));
+            return ConvertToItemSummaryDtoQuery(
+                queryable.OrderByDescending(item => item.CreatedDate));
         }
 
         public IEnumerable<ItemSummaryDto> GetAllItems()
@@ -261,7 +282,7 @@ namespace Http.News.Domain.Services
             var queryable = _repository.GetAllItems();
 
             return ConvertToItemSummaryDtoQuery(
-                queryable.OrderByDescending(item => item.ItemContent.NumOfView),
+                queryable.OrderByDescending(item => item.CreatedDate),
                 numOfItemOnHomePage);
         }
 

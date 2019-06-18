@@ -40,10 +40,19 @@ namespace ITNewsWeb.Controllers
 
         public ActionResult Index()
         {
-            var viewModel = _newsService.BuildHomePageViewModel(6);
+            var viewModel = _newsService.BuildHomePageViewModel(20);
             return View(viewModel);
         }
 
+        public ActionResult Search(string searchString)
+        {
+            if (string.IsNullOrEmpty(searchString))
+            {
+                RedirectToAction("Index");
+            }
+            var viewModel = _newsService.BuildSearchPageViewModel(searchString);
+            return View(viewModel);
+        }
 
         [Route("Home/Details/{title?}/{categoryId:int}/{itemId:int}")]
         public ActionResult Details(int categoryId, int itemId, string title = null)
@@ -220,22 +229,12 @@ namespace ITNewsWeb.Controllers
 
         public ActionResult GetAllTags()
         {
-            var tags = new List<Tag>
-            {
-                new Tag { Text = "C#", ItemId = 1 },
-                new Tag { Text = "Java", ItemId = 2 },
-                new Tag { Text = "C++", ItemId = 3 },
-                new Tag { Text = "Some text", ItemId = 4 },
-                new Tag { Text = "Category", ItemId = 5 },
-                new Tag { Text = "I don't know", ItemId = 6 },
-                new Tag { Text = "Text name", ItemId = 7 },
-                new Tag { Text = "Wow!", ItemId = 8 }
-            };
+            var tags = _newsService.GetAllTags();
 
             var tagsViewModel = tags.Select(x => new TagViewModel
             {
                 Text = x.Text,
-                Link = Url.Action("Details", "Home", new { Id = x.ItemId })
+                Link = Url.Action("Index", "Home", new { searchString = x.Text })
             });
 
             return new ContentResult
